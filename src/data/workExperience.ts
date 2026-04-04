@@ -17,7 +17,7 @@ export type WorkExperienceItem = {
   roles: WorkRole[];
   /** Shown once under all roles — e.g. stack for engineering-heavy work */
   stack?: string[];
-  /** Public URL under `/public` (e.g. `/company-logos/scribear.svg`). Shows a dashed placeholder if load fails. */
+  /** Public URL under `/public` (e.g. `/company-logos/scribear.png`). Shows a dashed placeholder if load fails. */
   logoSrc?: string;
 };
 
@@ -27,7 +27,7 @@ export const workExperience: WorkExperienceItem[] = [
     company: 'Scribear',
     location: 'Startup · Remote',
     dateRange: '2026 — Present',
-    logoSrc: '/company-logos/scribear.svg',
+    logoSrc: '/company-logos/scribear.png',
     roles: [
       {
         title: 'Front End & Fullstack Developer',
