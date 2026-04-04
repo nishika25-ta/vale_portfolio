@@ -37,6 +37,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           </span>
           <ScrollFloat
             as="span"
+            splitMode="chars"
             containerClassName="inline-block max-w-[min(100%,18rem)]"
             textClassName="!font-medium !font-sans text-[13px] text-white/70 md:text-[14px]"
             displaySize={false}
@@ -49,6 +50,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
 
         <ScrollFloat
           as="p"
+          splitMode="chars"
           textClassName="!font-normal !font-sans text-[15px] text-white/45 md:text-[17px]"
           containerClassName="mb-5"
           scrub={0.85}
@@ -59,6 +61,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
 
         <ScrollFloat
           as="h1"
+          splitMode="chars"
           displaySize
           textClassName="w-full min-w-0 text-center !font-extrabold !tracking-[-0.045em] text-white"
           containerClassName="mb-8 w-full min-w-0 justify-self-center pb-[min(0.2em,1.25rem)]"
@@ -72,6 +75,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
         <div className="mb-12 flex max-w-[22rem] flex-col items-center gap-3 text-center sm:max-w-lg md:max-w-2xl md:gap-4">
           <ScrollFloat
             as="p"
+            splitMode="chars"
             textClassName="!font-medium !font-sans text-[1.25rem] !leading-[1.25] !tracking-[-0.022em] text-white/[0.92] sm:text-[1.375rem] md:text-[1.625rem]"
             scrub={0.85}
             stagger={0.018}
@@ -80,6 +84,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           </ScrollFloat>
           <ScrollFloat
             as="p"
+            splitMode="chars"
             textClassName="max-w-[28rem] !font-normal !font-sans text-[0.9375rem] !leading-[1.55] text-[#8e8e93] sm:text-base md:text-[1.0625rem] md:!leading-[1.5]"
             scrub={0.85}
             stagger={0.014}

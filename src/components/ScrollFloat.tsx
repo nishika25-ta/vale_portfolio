@@ -23,6 +23,11 @@ export type ScrollFloatProps = {
   /** Number = smoothed scrub lag (recommended). */
   scrub?: number | boolean;
   role?: string;
+  /**
+   * `line` = animate the whole string (gradient text + word-wrap work on mobile).
+   * `chars` = per-letter (can break gradient text and mid-word wraps on narrow screens).
+   */
+  splitMode?: 'chars' | 'line';
 };
 
 export function ScrollFloat({
@@ -39,8 +44,10 @@ export function ScrollFloat({
   stagger = 0.025,
   scrub = 0.75,
   role,
+  splitMode = 'line',
 }: ScrollFloatProps) {
   const containerRef = useRef<HTMLElement | null>(null);
+  const lineTargetRef = useRef<HTMLSpanElement | null>(null);
   const text = String(children);
 
   const splitText = useMemo(
@@ -58,10 +65,43 @@ export function ScrollFloat({
       const el = containerRef.current;
       if (!el) return;
 
+      const scrollerEl = scrollContainerRef?.current;
+      const stCommon = {
+        trigger: el,
+        scroller: scrollerEl ?? window,
+        start: scrollStart,
+        end: scrollEnd,
+        scrub,
+      } as const;
+
+      if (splitMode === 'line') {
+        const target = lineTargetRef.current;
+        if (!target) return;
+        gsap.fromTo(
+          target,
+          {
+            willChange: 'opacity, transform',
+            opacity: 0,
+            yPercent: 108,
+            scaleY: 1.75,
+            scaleX: 0.82,
+            transformOrigin: '50% 0%',
+          },
+          {
+            duration: animationDuration,
+            ease,
+            opacity: 1,
+            yPercent: 0,
+            scaleY: 1,
+            scaleX: 1,
+            scrollTrigger: stCommon,
+          }
+        );
+        return;
+      }
+
       const charElements = el.querySelectorAll('.char');
       if (charElements.length === 0) return;
-
-      const scrollerEl = scrollContainerRef?.current;
 
       gsap.fromTo(
         charElements,
@@ -81,19 +121,23 @@ export function ScrollFloat({
           scaleY: 1,
           scaleX: 1,
           stagger,
-          scrollTrigger: {
-            trigger: el,
-            scroller: scrollerEl ?? window,
-            start: scrollStart,
-            end: scrollEnd,
-            scrub,
-          },
+          scrollTrigger: stCommon,
         }
       );
     },
     {
       scope: containerRef,
-      dependencies: [text, animationDuration, ease, scrollStart, scrollEnd, stagger, scrub, scrollContainerRef],
+      dependencies: [
+        text,
+        splitMode,
+        animationDuration,
+        ease,
+        scrollStart,
+        scrollEnd,
+        stagger,
+        scrub,
+        scrollContainerRef,
+      ],
     }
   );
 
@@ -101,15 +145,17 @@ export function ScrollFloat({
     .filter(Boolean)
     .join(' ');
 
+  const lineClass = splitMode === 'line' ? 'scroll-float--line' : '';
   const outerProps: Record<string, unknown> = {
     ref: containerRef,
-    className: `scroll-float ${containerClassName}`.trim(),
+    className: `scroll-float ${lineClass} ${containerClassName}`.trim(),
   };
   if (role !== undefined) outerProps.role = role;
 
-  return createElement(
-    Tag,
-    outerProps,
-    createElement('span', { className: textClasses }, splitText)
-  );
+  const innerSpan =
+    splitMode === 'line'
+      ? createElement('span', { ref: lineTargetRef, className: textClasses }, text)
+      : createElement('span', { className: textClasses }, splitText);
+
+  return createElement(Tag, outerProps, innerSpan);
 }

@@ -42,11 +42,11 @@ export function ContactFooter() {
         <h3 className="sr-only">
           Have a project in mind? Let&apos;s create something amazing.
         </h3>
-        <div className="mb-8 flex flex-col items-center gap-1 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-1" aria-hidden>
+        <div className="mb-8 flex min-w-0 max-w-full flex-col items-center gap-1 px-2 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-1" aria-hidden>
           <ScrollFloat
             as="span"
             textClassName="text-3xl !font-extrabold !leading-snug !tracking-tight text-white sm:text-4xl md:text-5xl"
-            containerClassName="inline-block text-center"
+            containerClassName="inline-block max-w-full min-w-0 text-center"
             scrub={0.78}
             stagger={0.02}
           >
@@ -55,7 +55,7 @@ export function ContactFooter() {
           <ScrollFloat
             as="span"
             textClassName="text-3xl !font-extrabold !leading-snug !tracking-tight bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent sm:text-4xl md:text-5xl"
-            containerClassName="inline-block text-center sm:pl-1"
+            containerClassName="inline-block max-w-full min-w-0 text-center sm:pl-1"
             scrub={0.78}
             stagger={0.018}
           >

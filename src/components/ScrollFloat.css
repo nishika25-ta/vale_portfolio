@@ -21,3 +21,15 @@
   display: inline-block;
   will-change: transform, opacity;
 }
+
+/* Whole-line mode: keeps gradient text visible on WebKit + normal word wrapping */
+.scroll-float--line {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.scroll-float--line .scroll-float-text {
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}

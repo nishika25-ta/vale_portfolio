@@ -115,7 +115,7 @@ export function SkillsSection() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-0">
-        <header className="mx-auto mb-16 max-w-2xl text-center md:mb-20">
+        <header className="mx-auto mb-16 min-w-0 max-w-2xl text-center md:mb-20">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-4 py-1.5">
             <Sparkles className="text-indigo-400" size={14} />
             <ScrollFloat
@@ -129,11 +129,11 @@ export function SkillsSection() {
             </ScrollFloat>
           </div>
           <h3 className="sr-only">Technical Arsenal</h3>
-          <div className="mb-5 flex flex-wrap items-baseline justify-center gap-x-2" aria-hidden>
+          <div className="mb-5 flex min-w-0 max-w-full flex-wrap items-baseline justify-center gap-x-2 px-2" aria-hidden>
             <ScrollFloat
               as="span"
               textClassName="text-4xl !font-extrabold !tracking-tight text-white md:text-6xl"
-              containerClassName="inline-block"
+              containerClassName="inline-block max-w-full min-w-0"
               scrub={0.75}
             >
               {`Technical `}
@@ -141,7 +141,7 @@ export function SkillsSection() {
             <ScrollFloat
               as="span"
               textClassName="text-4xl !font-extrabold !tracking-tight bg-gradient-to-r from-indigo-300 via-white to-violet-300 bg-clip-text text-transparent md:text-6xl"
-              containerClassName="inline-block"
+              containerClassName="inline-block max-w-full min-w-0"
               scrub={0.75}
             >
               Arsenal

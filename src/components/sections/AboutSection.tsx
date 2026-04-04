@@ -19,11 +19,11 @@ export function AboutSection() {
             </ScrollFloat>
           </div>
           <h2 className="sr-only">About Me</h2>
-          <div className="flex flex-wrap items-baseline justify-center gap-x-1.5 md:justify-start" aria-hidden>
+          <div className="flex min-w-0 max-w-full flex-wrap items-baseline justify-center gap-x-1.5 md:justify-start" aria-hidden>
             <ScrollFloat
               as="span"
               textClassName="text-4xl !font-extrabold !tracking-tight text-white md:text-5xl"
-              containerClassName="inline-block text-left"
+              containerClassName="inline-block max-w-full min-w-0 text-left"
               scrub={0.75}
             >
               About
@@ -31,7 +31,7 @@ export function AboutSection() {
             <ScrollFloat
               as="span"
               textClassName="text-4xl !font-extrabold !tracking-tight bg-gradient-to-r from-indigo-300 to-violet-400 bg-clip-text text-transparent md:text-5xl"
-              containerClassName="inline-block text-left"
+              containerClassName="inline-block max-w-full min-w-0 text-left"
               scrub={0.75}
             >
               Me

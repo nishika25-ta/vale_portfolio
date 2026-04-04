@@ -35,7 +35,7 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="border-t border-white/5 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <header className="mb-14 flex flex-col items-center text-center md:mb-16">
+        <header className="mb-14 flex min-w-0 max-w-full flex-col items-center text-center md:mb-16">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-4 py-1.5">
             <Briefcase className="h-3.5 w-3.5 text-indigo-400" aria-hidden />
             <ScrollFloat
@@ -49,11 +49,11 @@ export function ExperienceSection() {
             </ScrollFloat>
           </div>
           <h2 className="sr-only">Working experience</h2>
-          <div className="flex flex-wrap items-baseline justify-center gap-x-1" aria-hidden>
+          <div className="flex min-w-0 max-w-full flex-wrap items-baseline justify-center gap-x-1 px-2" aria-hidden>
             <ScrollFloat
               as="span"
               textClassName="text-4xl !font-extrabold !tracking-tight text-white md:text-5xl"
-              containerClassName="inline-block"
+              containerClassName="inline-block max-w-full min-w-0"
               scrub={0.75}
             >
               {`Working `}
@@ -61,7 +61,7 @@ export function ExperienceSection() {
             <ScrollFloat
               as="span"
               textClassName="text-4xl !font-extrabold !tracking-tight bg-gradient-to-r from-indigo-300 to-violet-400 bg-clip-text text-transparent md:text-5xl"
-              containerClassName="inline-block"
+              containerClassName="inline-block max-w-full min-w-0"
               scrub={0.75}
             >
               experience
