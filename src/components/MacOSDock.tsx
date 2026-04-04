@@ -18,17 +18,39 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   const lastMouseMoveTime = useRef(0);
 
   const getResponsiveConfig = useCallback(() => {
-    if (typeof window === 'undefined') return { baseIconSize: 40, maxScale: 1.6, effectWidth: 200 };
-    const smallerDimension = Math.min(window.innerWidth, window.innerHeight);
-    if (smallerDimension < 480) return { baseIconSize: 32, maxScale: 1.4, effectWidth: 150 };
-    if (smallerDimension < 768) return { baseIconSize: 36, maxScale: 1.5, effectWidth: 180 };
-    return { baseIconSize: 42, maxScale: 1.65, effectWidth: 220 };
+    if (typeof window === 'undefined') {
+      return {
+        baseIconSize: 40,
+        maxScale: 1.6,
+        effectWidth: 200,
+        baseSpacing: 10,
+        padX: 16,
+        padY: 10,
+      };
+    }
+    const w = window.innerWidth;
+    // Fit ~9 items + padding within viewport (dock width uses horizontal space, not min(w,h))
+    if (w < 360) {
+      return { baseIconSize: 22, maxScale: 1.18, effectWidth: 100, baseSpacing: 3, padX: 8, padY: 6 };
+    }
+    if (w < 400) {
+      return { baseIconSize: 24, maxScale: 1.22, effectWidth: 110, baseSpacing: 4, padX: 8, padY: 7 };
+    }
+    if (w < 480) {
+      return { baseIconSize: 26, maxScale: 1.28, effectWidth: 125, baseSpacing: 5, padX: 10, padY: 8 };
+    }
+    if (w < 640) {
+      return { baseIconSize: 30, maxScale: 1.38, effectWidth: 150, baseSpacing: 7, padX: 12, padY: 9 };
+    }
+    if (w < 768) {
+      return { baseIconSize: 36, maxScale: 1.5, effectWidth: 180, baseSpacing: 9, padX: 14, padY: 10 };
+    }
+    return { baseIconSize: 42, maxScale: 1.65, effectWidth: 220, baseSpacing: 10, padX: 16, padY: 10 };
   }, []);
 
   const [config, setConfig] = useState(getResponsiveConfig);
-  const { baseIconSize, maxScale, effectWidth } = config;
+  const { baseIconSize, maxScale, effectWidth, baseSpacing, padX, padY } = config;
   const minScale = 1.0;
-  const baseSpacing = 10;
 
   useEffect(() => {
     const handleResize = () => setConfig(getResponsiveConfig());
@@ -98,9 +120,9 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
     lastMouseMoveTime.current = now;
     if (dockRef.current) {
       const rect = dockRef.current.getBoundingClientRect();
-      setMouseX(e.clientX - rect.left - 16);
+      setMouseX(e.clientX - rect.left - padX);
     }
-  }, []);
+  }, [padX]);
 
   const handleAppClick = (appId: string, index: number) => {
     const el = iconRefs.current[index];
@@ -115,13 +137,16 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
     onAppClick(appId);
   };
 
+  const horizontalPadding = padX * 2;
   const dockWidth =
     currentPositions.length > 0
-      ? Math.max(...currentPositions.map((pos, i) => pos + (baseIconSize * currentScales[i]) / 2)) + 32
-      : apps.length * (baseIconSize + baseSpacing) - baseSpacing + 32;
+      ? Math.max(...currentPositions.map((pos, i) => pos + (baseIconSize * currentScales[i]) / 2)) + horizontalPadding
+      : apps.length * (baseIconSize + baseSpacing) - baseSpacing + horizontalPadding;
 
   return (
-    <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 ${className}`}>
+    <div
+      className={`fixed bottom-4 left-1/2 z-50 max-w-[calc(100vw-12px)] -translate-x-1/2 sm:bottom-6 ${className}`}
+    >
       <div
         ref={dockRef}
         className="backdrop-blur-2xl transition-all duration-300 ease-out flex items-center justify-center"
@@ -131,8 +156,8 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
           borderRadius: '20px',
           border: '1px solid rgba(255, 255, 255, 0.08)',
           boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.03)',
-          padding: '10px 16px',
-          height: `${baseIconSize + 20}px`,
+          padding: `${padY}px ${padX}px`,
+          height: `${baseIconSize + padY * 2}px`,
         }}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setMouseX(null)}
