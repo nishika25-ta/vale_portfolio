@@ -1,5 +1,7 @@
 .scroll-float {
   overflow: hidden;
+  /* Room for descenders (g, y, p) so overflow: hidden does not crop glyphs */
+  padding-bottom: 0.18em;
 }
 
 .scroll-float-text {
@@ -12,6 +14,7 @@
 .scroll-float-text--display {
   font-size: clamp(1.6rem, 8vw, 10rem);
   text-align: center;
+  line-height: 1.12;
 }
 
 .char {

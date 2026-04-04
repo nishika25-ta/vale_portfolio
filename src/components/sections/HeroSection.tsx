@@ -60,8 +60,8 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
         <ScrollFloat
           as="h1"
           displaySize
-          textClassName="w-full min-w-0 text-center !font-extrabold !leading-[0.95] !tracking-[-0.045em] text-white"
-          containerClassName="mb-8 w-full min-w-0 justify-self-center"
+          textClassName="w-full min-w-0 text-center !font-extrabold !tracking-[-0.045em] text-white"
+          containerClassName="mb-8 w-full min-w-0 justify-self-center pb-[min(0.2em,1.25rem)]"
           scrub={0.9}
           stagger={0.022}
           scrollStart="top bottom+=20%"
