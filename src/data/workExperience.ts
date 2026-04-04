@@ -46,6 +46,7 @@ export const workExperience: WorkExperienceItem[] = [
     company: 'Zenara Jaya',
     location: 'Miri, Sarawak, Malaysia',
     dateRange: 'Dec 2025 — Mar 2026',
+    logoSrc: '/company-logos/zenara.png',
     roles: [
       {
         title: 'Backend Engineer',
