@@ -2,14 +2,23 @@ import { useState } from 'react';
 import { Briefcase, Building2, Calendar, MapPin } from 'lucide-react';
 import { workExperience } from '@/data/workExperience';
 
+/** Public folder URLs must respect Vite `base` (e.g. subpath deploys). */
+function publicAssetUrl(path: string): string {
+  if (!path.startsWith('/')) return path;
+  const base = import.meta.env.BASE_URL;
+  const trimmed = path.replace(/^\//, '');
+  return `${base}${trimmed}`;
+}
+
 function CompanyLogoBadge({ company, src }: { company: string; src: string }) {
   const [failed, setFailed] = useState(false);
+  const resolvedSrc = publicAssetUrl(src);
 
   return (
     <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-dashed border-white/20 bg-white/[0.04] sm:h-12 sm:w-12">
       {!failed ? (
         <img
-          src={src}
+          src={resolvedSrc}
           alt={`${company} logo`}
           className="h-full w-full object-contain p-1"
           onError={() => setFailed(true)}
