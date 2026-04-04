@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.022em;
+    color: white;
+  }
+  p {
+    letter-spacing: -0.011em;
+  }
+}
+
+@layer components {
+  .hero-stars {
+    background-image: radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 40px);
+    background-size: 550px 550px;
+  }
+  .grid-overlay {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .academic-sigil {
+    mask-image: linear-gradient(to bottom, black, transparent);
+    opacity: 0.05;
+    transition: opacity 0.5s ease;
+  }
+  .timeline-card:hover .academic-sigil {
+    opacity: 0.15;
+  }
+  .tech-mesh {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* Prism tokens — geeky dark + emerald accent (scoped to hero IDE) */
+  .code-ide-block .token.comment,
+  .code-ide-block .token.prolog,
+  .code-ide-block .token.doctype,
+  .code-ide-block .token.cdata {
+    color: #5c6d7a;
+    font-style: italic;
+  }
+  .code-ide-block .token.punctuation {
+    color: #89ddff;
+  }
+  .code-ide-block .token.property,
+  .code-ide-block .token.tag,
+  .code-ide-block .token.constant,
+  .code-ide-block .token.symbol,
+  .code-ide-block .token.deleted {
+    color: #f07178;
+  }
+  .code-ide-block .token.boolean,
+  .code-ide-block .token.number {
+    color: #ffcb6b;
+  }
+  .code-ide-block .token.selector,
+  .code-ide-block .token.attr-name,
+  .code-ide-block .token.string,
+  .code-ide-block .token.char,
+  .code-ide-block .token.builtin,
+  .code-ide-block .token.inserted {
+    color: #c3e88d;
+  }
+  .code-ide-block .token.operator,
+  .code-ide-block .token.entity,
+  .code-ide-block .token.url,
+  .code-ide-block .language-css .token.string,
+  .code-ide-block .style .token.string {
+    color: #89ddff;
+  }
+  .code-ide-block .token.atrule,
+  .code-ide-block .token.attr-value,
+  .code-ide-block .token.keyword {
+    color: #c792ea;
+  }
+  .code-ide-block .token.function,
+  .code-ide-block .token.class-name {
+    color: #82aaff;
+  }
+  .code-ide-block .token.regex,
+  .code-ide-block .token.important,
+  .code-ide-block .token.variable {
+    color: #f78c6c;
+  }
+  /* System UI stack — SF Pro on Apple, Segoe UI on Windows */
+  .font-apple {
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      'SF Pro Display',
+      'SF Pro Text',
+      'Segoe UI',
+      system-ui,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .code-ide-shell {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .code-ide-scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 170, 0.15) 2px,
+      rgba(0, 255, 170, 0.15) 3px
+    );
+  }
+}
