@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Award, Calendar, GraduationCap, School } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import { ScrollFloat } from '@/components/ScrollFloat';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,8 +59,26 @@ export function EducationSection() {
       className="min-h-screen py-32 flex flex-col justify-center border-t border-white/5"
     >
       <div className="text-center mb-16 md:mb-24 relative z-10">
-        <p className="text-indigo-500 font-mono text-xs font-bold uppercase tracking-[0.4em] mb-4">Academic Credentials</p>
-        <h3 className="text-4xl md:text-6xl font-extrabold text-white mb-4">Education Path</h3>
+        <ScrollFloat
+          as="p"
+          containerClassName="mb-4"
+          textClassName="!font-mono text-xs !font-bold uppercase tracking-[0.4em] text-indigo-500"
+          scrub={0.75}
+          stagger={0.04}
+        >
+          Academic Credentials
+        </ScrollFloat>
+        <h3 className="sr-only">Education Path</h3>
+        <ScrollFloat
+          as="span"
+          containerClassName="mb-4 flex w-full justify-center"
+          textClassName="text-4xl !font-extrabold text-white md:text-6xl"
+          scrub={0.78}
+          stagger={0.02}
+          role="presentation"
+        >
+          Education Path
+        </ScrollFloat>
         <div className="h-1 w-20 bg-indigo-600 mx-auto rounded-full" />
       </div>
 
@@ -72,9 +91,15 @@ export function EducationSection() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-sm mb-4">
                 <Calendar size={14} /> Oct 2022 — Nov 2025
               </div>
-              <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight break-words">
+              <ScrollFloat
+                as="h4"
+                textClassName="text-2xl sm:text-3xl !font-bold text-white !leading-tight break-words"
+                containerClassName="mb-2"
+                scrub={0.65}
+                stagger={0.015}
+              >
                 Bachelor of Science in Cognitive Science
-              </h4>
+              </ScrollFloat>
               <p className="text-lg sm:text-xl text-slate-400 font-medium">
                 University Malaysia Sarawak (UNIMAS)
               </p>
@@ -128,7 +153,15 @@ export function EducationSection() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono text-sm mb-4">
                 <Calendar size={14} /> Jun 2020 — Jul 2022
               </div>
-              <h4 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight break-words">STPM · Sport Science</h4>
+              <ScrollFloat
+                as="h4"
+                textClassName="text-2xl sm:text-3xl !font-bold text-white !leading-tight break-words"
+                containerClassName="mb-2"
+                scrub={0.65}
+                stagger={0.02}
+              >
+                STPM · Sport Science
+              </ScrollFloat>
               <p className="text-lg sm:text-xl text-slate-400 font-medium">Kolej Tun Datu Tuanku Haji Bujang</p>
               <p className="text-sm text-slate-500 mt-1">Miri, Sarawak</p>
             </div>

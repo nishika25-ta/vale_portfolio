@@ -1,21 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import { lazy, Suspense } from 'react';
-import BlurText from '@/components/BlurText';
-import SplitText from '@/components/SplitText';
+import { ScrollFloat } from '@/components/ScrollFloat';
 
 const Silk = lazy(() => import('@/components/hero/Silk'));
-
-const heroSplit = {
-  delay: 42,
-  duration: 1.15,
-  ease: 'power3.out',
-  splitType: 'chars',
-  from: { opacity: 0, y: 36 },
-  to: { opacity: 1, y: 0 },
-  threshold: 0.12,
-  rootMargin: '-80px',
-  textAlign: 'center' as const,
-};
 
 type HeroSectionProps = {
   onNavigate: (sectionId: string) => void;
@@ -48,41 +35,57 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/40 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
           </span>
-          Open for roles · 2026
+          <ScrollFloat
+            as="span"
+            containerClassName="inline-block max-w-[min(100%,18rem)]"
+            textClassName="!font-medium !font-sans text-[13px] text-white/70 md:text-[14px]"
+            displaySize={false}
+            scrub={0.85}
+            stagger={0.02}
+          >
+            Open for roles · 2026
+          </ScrollFloat>
         </div>
 
-        <p className="mb-5 text-[15px] font-normal text-white/45 md:text-[17px]">Design, engineering, and product</p>
+        <ScrollFloat
+          as="p"
+          textClassName="!font-normal !font-sans text-[15px] text-white/45 md:text-[17px]"
+          containerClassName="mb-5"
+          scrub={0.85}
+          stagger={0.02}
+        >
+          Design, engineering, and product
+        </ScrollFloat>
 
-        <h1 className="mb-8 w-full min-w-0 text-center">
-          <BlurText
-            as="span"
-            text="Valentine Agam"
-            nowrap
-            animateBy="words"
-            direction="top"
-            delay={100}
-            stepDuration={0.36}
-            className="w-full min-w-0 justify-center text-[clamp(2.5rem,12vw,7.5rem)] font-extrabold leading-[0.95] tracking-[-0.045em] text-white"
-          />
-        </h1>
+        <ScrollFloat
+          as="h1"
+          displaySize
+          textClassName="w-full min-w-0 text-center !font-extrabold !leading-[0.95] !tracking-[-0.045em] text-white"
+          containerClassName="mb-8 w-full min-w-0 justify-self-center"
+          scrub={0.9}
+          stagger={0.022}
+          scrollStart="top bottom+=20%"
+        >
+          Valentine Agam
+        </ScrollFloat>
 
         <div className="mb-12 flex max-w-[22rem] flex-col items-center gap-3 text-center sm:max-w-lg md:max-w-2xl md:gap-4">
-          <SplitText
-            {...heroSplit}
-            text="I build products people actually use."
-            tag="p"
-            className="text-[1.25rem] font-medium leading-[1.25] tracking-[-0.022em] text-white/[0.92] sm:text-[1.375rem] md:text-[1.625rem]"
-            delay={20}
-            duration={1.05}
-          />
-          <SplitText
-            {...heroSplit}
-            text="Crisp interfaces, dependable code, and calm judgment when design, engineering, and reality disagree."
-            tag="p"
-            className="max-w-[28rem] text-[0.9375rem] font-normal leading-[1.55] text-[#8e8e93] sm:text-base md:text-[1.0625rem] md:leading-[1.5]"
-            delay={32}
-            duration={1.15}
-          />
+          <ScrollFloat
+            as="p"
+            textClassName="!font-medium !font-sans text-[1.25rem] !leading-[1.25] !tracking-[-0.022em] text-white/[0.92] sm:text-[1.375rem] md:text-[1.625rem]"
+            scrub={0.85}
+            stagger={0.018}
+          >
+            I build products people actually use.
+          </ScrollFloat>
+          <ScrollFloat
+            as="p"
+            textClassName="max-w-[28rem] !font-normal !font-sans text-[0.9375rem] !leading-[1.55] text-[#8e8e93] sm:text-base md:text-[1.0625rem] md:!leading-[1.5]"
+            scrub={0.85}
+            stagger={0.014}
+          >
+            Crisp interfaces, dependable code, and calm judgment when design, engineering, and reality disagree.
+          </ScrollFloat>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pb-12">

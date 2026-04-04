@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Briefcase, Building2, Calendar, MapPin } from 'lucide-react';
+import { ScrollFloat } from '@/components/ScrollFloat';
 import { workExperience } from '@/data/workExperience';
 
 /** Public folder URLs must respect Vite `base` (e.g. subpath deploys). */
@@ -37,19 +38,44 @@ export function ExperienceSection() {
         <header className="mb-14 flex flex-col items-center text-center md:mb-16">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-4 py-1.5">
             <Briefcase className="h-3.5 w-3.5 text-indigo-400" aria-hidden />
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-indigo-300/90">
+            <ScrollFloat
+              as="span"
+              textClassName="!font-mono text-[10px] !font-bold uppercase tracking-[0.35em] text-indigo-300/90"
+              containerClassName="inline-block"
+              scrub={0.68}
+              stagger={0.08}
+            >
               Career
-            </span>
+            </ScrollFloat>
           </div>
-          <h2 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            Working{' '}
-            <span className="bg-gradient-to-r from-indigo-300 to-violet-400 bg-clip-text text-transparent">
+          <h2 className="sr-only">Working experience</h2>
+          <div className="flex flex-wrap items-baseline justify-center gap-x-1" aria-hidden>
+            <ScrollFloat
+              as="span"
+              textClassName="text-4xl !font-extrabold !tracking-tight text-white md:text-5xl"
+              containerClassName="inline-block"
+              scrub={0.75}
+            >
+              {`Working `}
+            </ScrollFloat>
+            <ScrollFloat
+              as="span"
+              textClassName="text-4xl !font-extrabold !tracking-tight bg-gradient-to-r from-indigo-300 to-violet-400 bg-clip-text text-transparent md:text-5xl"
+              containerClassName="inline-block"
+              scrub={0.75}
+            >
               experience
-            </span>
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-slate-500">
+            </ScrollFloat>
+          </div>
+          <ScrollFloat
+            as="p"
+            containerClassName="mx-auto mt-3 max-w-xl text-center"
+            textClassName="!font-normal !font-sans text-slate-500"
+            scrub={0.8}
+            stagger={0.012}
+          >
             Roles and impact aligned with my resume — backend engineering, product delivery, and client-facing work.
-          </p>
+          </ScrollFloat>
         </header>
 
         <ul className="flex flex-col gap-8 md:gap-10">
@@ -70,7 +96,15 @@ export function ExperienceSection() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-3 sm:gap-4">
                       {job.logoSrc ? <CompanyLogoBadge company={job.company} src={job.logoSrc} /> : null}
-                      <h3 className="text-xl font-bold text-white sm:text-2xl">{job.company}</h3>
+                      <ScrollFloat
+                        as="h3"
+                        textClassName="text-xl !font-bold text-white sm:text-2xl"
+                        containerClassName="min-w-0 flex-1 sm:flex-none"
+                        scrub={0.7}
+                        stagger={0.03}
+                      >
+                        {job.company}
+                      </ScrollFloat>
                     </div>
                     <div className="mt-6 space-y-8">
                       {job.roles.map((role, roleIndex) => (
@@ -79,7 +113,15 @@ export function ExperienceSection() {
                           className={roleIndex > 0 ? 'border-t border-white/10 pt-8' : ''}
                         >
                           <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                            <h4 className="text-lg font-bold text-indigo-300 sm:text-xl">{role.title}</h4>
+                            <ScrollFloat
+                              as="h4"
+                              textClassName="text-lg !font-bold text-indigo-300 sm:text-xl"
+                              containerClassName="min-w-0"
+                              scrub={0.65}
+                              stagger={0.028}
+                            >
+                              {role.title}
+                            </ScrollFloat>
                             {role.dateRange ? (
                               <span className="font-mono text-xs font-medium text-slate-500">{role.dateRange}</span>
                             ) : null}

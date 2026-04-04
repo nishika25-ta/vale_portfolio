@@ -1,4 +1,5 @@
 import { MapPin, Sparkles } from 'lucide-react';
+import { ScrollFloat } from '@/components/ScrollFloat';
 
 export function AboutSection() {
   return (
@@ -7,14 +8,44 @@ export function AboutSection() {
         <header className="mb-14 text-center md:mb-16 md:text-left">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-4 py-1.5">
             <Sparkles className="h-3.5 w-3.5 text-indigo-400" aria-hidden />
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-indigo-300/90">Profile</span>
+            <ScrollFloat
+              as="span"
+              textClassName="!font-mono text-[10px] !font-bold uppercase tracking-[0.35em] text-indigo-300/90"
+              containerClassName="inline-block"
+              scrub={0.68}
+              stagger={0.08}
+            >
+              Profile
+            </ScrollFloat>
           </div>
-          <h2 className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            About <span className="bg-gradient-to-r from-indigo-300 to-violet-400 bg-clip-text text-transparent">Me</span>
-          </h2>
-          <p className="mt-3 max-w-xl text-slate-500 md:mx-0 mx-auto">
+          <h2 className="sr-only">About Me</h2>
+          <div className="flex flex-wrap items-baseline justify-center gap-x-1.5 md:justify-start" aria-hidden>
+            <ScrollFloat
+              as="span"
+              textClassName="text-4xl !font-extrabold !tracking-tight text-white md:text-5xl"
+              containerClassName="inline-block text-left"
+              scrub={0.75}
+            >
+              About
+            </ScrollFloat>
+            <ScrollFloat
+              as="span"
+              textClassName="text-4xl !font-extrabold !tracking-tight bg-gradient-to-r from-indigo-300 to-violet-400 bg-clip-text text-transparent md:text-5xl"
+              containerClassName="inline-block text-left"
+              scrub={0.75}
+            >
+              Me
+            </ScrollFloat>
+          </div>
+          <ScrollFloat
+            as="p"
+            containerClassName="mt-3 max-w-xl md:mx-0 mx-auto text-center md:text-left"
+            textClassName="!font-normal !font-sans text-slate-500"
+            scrub={0.8}
+            stagger={0.012}
+          >
             Engineering, AI, and product thinking — grounded in real shipping experience.
-          </p>
+          </ScrollFloat>
         </header>
 
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">

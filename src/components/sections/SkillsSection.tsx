@@ -1,5 +1,6 @@
 import { Brain, Code2, Cpu, Globe, Palette, Sparkles } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { ScrollFloat } from '@/components/ScrollFloat';
 import { aiSkills, designDataSkills, fullStackSkills, programmingSkills } from '../../data/skills';
 
 const accentStyles = {
@@ -86,7 +87,14 @@ function ArsenalCard({
             <Icon className={a.iconText} size={22} strokeWidth={1.75} />
           </div>
           <div>
-            <h4 className="text-lg font-bold tracking-tight text-white sm:text-xl">{title}</h4>
+            <ScrollFloat
+              as="h4"
+              textClassName="text-lg !font-bold !tracking-tight text-white sm:text-xl"
+              scrub={0.65}
+              stagger={0.025}
+            >
+              {title}
+            </ScrollFloat>
             {subtitle ? <p className="mt-1 text-sm leading-relaxed text-slate-500">{subtitle}</p> : null}
           </div>
         </div>
@@ -110,20 +118,55 @@ export function SkillsSection() {
         <header className="mx-auto mb-16 max-w-2xl text-center md:mb-20">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/5 px-4 py-1.5">
             <Sparkles className="text-indigo-400" size={14} />
-            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-indigo-300/90">Core Competencies</span>
+            <ScrollFloat
+              as="span"
+              textClassName="!font-mono text-[10px] !font-bold uppercase tracking-[0.35em] text-indigo-300/90"
+              containerClassName="inline-block"
+              scrub={0.68}
+              stagger={0.07}
+            >
+              Core Competencies
+            </ScrollFloat>
           </div>
-          <h3 className="mb-5 text-4xl font-extrabold tracking-tight text-white md:text-6xl">
-            Technical{' '}
-            <span className="bg-gradient-to-r from-indigo-300 via-white to-violet-300 bg-clip-text text-transparent">
+          <h3 className="sr-only">Technical Arsenal</h3>
+          <div className="mb-5 flex flex-wrap items-baseline justify-center gap-x-2" aria-hidden>
+            <ScrollFloat
+              as="span"
+              textClassName="text-4xl !font-extrabold !tracking-tight text-white md:text-6xl"
+              containerClassName="inline-block"
+              scrub={0.75}
+            >
+              {`Technical `}
+            </ScrollFloat>
+            <ScrollFloat
+              as="span"
+              textClassName="text-4xl !font-extrabold !tracking-tight bg-gradient-to-r from-indigo-300 via-white to-violet-300 bg-clip-text text-transparent md:text-6xl"
+              containerClassName="inline-block"
+              scrub={0.75}
+            >
               Arsenal
-            </span>
-          </h3>
-          <p className="text-base leading-relaxed text-slate-500 md:text-lg">
+            </ScrollFloat>
+          </div>
+          <ScrollFloat
+            as="p"
+            containerClassName="mx-auto max-w-2xl text-center"
+            textClassName="!font-normal !font-sans text-base !leading-relaxed text-slate-500 md:text-lg"
+            scrub={0.8}
+            stagger={0.01}
+          >
             Languages, models, and platforms I use to ship reliable AI products and full-stack systems.
-          </p>
+          </ScrollFloat>
           <div className="mx-auto mt-8 flex items-center justify-center gap-3">
             <span className="h-px w-12 bg-gradient-to-r from-transparent to-indigo-500/50" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-600">Stack overview</span>
+            <ScrollFloat
+              as="span"
+              textClassName="!font-mono text-[10px] uppercase tracking-[0.3em] text-slate-600"
+              containerClassName="inline-block"
+              scrub={0.7}
+              stagger={0.05}
+            >
+              Stack overview
+            </ScrollFloat>
             <span className="h-px w-12 bg-gradient-to-l from-transparent to-violet-500/50" />
           </div>
         </header>
@@ -203,7 +246,15 @@ export function SkillsSection() {
         <div className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-white/[0.06] pt-10 text-center">
           <div className="flex items-center gap-2 text-slate-600">
             <Cpu size={14} className="text-slate-500" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em]">Built for scale · Ship with confidence</span>
+            <ScrollFloat
+              as="span"
+              textClassName="!font-mono text-[10px] uppercase tracking-[0.25em]"
+              containerClassName="inline-block"
+              scrub={0.72}
+              stagger={0.02}
+            >
+              Built for scale · Ship with confidence
+            </ScrollFloat>
           </div>
         </div>
       </div>

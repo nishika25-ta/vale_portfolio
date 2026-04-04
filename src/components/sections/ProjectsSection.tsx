@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ScrollFloat } from '@/components/ScrollFloat';
 import { ShowcaseDetailModal } from '../showcase/ShowcaseDetailModal';
 import { ShowcaseVideoThumb } from '../showcase/ShowcaseVideoThumb';
 import { showcaseData } from '../../data/showcaseData';
@@ -25,12 +26,36 @@ export function ProjectsSection() {
   return (
     <section id="projects" className="flex min-h-screen flex-col items-center border-t border-white/5 py-32">
       <div className="mb-16 text-center">
-        <p className="mb-3 font-mono text-sm font-bold uppercase tracking-[0.2em] text-indigo-400">Portfolio Highlights</p>
-        <h3 className="mb-2 text-5xl font-extrabold text-white md:text-6xl">Live Showcase</h3>
-        <p className="mx-auto max-w-lg text-sm text-slate-500">
+        <ScrollFloat
+          as="p"
+          containerClassName="mb-3"
+          textClassName="!font-mono text-sm !font-bold uppercase tracking-[0.2em] text-indigo-400"
+          scrub={0.75}
+          stagger={0.04}
+        >
+          Portfolio Highlights
+        </ScrollFloat>
+        <h3 className="sr-only">Live Showcase</h3>
+        <ScrollFloat
+          as="span"
+          containerClassName="mb-2 flex w-full justify-center"
+          textClassName="text-5xl !font-extrabold text-white md:text-6xl"
+          scrub={0.78}
+          stagger={0.02}
+          role="presentation"
+        >
+          Live Showcase
+        </ScrollFloat>
+        <ScrollFloat
+          as="p"
+          containerClassName="mx-auto max-w-lg"
+          textClassName="!font-normal !font-sans text-sm text-slate-500"
+          scrub={0.82}
+          stagger={0.008}
+        >
           Tap a demo clip to play it in the player above. For screenshots and write-ups, open a card in the portfolio
           archive below.
-        </p>
+        </ScrollFloat>
       </div>
       <div className="relative flex w-full max-w-[1100px] flex-col overflow-hidden rounded-[2.5rem] border border-white/5 bg-[#0d1117] p-6 shadow-[0_40px_100px_rgba(0,0,0,0.6)] md:p-12">
         <div className="relative mb-12 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/5 bg-black shadow-inner">
@@ -82,9 +107,15 @@ export function ProjectsSection() {
           </button>
         </div>
         <div className="border-t border-white/[0.06] pt-8">
-          <p className="mb-4 text-center font-mono text-[10px] font-bold uppercase tracking-[0.35em] text-slate-600">
+          <ScrollFloat
+            as="p"
+            containerClassName="mb-4 flex justify-center"
+            textClassName="!font-mono text-[10px] !font-bold uppercase tracking-[0.35em] text-slate-600"
+            scrub={0.7}
+            stagger={0.06}
+          >
             Demo clips
-          </p>
+          </ScrollFloat>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-5">
             {showcaseData.map((project, index) => (
               <button
@@ -114,27 +145,46 @@ export function ProjectsSection() {
 
       <div className="mx-auto mt-24 w-full max-w-7xl px-4 md:px-6">
         <div className="mb-10 text-center md:text-left">
-          <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.3em] text-indigo-400/90">
+          <ScrollFloat
+            as="p"
+            containerClassName="mb-2"
+            textClassName="!font-mono text-xs !font-bold uppercase tracking-[0.3em] text-indigo-400/90"
+            scrub={0.72}
+            stagger={0.045}
+          >
             Portfolio archive
-          </p>
-          <h3 className="text-3xl font-extrabold text-white md:text-4xl">
+          </ScrollFloat>
+          <h3 className="sr-only">Project galleries and overviews</h3>
+          <ScrollFloat
+            as="span"
+            containerClassName="flex w-full justify-center md:justify-start"
+            textClassName="text-3xl !font-extrabold text-white md:text-4xl"
+            scrub={0.75}
+            stagger={0.018}
+            role="presentation"
+          >
             Project galleries and overviews
-          </h3>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-500 md:mx-0 mx-auto">
+          </ScrollFloat>
+          <ScrollFloat
+            as="p"
+            containerClassName="mt-2 max-w-2xl md:mx-0 mx-auto text-center md:text-left"
+            textClassName="!font-normal !font-sans text-sm !leading-relaxed text-slate-500"
+            scrub={0.85}
+            stagger={0.006}
+          >
             Select a project to view screenshots and a concise description of the work. Video walkthroughs are presented
-            in the <span className="font-medium text-slate-400">Live Showcase</span> above; this section focuses on
-            static deliverables and written context.
-          </p>
+            in the Live Showcase above; this section focuses on static deliverables and written context.
+          </ScrollFloat>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3">
           {showcaseData.map((project, index) => (
             <button
               key={`archive-${project.id}`}
               type="button"
               onClick={() => openProjectDetail(index)}
-              className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] text-left shadow-2xl transition-all duration-500 hover:border-indigo-500/30 hover:shadow-[0_20px_60px_-20px_rgba(79,70,229,0.15)]"
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0a0a0a] text-left shadow-2xl transition-all duration-500 hover:border-indigo-500/30 hover:shadow-[0_20px_60px_-20px_rgba(79,70,229,0.15)] sm:rounded-[2rem]"
             >
-              <div className="relative h-52 w-full overflow-hidden border-b border-white/5 bg-[#111]">
+              <div className="relative h-32 w-full overflow-hidden border-b border-white/5 bg-[#111] sm:h-52">
                 <img
                   src={project.thumb}
                   alt=""
@@ -142,15 +192,25 @@ export function ProjectsSection() {
                   loading="lazy"
                 />
               </div>
-              <div className="flex flex-grow flex-col justify-between bg-[#050505] p-7">
+              <div className="flex flex-grow flex-col justify-between bg-[#050505] p-3 sm:p-7">
                 <div>
-                  <h4 className="mb-2 text-xl font-bold tracking-tight text-white transition-colors group-hover:text-indigo-400">
+                  <ScrollFloat
+                    as="span"
+                    containerClassName="mb-1 block sm:mb-2"
+                    textClassName="line-clamp-2 text-sm !font-bold !tracking-tight text-white transition-colors group-hover:text-indigo-400 sm:text-xl"
+                    scrub={0.55}
+                    stagger={0.035}
+                  >
                     {project.title}
-                  </h4>
-                  <p className="text-sm leading-relaxed text-slate-500">{project.desc}</p>
+                  </ScrollFloat>
+                  <p className="line-clamp-3 text-xs leading-relaxed text-slate-500 sm:line-clamp-none sm:text-sm">
+                    {project.desc}
+                  </p>
                 </div>
-                <div className="mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-indigo-400 transition-colors group-hover:text-white">
-                  View details <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                <div className="mt-4 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-indigo-400 transition-colors group-hover:text-white sm:mt-8 sm:gap-2 sm:text-[10px] sm:tracking-widest">
+                  <span className="hidden sm:inline">View details</span>
+                  <span className="sm:hidden">Details</span>
+                  <ArrowRight size={12} className="shrink-0 transition-transform group-hover:translate-x-1 sm:h-[14px] sm:w-[14px]" />
                 </div>
               </div>
             </button>

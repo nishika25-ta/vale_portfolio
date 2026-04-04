@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
 import { lazy, Suspense } from 'react';
+import { ScrollFloat } from '@/components/ScrollFloat';
 
 const PrismaticBurst = lazy(() =>
   import('../footer/PrismaticBurst').then((m) => ({ default: m.PrismaticBurst }))
@@ -29,15 +30,38 @@ export function ContactFooter() {
       </div>
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#050505] via-[#050505]/80 to-[#050505]/55 pointer-events-none" />
       <div className="relative z-10 flex max-w-3xl flex-col items-center px-6 sm:px-8">
-        <p className="mb-4 font-mono text-xs font-bold uppercase tracking-[0.4em] text-indigo-400 md:tracking-[0.48em]">
+        <ScrollFloat
+          as="p"
+          containerClassName="mb-4"
+          textClassName="!font-mono text-xs !font-bold uppercase tracking-[0.4em] text-indigo-400 md:tracking-[0.48em]"
+          scrub={0.76}
+          stagger={0.045}
+        >
           Let&apos;s work together
-        </p>
-        <h3 className="mb-8 text-3xl font-extrabold leading-snug tracking-tight text-white sm:text-4xl md:text-5xl">
-          Have a project in mind?{' '}
-          <span className="block bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent sm:inline sm:pl-1">
-            Let&apos;s create something amazing.
-          </span>
+        </ScrollFloat>
+        <h3 className="sr-only">
+          Have a project in mind? Let&apos;s create something amazing.
         </h3>
+        <div className="mb-8 flex flex-col items-center gap-1 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-1" aria-hidden>
+          <ScrollFloat
+            as="span"
+            textClassName="text-3xl !font-extrabold !leading-snug !tracking-tight text-white sm:text-4xl md:text-5xl"
+            containerClassName="inline-block text-center"
+            scrub={0.78}
+            stagger={0.02}
+          >
+            {`Have a project in mind? `}
+          </ScrollFloat>
+          <ScrollFloat
+            as="span"
+            textClassName="text-3xl !font-extrabold !leading-snug !tracking-tight bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent sm:text-4xl md:text-5xl"
+            containerClassName="inline-block text-center sm:pl-1"
+            scrub={0.78}
+            stagger={0.018}
+          >
+            Let&apos;s create something amazing.
+          </ScrollFloat>
+        </div>
         <div className="mb-8 flex flex-wrap items-center justify-center gap-4">
           <a
             href="mailto:valentineagam6@gmail.com"
@@ -55,7 +79,15 @@ export function ContactFooter() {
           </a>
         </div>
         <div className="mb-6 flex items-center gap-4 text-slate-500">
-          <span className="text-[10px] font-semibold uppercase tracking-wider">Also on</span>
+          <ScrollFloat
+            as="span"
+            textClassName="text-[10px] !font-semibold uppercase tracking-wider"
+            containerClassName="inline-block"
+            scrub={0.65}
+            stagger={0.06}
+          >
+            Also on
+          </ScrollFloat>
           <div className="flex gap-3">
             <a
               href="https://github.com/valentineagam"
@@ -82,11 +114,24 @@ export function ContactFooter() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/50 opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
-          Available for new opportunities
+          <ScrollFloat
+            as="span"
+            textClassName="text-[10px] !font-bold uppercase tracking-wider text-emerald-500"
+            containerClassName="inline-block"
+            scrub={0.65}
+            stagger={0.04}
+          >
+            Available for new opportunities
+          </ScrollFloat>
         </div>
-        <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-slate-600">
+        <ScrollFloat
+          as="p"
+          textClassName="text-[10px] !font-mono uppercase tracking-[0.3em] text-slate-600"
+          scrub={0.85}
+          stagger={0.05}
+        >
           &copy; 2026 Valentine Agam · React & Tailwind
-        </p>
+        </ScrollFloat>
       </div>
     </footer>
   );

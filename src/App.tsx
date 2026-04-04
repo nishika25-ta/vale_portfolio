@@ -11,6 +11,7 @@ import { SkillsSection } from './components/sections/SkillsSection';
 import { dockApps } from './data/dockApps';
 import { useActiveSection } from './hooks/useActiveSection';
 import { useLenis } from './hooks/useLenis';
+import { useLenisScrollTrigger } from './hooks/useLenisScrollTrigger';
 import { scrollToSection } from './utils/navigation';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
   const activeSection = useActiveSection();
 
   useLenis(showSplash);
+  useLenisScrollTrigger(!showSplash);
 
   const handleSplashComplete = useCallback(() => setShowSplash(false), []);
 
