@@ -49,7 +49,7 @@ export const workExperience: WorkExperienceItem[] = [
     logoSrc: '/company-logos/zenara.png',
     roles: [
       {
-        title: 'Backend Engineer',
+        title: 'Junior Backend Engineer',
         dateRange: 'Feb 2026 — Mar 2026',
         highlights: [
           'Designed and deployed an AI-powered resume parsing microservice with FastAPI, hosted on DigitalOcean.',
