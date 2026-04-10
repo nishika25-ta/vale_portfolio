@@ -1,6 +1,6 @@
 export function scrollToSection(appId: string, offset = -60): void {
   if (appId === 'resume') {
-    window.open('Valentine_Resume_2026.pdf', '_blank');
+    window.open('/Valentine_Resume_2026.pdf', '_blank');
     return;
   }
   const element = document.getElementById(appId);
