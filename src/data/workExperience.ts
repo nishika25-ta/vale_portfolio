@@ -26,7 +26,7 @@ export const workExperience: WorkExperienceItem[] = [
     id: 'scribear',
     company: 'Scribear',
     location: 'Startup · Remote',
-    dateRange: 'March 2026 — Present',
+    dateRange: 'Mar 2026 — Present',
     logoSrc: '/company-logos/scribear.png',
     roles: [
       {
