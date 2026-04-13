@@ -30,7 +30,7 @@ export const workExperience: WorkExperienceItem[] = [
     logoSrc: '/company-logos/scribear.png',
     roles: [
       {
-        title: 'Front End & Fullstack Developer',
+        title: 'Creative Director | Front End & Fullstack Developer',
         highlights: [
           'Hold both titles at the same time: build product UI while owning API integration, data shaping, and features end to end.',
           'Ship responsive interfaces with reusable components and sensible state patterns that stay maintainable as the product moves fast.',
