@@ -48,7 +48,7 @@ export function ExperienceSection() {
               Career
             </ScrollFloat>
           </div>
-          <h2 className="sr-only">Working experience</h2>
+          <h2 className="sr-only">Working Experience</h2>
           <div className="flex min-w-0 max-w-full flex-wrap items-baseline justify-center gap-x-1 px-2" aria-hidden>
             <ScrollFloat
               as="span"
@@ -130,9 +130,8 @@ export function ExperienceSection() {
                             {role.highlights.map((line, i) => (
                               <li key={i} className="flex gap-3">
                                 <span
-                                  className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
-                                    roleIndex === 0 ? 'bg-indigo-500/80' : 'bg-violet-500/80'
-                                  }`}
+                                  className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${roleIndex === 0 ? 'bg-indigo-500/80' : 'bg-violet-500/80'
+                                    }`}
                                   aria-hidden
                                 />
                                 <span>{line}</span>
