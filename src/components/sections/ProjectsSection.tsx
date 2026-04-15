@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollFloat } from '@/components/ScrollFloat';
 import { ShowcaseDetailModal } from '../showcase/ShowcaseDetailModal';
+import { ShowcaseStageVideo } from '../showcase/ShowcaseStageVideo';
 import { ShowcaseVideoThumb } from '../showcase/ShowcaseVideoThumb';
 import { showcaseData } from '../../data/showcaseData';
 
@@ -65,16 +66,10 @@ export function ProjectsSection() {
             <div className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
           </div>
           {activeProject.videoUrl ? (
-            <video
-              key={activeProject.videoUrl}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 h-full w-full object-cover"
-            >
-              <source src={activeProject.videoUrl} type="video/mp4" />
-            </video>
+            <ShowcaseStageVideo
+              src={activeProject.videoUrl}
+              className="absolute inset-0 z-0 h-full w-full object-cover"
+            />
           ) : (
             <img
               key={activeProject.thumb}
