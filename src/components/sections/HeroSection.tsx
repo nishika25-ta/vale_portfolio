@@ -1,6 +1,5 @@
 import { ArrowRight } from 'lucide-react';
 import { lazy, Suspense } from 'react';
-import { ScrollFloat } from '@/components/ScrollFloat';
 
 const Silk = lazy(() => import('@/components/hero/Silk'));
 
@@ -30,70 +29,32 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
         className="font-apple relative z-10 flex w-full max-w-6xl flex-col items-center px-4 parallax-element sm:px-6"
         data-speed="0.05"
       >
-        <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.04] px-4 py-2 text-[13px] font-medium text-white/70 backdrop-blur-md md:text-[14px]">
+        <div className="hero-fade hero-fade-1 mb-10 inline-flex items-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.04] px-4 py-2 text-[13px] font-medium text-white/70 backdrop-blur-md md:text-[14px]">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/40 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
           </span>
-          <ScrollFloat
-            as="span"
-            splitMode="chars"
-            containerClassName="inline-block max-w-[min(100%,18rem)]"
-            textClassName="!font-medium !font-sans text-[13px] text-white/70 md:text-[14px]"
-            displaySize={false}
-            scrub={0.85}
-            stagger={0.02}
-          >
-            Open for roles · 2026
-          </ScrollFloat>
+          Open for roles · 2026
         </div>
 
-        <ScrollFloat
-          as="p"
-          splitMode="chars"
-          textClassName="!font-normal !font-sans text-[15px] text-white/45 md:text-[17px]"
-          containerClassName="mb-5"
-          scrub={0.85}
-          stagger={0.02}
-        >
+        <p className="hero-fade hero-fade-2 mb-5 text-[15px] font-normal text-white/45 md:text-[17px]">
           Design, engineering, and product
-        </ScrollFloat>
+        </p>
 
-        <ScrollFloat
-          as="h1"
-          splitMode="chars"
-          displaySize
-          textClassName="w-full min-w-0 text-center !font-extrabold !tracking-[-0.045em] text-white"
-          containerClassName="mb-8 w-full min-w-0 justify-self-center pb-[min(0.2em,1.25rem)]"
-          scrub={0.9}
-          stagger={0.022}
-          scrollStart="top bottom+=20%"
-        >
+        <h1 className="hero-fade hero-fade-3 mb-8 w-full min-w-0 text-center text-[clamp(2.5rem,12vw,7.5rem)] font-extrabold leading-[1.08] tracking-[-0.045em] text-white">
           Valentine Agam
-        </ScrollFloat>
+        </h1>
 
         <div className="mb-12 flex max-w-[22rem] flex-col items-center gap-3 text-center sm:max-w-lg md:max-w-2xl md:gap-4">
-          <ScrollFloat
-            as="p"
-            splitMode="chars"
-            textClassName="!font-medium !font-sans text-[1.25rem] !leading-[1.25] !tracking-[-0.022em] text-white/[0.92] sm:text-[1.375rem] md:text-[1.625rem]"
-            scrub={0.85}
-            stagger={0.018}
-          >
+          <p className="hero-fade hero-fade-4 text-[1.25rem] font-medium leading-[1.25] tracking-[-0.022em] text-white/[0.92] sm:text-[1.375rem] md:text-[1.625rem]">
             I build products people actually use.
-          </ScrollFloat>
-          <ScrollFloat
-            as="p"
-            splitMode="chars"
-            textClassName="max-w-[28rem] !font-normal !font-sans text-[0.9375rem] !leading-[1.55] text-[#8e8e93] sm:text-base md:text-[1.0625rem] md:!leading-[1.5]"
-            scrub={0.85}
-            stagger={0.014}
-          >
+          </p>
+          <p className="hero-fade hero-fade-5 max-w-[28rem] text-[0.9375rem] font-normal leading-[1.55] text-[#8e8e93] sm:text-base md:text-[1.0625rem] md:leading-[1.5]">
             Crisp interfaces, dependable code, and calm judgment when design, engineering, and reality disagree.
-          </ScrollFloat>
+          </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 pb-12">
+        <div className="hero-fade hero-fade-6 flex flex-wrap items-center justify-center gap-3 pb-12">
           <button
             type="button"
             onClick={() => onNavigate('projects')}
