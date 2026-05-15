@@ -39,7 +39,10 @@ export const metadata: Metadata = {
     'Portfolio',
     'Sarawak',
   ],
-  icons: { icon: '/logo.webp' },
+  icons: {
+    icon: '/vale.webp',
+    apple: '/vale.webp',
+  },
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
