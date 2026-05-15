@@ -1,9 +1,8 @@
 /**
- * Working history — align dates and bullets with your resume (e.g. Valentine_Resume_2026.pdf).
+ * Working history — aligned with Valentine_Resume_2026.pdf.
  */
 export type WorkRole = {
   title: string;
-  /** Optional if the whole job uses one tenure badge */
   dateRange?: string;
   highlights: string[];
 };
@@ -12,61 +11,67 @@ export type WorkExperienceItem = {
   id: string;
   company: string;
   location: string;
-  /** Overall tenure at the company (sidebar badge) */
   dateRange: string;
   roles: WorkRole[];
-  /** Shown once under all roles — e.g. stack for engineering-heavy work */
   stack?: string[];
-  /** Public URL under `/public` (e.g. `/company-logos/scribear.png`). Shows a dashed placeholder if load fails. */
   logoSrc?: string;
 };
 
 export const workExperience: WorkExperienceItem[] = [
   {
-    id: 'scribear',
-    company: 'Scribear',
-    location: 'Startup · Remote',
+    id: 'freelance',
+    company: 'Self-Employed',
+    location: 'Miri, Sarawak',
     dateRange: 'Mar 2026 — Present',
-    logoSrc: '/company-logos/scribear.png',
     roles: [
       {
-        title: 'Creative Director | Front End & Fullstack Developer',
+        title: 'Freelance Full Stack Developer',
         highlights: [
-          'Hold both titles at the same time: build product UI while owning API integration, data shaping, and features end to end.',
-          'Ship responsive interfaces with reusable components and sensible state patterns that stay maintainable as the product moves fast.',
-          'Wire authentication, forms, and dashboards to real backends with clear types, contracts, and thoughtful loading and error states.',
-          'Collaborate with design and backend in a startup setting — prioritize impact, test critical paths, and refine based on feedback.',
+          'Developed responsive full-stack web applications for client-based projects using modern frontend and backend technologies.',
+          'Designed mobile-friendly and desktop-optimized user interfaces with strong focus on usability and performance.',
+          'Developed scalable backend APIs, authentication systems, and database integrations using Python, FastAPI, and Supabase.',
+          'Collaborated directly with clients to gather requirements and maintain deployed applications.',
         ],
       },
     ],
-    stack: ['React', 'TypeScript', 'Tailwind CSS', 'REST APIs'],
+    stack: ['Python', 'FastAPI', 'Next.js', 'React', 'Supabase', 'REST APIs'],
   },
   {
     id: 'zenara-jaya',
     company: 'Zenara Jaya',
-    location: 'Miri, Sarawak, Malaysia',
+    location: 'Miri, Sarawak',
     dateRange: 'Dec 2025 — Mar 2026',
-    logoSrc: '/company-logos/zenara.png',
+    logoSrc: '/company-logos/zenara.webp',
     roles: [
       {
         title: 'Junior Backend Engineer',
-        dateRange: 'Feb 2026 — Mar 2026',
         highlights: [
-          'Designed and deployed an AI-powered resume parsing microservice with FastAPI, hosted on DigitalOcean.',
-          'Shipped and maintained REST APIs and SaaS-style backend services for internal workflows and integrations.',
-          'Emphasized reliability, clear service boundaries, and production-ready deployments.',
-        ],
-      },
-      {
-        title: 'Business Development Executive',
-        dateRange: 'Dec 2025 — Jan 2026',
-        highlights: [
-          'Led digital transformation initiatives with stakeholders, linking business goals to technical delivery.',
-          'Scoped opportunities, facilitated alignment between teams, and supported client-facing engagements.',
-          'Bridged commercial priorities with engineering roadmaps so solutions matched real operational needs.',
+          'Developed an AI-powered Applicant Tracking System (ATS) using FastAPI and Next.js to automate recruitment workflows.',
+          'Implemented resume parsing with Claude API, OCR fallback, and PDF extraction using PyMuPDF and pdfplumber.',
+          'Built RBAC authentication and permission systems for Admin, Recruiter, and Client Manager roles.',
+          'Automated recruitment operations using n8n workflows, reducing manual processing time by 60%.',
+          'Deployed scalable backend services on DigitalOcean with Supabase PostgreSQL integration and cloud storage.',
         ],
       },
     ],
-    stack: ['FastAPI', 'Python', 'DigitalOcean', 'REST APIs', 'SaaS'],
+    stack: ['FastAPI', 'Python', 'Next.js', 'Claude API', 'n8n', 'Supabase', 'DigitalOcean'],
+  },
+  {
+    id: 'sarawak-oil-palm',
+    company: 'Sarawak Oil Palms',
+    location: 'Miri, Sarawak',
+    dateRange: 'Jul 2024 — Oct 2024',
+    roles: [
+      {
+        title: 'Geographic Information Systems (GIS) Intern',
+        highlights: [
+          'Conducted GIS digitization and palm census analysis using QGIS for operational planning and land management.',
+          'Developed Python automation scripts for FIT-to-GPX conversion to improve field data processing efficiency.',
+          'Built TensorFlow and OpenCV-based object detection solutions for automated soil hole identification.',
+          'Produced 3D spatial visualization videos using Global Mapper to support data presentation and analysis.',
+        ],
+      },
+    ],
+    stack: ['Python', 'TensorFlow', 'OpenCV', 'QGIS', 'Global Mapper'],
   },
 ];

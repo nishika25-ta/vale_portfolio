@@ -1,137 +1,157 @@
-import { Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
-import { lazy, Suspense } from 'react';
-import { ScrollFloat } from '@/components/ScrollFloat';
+'use client';
 
-const PrismaticBurst = lazy(() =>
-  import('../footer/PrismaticBurst').then((m) => ({ default: m.PrismaticBurst }))
-);
+import dynamic from 'next/dynamic';
+import { ArrowUpRight, Github, Linkedin, Mail, MessageCircle, Sparkles } from 'lucide-react';
+
+const LiquidChrome = dynamic(() => import('@/components/footer/LiquidChrome'), { ssr: false });
+
+const FOCUS_AREAS = [
+  'Python · FastAPI APIs',
+  'AI / ML Deployment',
+  'YOLO Computer Vision',
+  'n8n Automation',
+  'Supabase · DigitalOcean',
+];
+
+/** RGB 0–1 — indigo/violet base to match content accent */
+const FOOTER_CHROME_COLOR: [number, number, number] = [0.12, 0.1, 0.22];
 
 export function ContactFooter() {
   return (
     <footer
       id="contact"
-      className="relative flex flex-col items-center justify-center overflow-hidden border-t border-white/5 bg-[#050505] py-24 text-center md:py-28"
+      className="relative min-h-[600px] overflow-hidden border-t border-white/[0.06] bg-[#050505] pt-24 md:min-h-[640px] md:pt-32"
     >
       <div className="absolute inset-0 z-0">
-        <Suspense fallback={<div className="h-full w-full bg-[#050505]" aria-hidden />}>
-          <PrismaticBurst
-            animationType="rotate3d"
-            intensity={2}
-            speed={0.5}
-            distort={0}
-            paused={false}
-            offset={{ x: 0, y: 0 }}
-            hoverDampness={0.25}
-            rayCount={0}
-            mixBlendMode="lighten"
-            colors={['#ff007a', '#4d3dff', '#ffffff']}
-          />
-        </Suspense>
+        <LiquidChrome
+          baseColor={FOOTER_CHROME_COLOR}
+          speed={0.3}
+          amplitude={0.3}
+          frequencyX={3}
+          frequencyY={2}
+          interactive
+          className="absolute inset-0"
+          aria-hidden
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/75 to-[#050505]/40" />
+        <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.08]" aria-hidden />
       </div>
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#050505] via-[#050505]/80 to-[#050505]/55 pointer-events-none" />
-      <div className="relative z-10 flex max-w-3xl flex-col items-center px-6 sm:px-8">
-        <ScrollFloat
-          as="p"
-          containerClassName="mb-4"
-          textClassName="!font-mono text-xs !font-bold uppercase tracking-[0.4em] text-indigo-400 md:tracking-[0.48em]"
-          scrub={0.76}
-          stagger={0.045}
-        >
-          Let&apos;s work together
-        </ScrollFloat>
-        <h3 className="sr-only">
-          Have a project in mind? Let&apos;s create something amazing.
-        </h3>
-        <div className="mb-8 flex min-w-0 max-w-full flex-col items-center gap-1 px-2 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-1" aria-hidden>
-          <ScrollFloat
-            as="span"
-            textClassName="text-3xl !font-extrabold !leading-snug !tracking-tight text-white sm:text-4xl md:text-5xl"
-            containerClassName="inline-block max-w-full min-w-0 text-center"
-            scrub={0.78}
-            stagger={0.02}
-          >
-            {`Have a project in mind? `}
-          </ScrollFloat>
-          <ScrollFloat
-            as="span"
-            textClassName="text-3xl !font-extrabold !leading-snug !tracking-tight bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent sm:text-4xl md:text-5xl"
-            containerClassName="inline-block max-w-full min-w-0 text-center sm:pl-1"
-            scrub={0.78}
-            stagger={0.018}
-          >
-            Let&apos;s create something amazing.
-          </ScrollFloat>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-8">
+        <div className="pointer-events-none mb-16 text-center md:text-left">
+          <div className="pointer-events-auto mb-4 inline-flex items-center gap-2 rounded-full border border-hero-primary/25 bg-hero-primary/[0.06] px-4 py-1.5 backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-hero-primary/40 opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-hero-primary" />
+            </span>
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-hero-primary/90">
+              Available for new opportunities
+            </span>
+          </div>
+          <h3 className="mx-auto max-w-3xl text-3xl font-extrabold !leading-[1.1] tracking-tight text-white md:mx-0 md:text-5xl">
+            Have a project in mind?{' '}
+            <span className="bg-gradient-to-r from-content-primary to-hero-secondary bg-clip-text text-transparent">
+              Let&apos;s create something amazing.
+            </span>
+          </h3>
         </div>
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="mailto:valentineagam6@gmail.com"
-            className="group flex items-center gap-2.5 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-600/20 transition-transform hover:scale-[1.02]"
-          >
-            <Mail size={19} /> Get in touch
-          </a>
-          <a
-            href="https://wa.me/60146521429"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] px-8 py-3 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/25 hover:bg-white/10"
-          >
-            <MessageCircle size={19} /> WhatsApp
-          </a>
-        </div>
-        <div className="mb-6 flex items-center gap-4 text-slate-500">
-          <ScrollFloat
-            as="span"
-            textClassName="text-[10px] !font-semibold uppercase tracking-wider"
-            containerClassName="inline-block"
-            scrub={0.65}
-            stagger={0.06}
-          >
-            Also on
-          </ScrollFloat>
-          <div className="flex gap-3">
-            <a
-              href="https://github.com/valentineagam"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white/5 p-3 transition-all hover:bg-white/10 hover:text-white"
-              aria-label="GitHub"
-            >
-              <Github size={20} />
-            </a>
-            <a
-              href="https://linkedin.com/in/valentineagam"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white/5 p-3 transition-all hover:bg-white/10 hover:text-white"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={20} />
-            </a>
+
+        <div className="pointer-events-none grid grid-cols-1 gap-8 border-t border-white/[0.06] pt-12 md:grid-cols-3 md:gap-12">
+          <div className="pointer-events-auto">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
+              01 // Get in touch
+            </p>
+            <div className="mt-5 flex flex-col gap-3">
+              <a
+                href="mailto:valentineagam6@gmail.com"
+                className="group inline-flex items-center justify-between gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-neutral-950 transition-transform hover:scale-[1.02]"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <Mail size={16} /> Email me
+                </span>
+                <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="https://wa.me/60146521429"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-between gap-2 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/25 hover:bg-white/[0.08]"
+              >
+                <span className="inline-flex items-center gap-2">
+                  <MessageCircle size={16} /> WhatsApp
+                </span>
+                <ArrowUpRight size={14} className="opacity-60 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            </div>
+          </div>
+
+          <div className="pointer-events-auto">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
+              02 // Details
+            </p>
+            <dl className="mt-5 space-y-3 text-sm">
+              <div className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2">
+                <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Email</dt>
+                <dd className="text-right text-[12px] font-medium text-slate-200">valentineagam6@gmail.com</dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2">
+                <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Phone</dt>
+                <dd className="text-right text-[12px] font-medium text-slate-200">+60 14-652 1429</dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2">
+                <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Based in</dt>
+                <dd className="text-right text-[12px] font-medium text-slate-200">Miri, Sarawak · MY</dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3">
+                <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Reply within</dt>
+                <dd className="text-right text-[12px] font-medium text-slate-200">~24 hours</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="pointer-events-auto">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
+              03 // Best at
+            </p>
+            <ul className="mt-5 space-y-2">
+              {FOCUS_AREAS.map((item) => (
+                <li key={item} className="flex items-center gap-2 text-[13px] text-slate-300">
+                  <Sparkles className="h-3 w-3 shrink-0 text-content-primary/80" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex gap-2">
+              <a
+                href="https://github.com/valentineagam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                aria-label="GitHub"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="https://linkedin.com/in/valentineagam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
+            </div>
           </div>
         </div>
-        <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-emerald-900/40 bg-[#050505]/90 px-4 py-2 text-[10px] font-bold uppercase tracking-wider text-emerald-500">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/50 opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-          </span>
-          <ScrollFloat
-            as="span"
-            textClassName="text-[10px] !font-bold uppercase tracking-wider text-emerald-500"
-            containerClassName="inline-block"
-            scrub={0.65}
-            stagger={0.04}
-          >
-            Available for new opportunities
-          </ScrollFloat>
+
+        <div className="pointer-events-none mt-16 flex flex-col items-center justify-between gap-3 border-t border-white/[0.05] py-8 text-center md:flex-row md:text-left">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-600">
+            &copy; 2026 Valentine Agam · Next.js &amp; Tailwind
+          </p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-600">
+            Crafted in Miri, Sarawak · MY
+          </p>
         </div>
-        <ScrollFloat
-          as="p"
-          textClassName="text-[10px] !font-mono uppercase tracking-[0.3em] text-slate-600"
-          scrub={0.85}
-          stagger={0.05}
-        >
-          &copy; 2026 Valentine Agam · React & Tailwind
-        </ScrollFloat>
       </div>
     </footer>
   );

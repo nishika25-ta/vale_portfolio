@@ -1,17 +1,17 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type ShowcaseVideoThumbProps = {
-  videoUrl?: string;
-  imageFallback: string;
+  videoUrl: string;
+  imageFallback?: string;
 };
 
 /**
- * Shows the first frame of a local MP4 as the thumbnail (no autoplay).
- * Falls back to a static image when there is no video URL.
- * Parent control should supply an accessible name (e.g. aria-label on the button).
+ * First frame of a local demo clip as thumbnail (metadata only, in-viewport).
  */
 export function ShowcaseVideoThumb({ videoUrl, imageFallback }: ShowcaseVideoThumbProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
   const primeFrame = useCallback(() => {
     const el = videoRef.current;
@@ -23,21 +23,49 @@ export function ShowcaseVideoThumb({ videoUrl, imageFallback }: ShowcaseVideoThu
     }
   }, []);
 
-  if (!videoUrl) {
-    return <img src={imageFallback} alt="" className="h-full w-full object-cover" loading="lazy" />;
-  }
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) setShouldLoad(true);
+      },
+      { rootMargin: '100px', threshold: 0.01 }
+    );
+    io.observe(root);
+    return () => io.disconnect();
+  }, []);
+
+  const placeholder = imageFallback ? (
+    <img
+      src={imageFallback}
+      alt=""
+      className="h-full w-full object-cover"
+      loading="lazy"
+      decoding="async"
+    />
+  ) : (
+    <div className="h-full w-full bg-[#0a0a0c]" aria-hidden />
+  );
 
   return (
-    <video
-      ref={videoRef}
-      src={videoUrl}
-      muted
-      playsInline
-      preload="metadata"
-      onLoadedMetadata={primeFrame}
-      onLoadedData={primeFrame}
-      className="pointer-events-none h-full w-full object-cover"
-      aria-hidden
-    />
+    <div ref={rootRef} className="absolute inset-0">
+      {!shouldLoad ? (
+        placeholder
+      ) : (
+        <video
+          ref={videoRef}
+          src={videoUrl}
+          muted
+          playsInline
+          preload="metadata"
+          onLoadedMetadata={primeFrame}
+          onLoadedData={primeFrame}
+          className="pointer-events-none h-full w-full object-cover"
+          aria-hidden
+        />
+      )}
+    </div>
   );
 }

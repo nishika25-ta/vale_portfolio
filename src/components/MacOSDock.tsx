@@ -9,12 +9,13 @@ type MacOSDockProps = {
 };
 
 export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: MacOSDockProps) {
+  const [mounted, setMounted] = useState(false);
   const [mouseX, setMouseX] = useState<number | null>(null);
   const [currentScales, setCurrentScales] = useState(() => apps.map(() => 1));
   const [currentPositions, setCurrentPositions] = useState<number[]>([]);
   const dockRef = useRef<HTMLDivElement>(null);
   const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(undefined);
   const lastMouseMoveTime = useRef(0);
 
   const getResponsiveConfig = useCallback(() => {
@@ -51,6 +52,11 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   const [config, setConfig] = useState(getResponsiveConfig);
   const { baseIconSize, maxScale, effectWidth, baseSpacing, padX, padY } = config;
   const minScale = 1.0;
+
+  useEffect(() => {
+    setConfig(getResponsiveConfig());
+    setMounted(true);
+  }, [getResponsiveConfig]);
 
   useEffect(() => {
     const handleResize = () => setConfig(getResponsiveConfig());
@@ -143,6 +149,8 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
       ? Math.max(...currentPositions.map((pos, i) => pos + (baseIconSize * currentScales[i]) / 2)) + horizontalPadding
       : apps.length * (baseIconSize + baseSpacing) - baseSpacing + horizontalPadding;
 
+  if (!mounted) return null;
+
   return (
     <div
       className={`fixed bottom-4 left-1/2 z-50 max-w-[calc(100vw-12px)] -translate-x-1/2 sm:bottom-6 ${className}`}
@@ -184,7 +192,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
                   zIndex: Math.round(scale * 10),
                 }}
               >
-                <div className="absolute -top-12 bg-white text-black text-[9px] font-bold uppercase tracking-widest px-2.5 py-1.2 rounded-md opacity-0 group-hover:opacity-100 transition-all transform -translate-y-1 group-hover:translate-y-0 shadow-xl pointer-events-none whitespace-nowrap">
+                <div className="pointer-events-none absolute -top-11 whitespace-nowrap rounded-md border border-white/10 bg-black/85 px-2.5 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-white opacity-0 shadow-xl transition-all -translate-y-1 backdrop-blur-md group-hover:translate-y-0 group-hover:opacity-100">
                   {app.name}
                 </div>
                 <div
@@ -199,11 +207,16 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
                 </div>
                 {openApps.includes(app.id) && !app.isDivider && (
                   <div
-                    className="absolute bg-white rounded-full shadow-[0_0_6px_rgba(255,255,255,0.7)]"
+                    className="absolute rounded-full"
                     style={{
                       bottom: `-${Math.max(3, scaledSize * 0.1)}px`,
-                      width: '2.5px',
-                      height: '2.5px',
+                      width: '3px',
+                      height: '3px',
+                      background: app.id === 'home' ? '#61dca3' : '#818cf8',
+                      boxShadow:
+                        app.id === 'home'
+                          ? '0 0 8px rgba(97,220,163,0.85)'
+                          : '0 0 8px rgba(129,140,248,0.85)',
                     }}
                   />
                 )}

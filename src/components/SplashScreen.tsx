@@ -22,17 +22,21 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-950 transition-transform duration-[800ms] ease-[cubic-bezier(0.85,0,0.15,1)] ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050505] transition-transform duration-[800ms] ease-[cubic-bezier(0.85,0,0.15,1)] ${
         stage === 3 ? '-translate-y-full' : 'translate-y-0'
       }`}
     >
-      <div className="overflow-hidden mb-8 px-4 text-center">
+      {/* Subtle scanline backdrop */}
+      <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.08]" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(97,220,163,0.08)_0%,transparent_60%)]" aria-hidden />
+
+      <div className="relative z-10 mb-8 overflow-hidden px-4 text-center">
         <h1
-          className={`text-xl md:text-3xl lg:text-5xl font-mono font-semibold text-slate-300 transition-transform duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`font-mono text-xl font-semibold text-slate-300 transition-transform duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] md:text-3xl lg:text-5xl ${
             stage >= 1 && stage < 2 ? 'translate-y-0' : 'translate-y-[120%]'
           }`}
         >
-          <span className="text-indigo-500">import</span> {'{ '}
+          <span className="text-hero-primary">import</span> {'{ '}
           {stage >= 1 ? (
             <DecryptedText
               text="Valentine"
@@ -49,20 +53,23 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
             <span className="text-white">Valentine</span>
           )}
           {' } '}
-          <span className="text-indigo-500">from</span>{' '}
-          <span className="text-emerald-400">&apos;./future&apos;</span>;
+          <span className="text-hero-primary">from</span>{' '}
+          <span className="text-hero-secondary">&apos;./future&apos;</span>;
         </h1>
       </div>
       <div
-        className={`w-48 md:w-64 h-1 bg-slate-800 rounded-full overflow-hidden transition-opacity duration-500 ${
+        className={`relative z-10 h-1 w-48 overflow-hidden rounded-full bg-slate-900 transition-opacity duration-500 md:w-64 ${
           stage >= 1 && stage < 2 ? 'opacity-100' : 'opacity-0'
         }`}
       >
         <div
-          className="h-full bg-indigo-600 transition-all duration-[2000ms] ease-out"
+          className="h-full bg-gradient-to-r from-hero-primary to-hero-secondary transition-all duration-[2000ms] ease-out"
           style={{ width: stage >= 1 ? '100%' : '0%' }}
         />
       </div>
+      <p className="relative z-10 mt-6 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-600">
+        Initializing portfolio
+      </p>
     </div>
   );
 }

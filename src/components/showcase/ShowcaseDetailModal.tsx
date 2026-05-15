@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import type { ShowcaseItem } from '../../types/portfolio';
+import { getLenis } from '@/utils/lenisRef';
 
 type ShowcaseDetailModalProps = {
   open: boolean;
@@ -33,12 +34,12 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
     html.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
 
-    window.lenis?.stop();
+    getLenis()?.stop();
 
     return () => {
       html.style.overflow = prevHtmlOverflow;
       document.body.style.overflow = prevBodyOverflow;
-      window.lenis?.start();
+      getLenis()?.start();
     };
   }, [open]);
 

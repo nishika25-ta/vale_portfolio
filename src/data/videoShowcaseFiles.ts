@@ -3,17 +3,14 @@
  * Add or remove entries here when you add/remove files from that folder.
  */
 export const SHOWCASE_VIDEO_FILES = [
-  'chemara_hotel.mp4',
-  'Coffee Joa.mp4',
-  'Coffee.mp4',
-  'Collectors_world.mp4',
-  'DASH.mp4',
-  'Dynasty_Hotel.mp4',
-  'Hotel.mp4',
-  'Kaledi_Demo.mp4',
-  'Mal_Demo.mp4',
-  'The_Yard(new).mp4',
-  'The_Yard.mp4',
+  'Coffee.webm',
+  'Coffee_Joa.webm',
+  'Collectors_world.webm',
+  'DASH.webm',
+  'Dynasty_Hotel.webm',
+  'Mal_Demo.webm',
+  'Pelita_Clinic.webm',
+  'The_Yard.webm',
 ] as const;
 
 export function videoPublicUrl(filename: string): string {
@@ -24,3 +21,18 @@ export function filenameToTitle(filename: string): string {
   const base = filename.replace(/\.[^.]+$/i, '');
   return base.replace(/_/g, ' ').trim();
 }
+
+export type VideoDemoClip = {
+  id: string;
+  title: string;
+  videoUrl: string;
+};
+
+/** Sorted demo clips for the Live Showcase player and thumbnail strip. */
+export const videoDemoClips: VideoDemoClip[] = [...SHOWCASE_VIDEO_FILES]
+  .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
+  .map((file) => ({
+    id: file.replace(/\.[^.]+$/i, '').toLowerCase(),
+    title: filenameToTitle(file),
+    videoUrl: videoPublicUrl(file),
+  }));

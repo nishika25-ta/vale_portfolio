@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getLenis } from '@/utils/lenisRef';
 
-/**
- * Keeps ScrollTrigger in sync with Lenis smooth scroll and refreshes on resize.
- */
 export function useLenisScrollTrigger(enabled: boolean): void {
   useEffect(() => {
     if (!enabled) return;
@@ -12,22 +10,19 @@ export function useLenisScrollTrigger(enabled: boolean): void {
     window.addEventListener('resize', onResize);
 
     const update = () => ScrollTrigger.update();
-    let detach: (() => void) | undefined;
+    let unsub: (() => void) | undefined;
 
     const attach = () => {
-      const lenis = window.lenis as
-        | { on?: (ev: string, fn: () => void) => void; off?: (ev: string, fn: () => void) => void }
-        | undefined;
-      if (!lenis?.on) return false;
-      lenis.on('scroll', update);
-      detach = () => lenis.off?.('scroll', update);
+      const lenis = getLenis();
+      if (!lenis) return false;
+      unsub = lenis.on('scroll', () => update);
       ScrollTrigger.refresh();
       return true;
     };
 
     if (attach()) {
       return () => {
-        detach?.();
+        unsub?.();
         window.removeEventListener('resize', onResize);
       };
     }
@@ -38,7 +33,7 @@ export function useLenisScrollTrigger(enabled: boolean): void {
 
     return () => {
       window.clearInterval(interval);
-      detach?.();
+      unsub?.();
       window.removeEventListener('resize', onResize);
     };
   }, [enabled]);

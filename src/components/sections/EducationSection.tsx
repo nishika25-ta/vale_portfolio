@@ -3,7 +3,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Award, Calendar, GraduationCap, School } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { ScrollFloat } from '@/components/ScrollFloat';
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { getLenis } from '@/utils/lenisRef';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,149 +43,118 @@ export function EducationSection() {
       update();
     });
 
-    const lenis = window.lenis as
-      | { on?: (ev: string, fn: () => void) => void; off?: (ev: string, fn: () => void) => void }
-      | undefined;
-    lenis?.on?.('scroll', update);
+    const lenis = getLenis();
+    const unsub = lenis?.on('scroll', () => update);
 
     return () => {
-      lenis?.off?.('scroll', update);
+      unsub?.();
     };
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="education"
-      className="min-h-screen py-32 flex flex-col justify-center border-t border-white/5"
-    >
-      <div className="text-center mb-16 md:mb-24 relative z-10">
-        <ScrollFloat
-          as="p"
-          containerClassName="mb-4"
-          textClassName="!font-mono text-xs !font-bold uppercase tracking-[0.4em] text-indigo-500"
-          scrub={0.75}
-          stagger={0.04}
-        >
-          Academic Credentials
-        </ScrollFloat>
-        <h3 className="sr-only">Education Path</h3>
-        <ScrollFloat
-          as="span"
-          containerClassName="mb-4 flex w-full justify-center"
-          textClassName="text-4xl !font-extrabold text-white md:text-6xl"
-          scrub={0.78}
-          stagger={0.02}
-          role="presentation"
-        >
-          Education Path
-        </ScrollFloat>
-        <div className="h-1 w-20 bg-indigo-600 mx-auto rounded-full" />
-      </div>
+    <section ref={sectionRef} id="education" className="section-border section-pad">
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
+        <SectionHeader
+          number="04 // EDUCATION"
+          title="Education"
+          gradient="Path"
+          description="Cognitive Science training with focus on data science, AI/ML, and software development."
+          accent="content"
+        />
 
-      <div className="max-w-5xl mx-auto w-full min-w-0">
-        {/* Mobile: stacked order; md: 3-column grid with shared timeline */}
-        <div className="flex flex-col gap-12 md:gap-0">
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] md:grid-rows-[auto_auto] gap-x-6 md:gap-x-8 gap-y-10 md:gap-y-16 items-start">
-            {/* UNIMAS — left column */}
-            <div className="order-2 md:order-none md:col-start-1 md:row-start-1 md:text-right min-w-0 md:pr-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 font-mono text-sm mb-4">
-                <Calendar size={14} /> Oct 2022 — Nov 2025
-              </div>
-              <ScrollFloat
-                as="h4"
-                textClassName="text-2xl sm:text-3xl !font-bold text-white !leading-tight break-words"
-                containerClassName="mb-2"
-                scrub={0.65}
-                stagger={0.015}
-              >
-                Bachelor of Science in Cognitive Science
-              </ScrollFloat>
-              <p className="text-lg sm:text-xl text-slate-400 font-medium">
-                University Malaysia Sarawak (UNIMAS)
-              </p>
-              <p className="text-sm text-slate-500 mt-1">Kuching, Sarawak · Graduated Nov 2025</p>
-            </div>
-
-            {/* Timeline: spans both rows on desktop */}
-            <div className="order-1 md:order-none md:col-start-2 md:row-start-1 md:row-span-2 hidden md:block relative w-8 shrink-0 justify-self-center self-stretch min-h-[20rem]">
-              {/* Baseline track (unfilled) */}
-              <div
-                className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 rounded-full bg-gradient-to-b from-white/[0.08] via-white/[0.05] to-white/[0.08]"
-                aria-hidden
-              />
-              {/* Scroll-driven fill */}
-              <div
-                ref={lineFillRef}
-                className="absolute left-1/2 top-0 h-full w-[2px] origin-top scale-y-0 -translate-x-1/2 rounded-full bg-gradient-to-b from-indigo-400 via-purple-400 to-purple-500 shadow-[0_0_14px_rgba(129,140,248,0.45)] will-change-transform z-[1]"
-                aria-hidden
-              />
-              <div className="absolute left-1/2 top-[12%] -translate-x-1/2 z-10 h-4 w-4 rounded-full border-4 border-[#050505] bg-indigo-500 shadow-[0_0_20px_rgba(99,102,241,1)]" />
-              <div className="absolute left-1/2 top-[58%] -translate-x-1/2 z-10 h-4 w-4 rounded-full border-4 border-[#050505] bg-purple-500 shadow-[0_0_16px_rgba(168,85,247,0.8)]" />
-            </div>
-
-            {/* UNIMAS — detail card */}
-            <div className="order-3 md:order-none md:col-start-3 md:row-start-1 min-w-0 md:pl-2">
-              <div className="timeline-card group relative bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-[2rem] hover:border-indigo-500/30 transition-all duration-500 overflow-hidden">
-                <GraduationCap className="academic-sigil absolute -right-4 -bottom-4 text-indigo-500 pointer-events-none" size={120} />
-                <div className="flex flex-wrap gap-2 mb-6 relative z-10">
-                  <span className="px-3 py-1 bg-white text-black text-[10px] font-bold uppercase tracking-widest rounded-md">
-                    Minor: Computer Science
-                  </span>
-                  <span className="px-3 py-1 bg-indigo-500/20 text-indigo-400 text-[10px] font-bold uppercase tracking-widest rounded-md border border-indigo-500/20 flex items-center gap-1">
-                    <Award size={10} /> Dean&apos;s List · Y3 Sem 2 (2025)
-                  </span>
+        <div className="mx-auto w-full min-w-0 max-w-5xl">
+          <div className="flex flex-col gap-12 md:gap-0">
+            <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10 md:grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] md:grid-rows-[auto_auto] md:gap-x-8 md:gap-y-16">
+              {/* UNIMAS — meta */}
+              <div className="order-2 min-w-0 md:order-none md:col-start-1 md:row-start-1 md:pr-2 md:text-right">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-content-primary/25 bg-content-primary/[0.06] px-4 py-2 font-mono text-sm text-content-primary">
+                  <Calendar size={14} /> Oct 2022 — Nov 2025
                 </div>
-                <p className="text-slate-300 leading-relaxed relative z-10 text-sm sm:text-base">
-                  Focus areas: <strong className="text-white font-semibold">Data Science</strong>,{' '}
-                  <strong className="text-white font-semibold">AI/ML</strong>, and{' '}
-                  <strong className="text-white font-semibold">Software Development</strong>. Relevant coursework includes
-                  Data Analysis, Software Development, Web Development, and Artificial Intelligence.
+                <h4 className="text-2xl !font-bold !leading-tight text-white sm:text-3xl">
+                  Bachelor of Science in Cognitive Science
+                </h4>
+                <p className="mt-2 text-lg font-medium text-slate-400 sm:text-xl">University Malaysia Sarawak (UNIMAS)</p>
+                <p className="mt-1 text-sm text-slate-500">Kota Samarahan, Sarawak · Graduated Nov 2025</p>
+              </div>
+
+              {/* Timeline rail */}
+              <div className="relative order-1 hidden min-h-[20rem] w-8 shrink-0 self-stretch justify-self-center md:order-none md:col-start-2 md:row-span-2 md:row-start-1 md:block">
+                <div
+                  className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 rounded-full bg-white/[0.06]"
+                  aria-hidden
+                />
+                <div
+                  ref={lineFillRef}
+                  className="absolute left-1/2 top-0 h-full w-[2px] origin-top -translate-x-1/2 scale-y-0 rounded-full bg-gradient-to-b from-content-primary via-content-secondary to-content-secondary shadow-[0_0_14px_rgba(129,140,248,0.4)] will-change-transform z-[1]"
+                  aria-hidden
+                />
+                <div className="absolute left-1/2 top-[12%] z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-4 border-[#050505] bg-content-primary shadow-[0_0_18px_rgba(129,140,248,0.9)]" />
+                <div className="absolute left-1/2 top-[58%] z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-4 border-[#050505] bg-content-secondary shadow-[0_0_14px_rgba(167,139,250,0.75)]" />
+              </div>
+
+              {/* UNIMAS — detail */}
+              <div className="order-3 min-w-0 md:order-none md:col-start-3 md:row-start-1 md:pl-2">
+                <div className="surface-card group relative overflow-hidden p-6 transition-all duration-500 hover:border-content-primary/25 sm:p-8">
+                  <GraduationCap
+                    className="academic-sigil pointer-events-none absolute -right-4 -bottom-4 text-content-primary"
+                    size={120}
+                  />
+                  <div className="relative z-10 mb-5 flex flex-wrap gap-1.5">
+                    <span className="inline-flex items-center gap-1 rounded-md border border-white/15 bg-white/[0.04] px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-slate-300">
+                      Minor: Computer Science
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-md border border-content-primary/30 bg-content-primary/[0.06] px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-content-primary">
+                      <Award size={10} /> Dean&apos;s List · Y3 Sem 2
+                    </span>
+                  </div>
+                  <p className="relative z-10 text-sm leading-relaxed text-slate-400 sm:text-[15px]">
+                    Focus areas: <strong className="font-semibold text-white">Data Science</strong>,{' '}
+                    <strong className="font-semibold text-white">AI/ML</strong>, and{' '}
+                    <strong className="font-semibold text-white">Software Development</strong>. Coursework included
+                    Data Analysis, Software Development, Web Development, and Artificial Intelligence.
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-baseline gap-2 border-t border-white/[0.05] pt-5">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">CGPA</span>
+                    <span className="text-2xl font-bold text-content-primary">3.12</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* STPM — meta */}
+              <div className="order-5 min-w-0 md:order-none md:col-start-1 md:row-start-2 md:pr-2 md:text-right">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-content-secondary/25 bg-content-secondary/[0.06] px-4 py-2 font-mono text-sm text-content-secondary">
+                  <Calendar size={14} /> Jun 2020 — Jul 2022
+                </div>
+                <h4 className="text-2xl !font-bold !leading-tight text-white sm:text-3xl">STPM · Sport Science</h4>
+                <p className="mt-2 text-lg font-medium text-slate-400 sm:text-xl">
+                  Kolej Tun Datu Tuanku Haji Bujang
                 </p>
-                <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap items-baseline gap-2">
-                  <span className="text-slate-500 text-xs font-mono uppercase tracking-widest">CGPA:</span>
-                  <span className="text-2xl font-bold text-indigo-400">3.12</span>
+                <p className="mt-1 text-sm text-slate-500">Miri, Sarawak</p>
+              </div>
+
+              {/* STPM — detail */}
+              <div className="order-6 min-w-0 md:order-none md:col-start-3 md:row-start-2 md:pl-2">
+                <div className="surface-card group relative overflow-hidden p-6 transition-all duration-500 hover:border-content-secondary/25 sm:p-8">
+                  <School
+                    className="academic-sigil pointer-events-none absolute -right-4 -bottom-4 text-content-secondary"
+                    size={100}
+                  />
+                  <ul className="relative z-10 list-none space-y-3 text-sm leading-relaxed text-slate-400 sm:text-[15px]">
+                    <li className="flex gap-2">
+                      <span className="shrink-0 text-content-secondary">•</span>
+                      <span>
+                        Participant, <strong className="font-semibold text-white">National Scout Forum</strong> (2022)
+                      </span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="shrink-0 text-content-secondary">•</span>
+                      <span>
+                        <strong className="font-semibold text-white">Head of Student Council (Multimedia)</strong> —
+                        graphics, video, and event coverage; digital content and social campaigns.
+                      </span>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-            </div>
-
-            {/* STPM — left column */}
-            <div className="order-5 md:order-none md:col-start-1 md:row-start-2 md:text-right min-w-0 md:pr-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 font-mono text-sm mb-4">
-                <Calendar size={14} /> Jun 2020 — Jul 2022
-              </div>
-              <ScrollFloat
-                as="h4"
-                textClassName="text-2xl sm:text-3xl !font-bold text-white !leading-tight break-words"
-                containerClassName="mb-2"
-                scrub={0.65}
-                stagger={0.02}
-              >
-                STPM · Sport Science
-              </ScrollFloat>
-              <p className="text-lg sm:text-xl text-slate-400 font-medium">Kolej Tun Datu Tuanku Haji Bujang</p>
-              <p className="text-sm text-slate-500 mt-1">Miri, Sarawak</p>
-            </div>
-
-            {/* STPM — detail card */}
-            <div className="order-6 md:order-none md:col-start-3 md:row-start-2 min-w-0 md:pl-2">
-              <div className="timeline-card group relative bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-[2rem] hover:border-purple-500/30 transition-all duration-500 overflow-hidden">
-                <School className="academic-sigil absolute -right-4 -bottom-4 text-purple-500 pointer-events-none" size={100} />
-                <ul className="text-slate-300 leading-relaxed relative z-10 text-sm sm:text-base space-y-3 list-none">
-                  <li className="flex gap-2">
-                    <span className="text-purple-400 shrink-0">•</span>
-                    <span>
-                      Participant, <strong className="text-white font-semibold">National Scout Forum</strong> (2022)
-                    </span>
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-purple-400 shrink-0">•</span>
-                    <span>
-                      <strong className="text-white font-semibold">Head of Student Council (Multimedia)</strong> — graphics,
-                      video, and event coverage; digital content and social campaigns.
-                    </span>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>

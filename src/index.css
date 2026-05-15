@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --accent-hero-primary: #61dca3;
+  --accent-hero-secondary: #61b3dc;
+  --accent-hero-deep: #2b4539;
+  --accent-content-primary: #818cf8;
+  --accent-content-secondary: #a78bfa;
+  --accent-content-deep: #1e1b4b;
+  --surface-base: #050505;
+  --surface-raised: #0a0a0c;
+  --surface-edge: rgba(255, 255, 255, 0.06);
+}
+
 @layer base {
   h1,
   h2,
@@ -12,6 +24,9 @@
   }
   p {
     letter-spacing: -0.011em;
+  }
+  html {
+    color-scheme: dark;
   }
 }
 
@@ -26,6 +41,7 @@
     background-size: 40px 40px;
   }
   .academic-sigil {
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
     mask-image: linear-gradient(to bottom, black, transparent);
     opacity: 0.05;
     transition: opacity 0.5s ease;
@@ -139,4 +155,117 @@
   .hero-fade-4 { animation-delay: 0.65s; }
   .hero-fade-5 { animation-delay: 0.8s; }
   .hero-fade-6 { animation-delay: 0.95s; }
+
+  /*
+   * Luminous clear glass — light fill + brightness() so blur doesn’t turn muddy/dark.
+   */
+  .hero-glass {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.05) 45%,
+      rgba(255, 255, 255, 0.09) 100%
+    );
+    -webkit-backdrop-filter: blur(18px) brightness(1.22) saturate(1.45);
+    backdrop-filter: blur(18px) brightness(1.22) saturate(1.45);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1px 0 0 rgba(255, 255, 255, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-glass-pill {
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    -webkit-backdrop-filter: blur(14px) brightness(1.18) saturate(1.35);
+    backdrop-filter: blur(14px) brightness(1.18) saturate(1.35);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.65);
+  }
+
+  .hero-glass-shine::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    height: 42%;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.06) 55%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .hero-glass-edge::after {
+    content: '';
+    position: absolute;
+    inset-inline: 1.5rem;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+    pointer-events: none;
+  }
+
+  /* Reusable surface treatments for the redesign */
+  .surface-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 1.75rem;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03), 0 24px 60px -30px rgba(0, 0, 0, 0.65);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .surface-card-hero {
+    background: linear-gradient(135deg, rgba(97, 220, 163, 0.06) 0%, rgba(97, 179, 220, 0.02) 100%);
+    border: 1px solid rgba(97, 220, 163, 0.12);
+    border-radius: 1.75rem;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+  .section-border {
+    @apply border-t border-white/5;
+  }
+
+  /* Marquee for hero tech stack strip */
+  .marquee-track {
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee-paused:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Aurora orb used in contact footer */
+  .aurora-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.55;
+    will-change: transform;
+    animation: auroraDrift 18s ease-in-out infinite;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fade,
+    .marquee-track,
+    .aurora-orb {
+      animation: none !important;
+    }
+    .hero-fade {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
