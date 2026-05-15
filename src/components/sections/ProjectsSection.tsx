@@ -43,7 +43,6 @@ export function ProjectsSection() {
               <div className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
             </div>
             <ShowcaseStageVideo
-              key={activeDemo.videoUrl}
               src={activeDemo.videoUrl}
               className="absolute inset-0 z-0 h-full w-full object-cover"
             />
@@ -95,7 +94,7 @@ export function ProjectsSection() {
                   aria-label={`Play ${demo.title} in showcase`}
                   aria-current={activeDemoIndex === index ? 'true' : undefined}
                 >
-                  <ShowcaseVideoThumb videoUrl={demo.videoUrl} />
+                  <ShowcaseVideoThumb title={demo.title} isActive={activeDemoIndex === index} />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
                   {activeDemoIndex === index ? (
                     <span className="pointer-events-none absolute right-2 top-2 h-2 w-2 rounded-full bg-indigo-400 shadow-[0_0_10px_rgba(129,140,248,0.9)]" />

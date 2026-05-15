@@ -1,71 +1,35 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Play } from 'lucide-react';
 
 type ShowcaseVideoThumbProps = {
-  videoUrl: string;
-  imageFallback?: string;
+  title: string;
+  isActive?: boolean;
 };
 
 /**
- * First frame of a local demo clip as thumbnail (metadata only, in-viewport).
+ * Static demo thumb — no video decode (avoids mobile OOM / crashes).
  */
-export function ShowcaseVideoThumb({ videoUrl, imageFallback }: ShowcaseVideoThumbProps) {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [shouldLoad, setShouldLoad] = useState(false);
-
-  const primeFrame = useCallback(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    try {
-      el.currentTime = 0.15;
-    } catch {
-      /* seek may fail before metadata */
-    }
-  }, []);
-
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) setShouldLoad(true);
-      },
-      { rootMargin: '100px', threshold: 0.01 }
-    );
-    io.observe(root);
-    return () => io.disconnect();
-  }, []);
-
-  const placeholder = imageFallback ? (
-    <img
-      src={imageFallback}
-      alt=""
-      className="h-full w-full object-cover"
-      loading="lazy"
-      decoding="async"
-    />
-  ) : (
-    <div className="h-full w-full bg-[#0a0a0c]" aria-hidden />
-  );
-
+export function ShowcaseVideoThumb({ title, isActive }: ShowcaseVideoThumbProps) {
   return (
-    <div ref={rootRef} className="absolute inset-0">
-      {!shouldLoad ? (
-        placeholder
-      ) : (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          muted
-          playsInline
-          preload="metadata"
-          onLoadedMetadata={primeFrame}
-          onLoadedData={primeFrame}
-          className="pointer-events-none h-full w-full object-cover"
+    <div className="absolute inset-0 overflow-hidden bg-gradient-to-br from-[#1c1c28] via-[#12121a] to-[#08080c]">
+      <div
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isActive ? 'bg-indigo-500/15' : 'bg-transparent'
+        }`}
+        aria-hidden
+      />
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span
+          className={`flex h-8 w-8 items-center justify-center rounded-full border bg-black/50 backdrop-blur-sm transition-colors ${
+            isActive ? 'border-indigo-400/60 text-indigo-200' : 'border-white/15 text-white/70'
+          }`}
           aria-hidden
-        />
-      )}
+        >
+          <Play className="h-3.5 w-3.5 fill-current" />
+        </span>
+      </div>
+      <span className="absolute inset-x-1 bottom-1 truncate text-center font-mono text-[7px] font-bold uppercase tracking-[0.12em] text-white/40 sm:text-[8px]">
+        {title}
+      </span>
     </div>
   );
 }
