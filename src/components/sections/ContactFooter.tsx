@@ -5,9 +5,6 @@ import { ArrowUpRight, Github, Linkedin, Mail, MessageCircle } from 'lucide-reac
 
 const LiquidChrome = dynamic(() => import('@/components/footer/LiquidChrome'), { ssr: false });
 
-const GITHUB_URL = 'https://github.com/nishika25-ta';
-const LINKEDIN_URL = 'https://www.linkedin.com/in/valentine-a-a278a7254';
-
 /** RGB 0–1 — indigo/violet base to match content accent */
 const FOOTER_CHROME_COLOR: [number, number, number] = [0.12, 0.1, 0.22];
 
@@ -78,6 +75,26 @@ export function ContactFooter() {
                 <ArrowUpRight size={14} className="opacity-60 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
             </div>
+            <div className="mt-6 flex gap-2">
+              <a
+                href="https://github.com/nishika25-ta"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pointer-events-auto rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                aria-label="GitHub — nishika25-ta"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/valentine-a-a278a7254"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pointer-events-auto rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                aria-label="LinkedIn — Valentine Agam"
+              >
+                <Linkedin size={18} />
+              </a>
+            </div>
           </div>
 
           <div className="pointer-events-auto">
@@ -102,31 +119,6 @@ export function ContactFooter() {
                 <dd className="text-right text-[12px] font-medium text-slate-200">~24 hours</dd>
               </div>
             </dl>
-            <div className="mt-8">
-              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
-                Connect
-              </p>
-              <div className="mt-4 flex gap-2">
-                <a
-                  href={GITHUB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
-                  aria-label="GitHub profile"
-                >
-                  <Github size={18} />
-                </a>
-                <a
-                  href={LINKEDIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
-                  aria-label="LinkedIn profile"
-                >
-                  <Linkedin size={18} />
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
