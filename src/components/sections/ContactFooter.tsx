@@ -1,17 +1,12 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { ArrowUpRight, Github, Linkedin, Mail, MessageCircle, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
 
 const LiquidChrome = dynamic(() => import('@/components/footer/LiquidChrome'), { ssr: false });
 
-const FOCUS_AREAS = [
-  'Python · FastAPI APIs',
-  'AI / ML Deployment',
-  'YOLO Computer Vision',
-  'n8n Automation',
-  'Supabase · DigitalOcean',
-];
+const GITHUB_URL = 'https://github.com/nishika25-ta';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/valentine-a-a278a7254';
 
 /** RGB 0–1 — indigo/violet base to match content accent */
 const FOOTER_CHROME_COLOR: [number, number, number] = [0.12, 0.1, 0.22];
@@ -56,7 +51,7 @@ export function ContactFooter() {
           </h3>
         </div>
 
-        <div className="pointer-events-none grid grid-cols-1 gap-8 border-t border-white/[0.06] pt-12 md:grid-cols-3 md:gap-12">
+        <div className="pointer-events-none grid grid-cols-1 gap-8 border-t border-white/[0.06] pt-12 md:grid-cols-2 md:gap-12">
           <div className="pointer-events-auto">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
               01 // Get in touch
@@ -107,39 +102,30 @@ export function ContactFooter() {
                 <dd className="text-right text-[12px] font-medium text-slate-200">~24 hours</dd>
               </div>
             </dl>
-          </div>
-
-          <div className="pointer-events-auto">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
-              03 // Best at
-            </p>
-            <ul className="mt-5 space-y-2">
-              {FOCUS_AREAS.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-[13px] text-slate-300">
-                  <Sparkles className="h-3 w-3 shrink-0 text-content-primary/80" aria-hidden />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 flex gap-2">
-              <a
-                href="https://github.com/valentineagam"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
-                aria-label="GitHub"
-              >
-                <Github size={18} />
-              </a>
-              <a
-                href="https://linkedin.com/in/valentineagam"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
+            <div className="mt-8">
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
+                Connect
+              </p>
+              <div className="mt-4 flex gap-2">
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                  aria-label="GitHub profile"
+                >
+                  <Github size={18} />
+                </a>
+                <a
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-white/10 bg-white/[0.04] p-3 text-slate-400 transition-all hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                  aria-label="LinkedIn profile"
+                >
+                  <Linkedin size={18} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
