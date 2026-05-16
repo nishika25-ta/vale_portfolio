@@ -92,6 +92,8 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
                 src={images[slide]}
                 alt={`${project.title} slide ${slide + 1}`}
                 className="max-h-[min(50vh,480px)] w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             {images.length > 1 ? (

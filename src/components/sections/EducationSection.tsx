@@ -2,21 +2,24 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Award, Calendar, GraduationCap, School } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
+import { useScrollAnimationsReady } from '@/context/ScrollAnimationContext';
 import { SectionHeader } from '@/components/ui/SectionHeader';
-import { getLenis } from '@/utils/lenisRef';
+import { getScrollScroller } from '@/utils/scrollScroller';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function EducationSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const lineFillRef = useRef<HTMLDivElement>(null);
+  const scrollReady = useScrollAnimationsReady();
 
   useGSAP(
     () => {
       const section = sectionRef.current;
       const fill = lineFillRef.current;
-      if (!section || !fill) return;
+      if (!section || !fill || !scrollReady) return;
 
       gsap.fromTo(
         fill,
@@ -25,6 +28,7 @@ export function EducationSection() {
           scaleY: 1,
           ease: 'none',
           scrollTrigger: {
+            scroller: getScrollScroller(),
             trigger: section,
             start: 'top 78%',
             end: 'bottom 38%',
@@ -33,23 +37,9 @@ export function EducationSection() {
         }
       );
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [scrollReady] }
   );
 
-  useEffect(() => {
-    const update = () => ScrollTrigger.update();
-    requestAnimationFrame(() => {
-      ScrollTrigger.refresh();
-      update();
-    });
-
-    const lenis = getLenis();
-    const unsub = lenis?.on('scroll', () => update);
-
-    return () => {
-      unsub?.();
-    };
-  }, []);
 
   return (
     <section ref={sectionRef} id="education" className="section-border section-pad">
@@ -62,7 +52,7 @@ export function EducationSection() {
           accent="content"
         />
 
-        <div className="mx-auto w-full min-w-0 max-w-5xl">
+        <ScrollRevealGroup className="mx-auto w-full min-w-0 max-w-5xl" stagger={0.14} animation="fade-up">
           <div className="flex flex-col gap-12 md:gap-0">
             <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10 md:grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] md:grid-rows-[auto_auto] md:gap-x-8 md:gap-y-16">
               {/* UNIMAS — meta */}
@@ -158,7 +148,7 @@ export function EducationSection() {
               </div>
             </div>
           </div>
-        </div>
+        </ScrollRevealGroup>
       </div>
     </section>
   );

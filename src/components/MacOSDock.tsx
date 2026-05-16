@@ -153,7 +153,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
 
   return (
     <div
-      className={`fixed bottom-4 left-1/2 z-50 max-w-[calc(100vw-12px)] -translate-x-1/2 sm:bottom-6 ${className}`}
+      className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 z-50 max-w-[calc(100vw-12px)] -translate-x-1/2 sm:bottom-6 ${className}`}
     >
       <div
         ref={dockRef}

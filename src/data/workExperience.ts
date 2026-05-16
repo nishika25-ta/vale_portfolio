@@ -61,6 +61,7 @@ export const workExperience: WorkExperienceItem[] = [
     company: 'Sarawak Oil Palms',
     location: 'Miri, Sarawak',
     dateRange: 'Jul 2024 — Oct 2024',
+    logoSrc: '/company-logos/sarawak-oil-palms.png',
     roles: [
       {
         title: 'Geographic Information Systems (GIS) Intern',

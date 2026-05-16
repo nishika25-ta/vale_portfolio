@@ -1,5 +1,6 @@
 import { Brain, Code2, Cpu, Globe, Palette } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { aiSkills, designDataSkills, fullStackSkills, programmingSkills } from '@/data/skills';
 
@@ -129,13 +130,14 @@ export function SkillsSection() {
           accent="content"
         />
 
-        <div className="flex flex-col gap-4">
-          {ROWS.map((row) => (
-            <SkillRow key={row.id} row={row} />
-          ))}
-        </div>
+        <ScrollRevealGroup className="flex flex-col gap-10" stagger={0.12}>
+          <div className="flex flex-col gap-4">
+            {ROWS.map((row) => (
+              <SkillRow key={row.id} row={row} />
+            ))}
+          </div>
 
-        <div className="mt-12 surface-card p-6 sm:p-8">
+          <div className="surface-card p-6 sm:p-8">
           <div className="mb-6 flex items-center gap-3">
             <Cpu className="h-4 w-4 text-content-primary" aria-hidden />
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
@@ -160,16 +162,19 @@ export function SkillsSection() {
               </div>
             ))}
           </div>
-        </div>
+          </div>
+        </ScrollRevealGroup>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-white/[0.05] pt-8 text-center">
+        <ScrollRevealGroup className="mt-10" animation="fade-up" stagger={0}>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-white/[0.05] pt-8 text-center">
           <div className="flex items-center gap-2 text-slate-600">
             <Cpu size={14} className="text-slate-500" />
             <span className="font-mono text-[10px] uppercase tracking-[0.25em]">
               Built for scale · Ship with confidence
             </span>
           </div>
-        </div>
+          </div>
+        </ScrollRevealGroup>
       </div>
     </section>
   );

@@ -3,6 +3,9 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { useScrollAnimationsReady } from '@/context/ScrollAnimationContext';
+import { getScrollScroller } from '@/utils/scrollScroller';
+
 import './ScrollFloat.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,6 +51,7 @@ export function ScrollFloat({
 }: ScrollFloatProps) {
   const containerRef = useRef<HTMLElement | null>(null);
   const lineTargetRef = useRef<HTMLSpanElement | null>(null);
+  const scrollReady = useScrollAnimationsReady();
   const text = String(children);
 
   const splitText = useMemo(
@@ -63,12 +67,12 @@ export function ScrollFloat({
   useGSAP(
     () => {
       const el = containerRef.current;
-      if (!el) return;
+      if (!el || !scrollReady) return;
 
-      const scrollerEl = scrollContainerRef?.current;
+      const scrollerEl = scrollContainerRef?.current ?? getScrollScroller();
       const stCommon = {
         trigger: el,
-        scroller: scrollerEl ?? window,
+        scroller: scrollerEl,
         start: scrollStart,
         end: scrollEnd,
         scrub,
@@ -128,6 +132,7 @@ export function ScrollFloat({
     {
       scope: containerRef,
       dependencies: [
+        scrollReady,
         text,
         splitMode,
         animationDuration,

@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, FolderOpen } from 'lucide-react';
 import { ScrollFloat } from '@/components/ScrollFloat';
+import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { ShowcaseDetailModal } from '../showcase/ShowcaseDetailModal';
 import { ShowcaseStageVideo } from '../showcase/ShowcaseStageVideo';
@@ -35,7 +36,8 @@ export function ProjectsSection() {
           accent="hero"
         />
 
-        <div className="relative flex w-full flex-col overflow-hidden rounded-[2.5rem] border border-white/5 bg-[#0d1117] p-6 shadow-[0_40px_100px_rgba(0,0,0,0.6)] md:p-12">
+        <ScrollRevealGroup className="flex flex-col gap-16 md:gap-20" stagger={0.15}>
+        <div className="relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0d1117] p-4 shadow-[0_40px_100px_rgba(0,0,0,0.6)] sm:rounded-[2.5rem] sm:p-6 md:p-12">
           <div className="relative mb-12 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/5 bg-black shadow-inner">
             <div className="absolute left-4 top-4 z-20 flex gap-2">
               <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
@@ -178,6 +180,7 @@ export function ProjectsSection() {
             ))}
           </div>
         </div>
+        </ScrollRevealGroup>
       </div>
     </section>
   );

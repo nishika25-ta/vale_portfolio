@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { ExternalLink, ShieldCheck, X } from 'lucide-react';
+import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { certificates, type Certificate } from '@/data/certificates';
 import { getLenis } from '@/utils/lenisRef';
@@ -152,28 +153,30 @@ export function CertificatesSection() {
           accent="content"
         />
 
-        <div className="mb-10 flex flex-wrap items-center gap-2">
-          {certificates.map((cert) => (
-            <span
-              key={`badge-${cert.id}`}
-              className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400"
-            >
-              <ShieldCheck className="h-3 w-3 text-content-primary" aria-hidden />
-              {cert.issuer.split(' ')[0]}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center gap-8 lg:gap-10">
-          <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
-            {certificates.slice(0, 2).map((cert) => (
-              <CertificateCard key={cert.id} {...cert} onOpen={() => setOpenCert(cert)} />
+        <ScrollRevealGroup className="flex flex-col gap-10" stagger={0.14}>
+          <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
+            {certificates.map((cert) => (
+              <span
+                key={`badge-${cert.id}`}
+                className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400"
+              >
+                <ShieldCheck className="h-3 w-3 text-content-primary" aria-hidden />
+                {cert.issuer.split(' ')[0]}
+              </span>
             ))}
           </div>
-          <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-            <CertificateCard {...certificates[2]} featured onOpen={() => setOpenCert(certificates[2])} />
+
+          <div className="flex flex-col items-center gap-8 lg:gap-10">
+            <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+              {certificates.slice(0, 2).map((cert) => (
+                <CertificateCard key={cert.id} {...cert} onOpen={() => setOpenCert(cert)} />
+              ))}
+            </div>
+            <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+              <CertificateCard {...certificates[2]} featured onOpen={() => setOpenCert(certificates[2])} />
+            </div>
           </div>
-        </div>
+        </ScrollRevealGroup>
       </div>
 
       <CertificateLightbox cert={openCert} onClose={closeCert} />

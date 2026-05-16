@@ -28,20 +28,7 @@ export default {
       fontFamily: {
         mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
         sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-      },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
-        auroraDrift: {
-          '0%, 100%': { transform: 'translate3d(0, 0, 0) scale(1)' },
-          '50%': { transform: 'translate3d(-12%, 8%, 0) scale(1.15)' },
-        },
-      },
-      animation: {
-        marquee: 'marquee 32s linear infinite',
-        'aurora-drift': 'auroraDrift 18s ease-in-out infinite',
+        display: ['var(--font-display)', 'Georgia', 'Times New Roman', 'serif'],
       },
     },
   },

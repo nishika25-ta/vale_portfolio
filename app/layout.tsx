@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google';
 import '@/index.css';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-inter',
   display: 'swap',
 });
@@ -13,6 +13,14 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-display',
   display: 'swap',
 });
 
@@ -66,7 +74,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
+    >
       <body className="bg-[#050505] text-slate-300 antialiased">{children}</body>
     </html>
   );

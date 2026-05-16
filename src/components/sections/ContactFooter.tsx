@@ -1,12 +1,7 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { ArrowUpRight, Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
-
-const LiquidChrome = dynamic(() => import('@/components/footer/LiquidChrome'), { ssr: false });
-
-/** RGB 0–1 — indigo/violet base to match content accent */
-const FOOTER_CHROME_COLOR: [number, number, number] = [0.12, 0.1, 0.22];
+import { FooterChrome } from '@/components/footer/FooterChrome';
 
 export function ContactFooter() {
   return (
@@ -15,23 +10,15 @@ export function ContactFooter() {
       className="relative min-h-[600px] overflow-hidden border-t border-white/[0.06] bg-[#050505] pt-24 md:min-h-[640px] md:pt-32"
     >
       <div className="absolute inset-0 z-0">
-        <LiquidChrome
-          baseColor={FOOTER_CHROME_COLOR}
-          speed={0.3}
-          amplitude={0.3}
-          frequencyX={3}
-          frequencyY={2}
-          interactive
-          className="absolute inset-0"
-          aria-hidden
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/75 to-[#050505]/40" />
+        <FooterChrome />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-[#050505]/45 to-transparent" />
         <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.08]" aria-hidden />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-8">
-        <div className="pointer-events-none mb-16 text-center md:text-left">
-          <div className="pointer-events-auto mb-4 inline-flex items-center gap-2 rounded-full border border-hero-primary/25 bg-hero-primary/[0.06] px-4 py-1.5 backdrop-blur-sm">
+        <div className="pointer-events-none mb-16 text-center md:text-left" data-reveal-stagger="0.14">
+          <div data-reveal-item className="pointer-events-auto">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-hero-primary/25 bg-hero-primary/[0.06] px-4 py-1.5 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-hero-primary/40 opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-hero-primary" />
@@ -46,10 +33,14 @@ export function ContactFooter() {
               Let&apos;s create something amazing.
             </span>
           </h3>
+          </div>
         </div>
 
-        <div className="pointer-events-none grid grid-cols-1 gap-8 border-t border-white/[0.06] pt-12 md:grid-cols-2 md:gap-12">
-          <div className="pointer-events-auto">
+        <div
+          className="pointer-events-none grid grid-cols-1 gap-8 border-t border-white/[0.06] pt-12 md:grid-cols-2 md:gap-12"
+          data-reveal-stagger="0.14"
+        >
+          <div data-reveal-item className="pointer-events-auto">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
               01 // Get in touch
             </p>
@@ -97,7 +88,7 @@ export function ContactFooter() {
             </div>
           </div>
 
-          <div className="pointer-events-auto">
+          <div data-reveal-item className="pointer-events-auto">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
               02 // Details
             </p>

@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import { MapPin } from 'lucide-react';
+import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 const META_ROWS = [
@@ -44,17 +46,18 @@ export function AboutSection() {
           accent="content"
         />
 
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+        <ScrollRevealGroup className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12" stagger={0.14}>
           {/* ID-card portrait */}
           <aside className="lg:col-span-4">
             <figure className="surface-card overflow-hidden p-3">
               <div className="relative overflow-hidden rounded-2xl">
-                <div className="aspect-[3/4] w-full">
-                  <img
+                <div className="relative aspect-[3/4] w-full">
+                  <Image
                     src="/hi.webp"
                     alt="Valentine Agam"
-                    className="h-full w-full object-cover object-[center_22%]"
-                    loading="lazy"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover object-[center_22%]"
                   />
                 </div>
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -112,7 +115,7 @@ export function AboutSection() {
               ))}
             </div>
           </div>
-        </div>
+        </ScrollRevealGroup>
       </div>
     </section>
   );

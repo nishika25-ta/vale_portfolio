@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Building2, MapPin } from 'lucide-react';
+import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { workExperience } from '@/data/workExperience';
 
@@ -12,7 +13,7 @@ function CompanyLogoBadge({ company, src }: { company: string; src: string }) {
         <img
           src={src}
           alt={`${company} logo`}
-          className="block h-full w-full object-cover"
+          className="block h-full w-full object-contain p-1"
           onError={() => setFailed(true)}
         />
       ) : (
@@ -49,7 +50,7 @@ export function ExperienceSection() {
         <div className="relative">
           {/* Shared rail */}
           <div className="pointer-events-none absolute left-[1.05rem] top-0 bottom-0 hidden w-px bg-gradient-to-b from-content-primary/40 via-white/[0.06] to-transparent md:block" aria-hidden />
-          <ol className="relative">
+          <ScrollRevealGroup as="ol" className="relative flex flex-col" stagger={0.16} animation="bounce-up">
           {workExperience.map((job, jobIdx) => {
             const yearLabel = extractYearLabel(job.dateRange);
             return (
@@ -134,7 +135,7 @@ export function ExperienceSection() {
               </li>
             );
           })}
-          </ol>
+          </ScrollRevealGroup>
         </div>
       </div>
     </section>

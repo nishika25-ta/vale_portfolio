@@ -67,9 +67,6 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
           style={{ width: stage >= 1 ? '100%' : '0%' }}
         />
       </div>
-      <p className="relative z-10 mt-6 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-600">
-        Initializing portfolio
-      </p>
     </div>
   );
 }
