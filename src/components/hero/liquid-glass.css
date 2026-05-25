@@ -58,6 +58,18 @@
   pointer-events: none;
 }
 
+@media (max-width: 768px), (pointer: coarse) {
+  .liquid-glass--hero-role {
+    cursor: default;
+    touch-action: pan-y;
+  }
+
+  .liquid-glass--hero-role .liquid-glass--bend {
+    filter: none;
+    backdrop-filter: blur(10px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .liquid-glass--hero-role {
     cursor: default;

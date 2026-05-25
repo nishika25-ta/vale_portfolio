@@ -1,9 +1,12 @@
+'use client';
+
 import { createElement, useMemo, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { useScrollAnimationsReady } from '@/context/ScrollAnimationContext';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 import { getScrollScroller } from '@/utils/scrollScroller';
 
 import './ScrollFloat.css';
@@ -69,18 +72,28 @@ export function ScrollFloat({
       const el = containerRef.current;
       if (!el || !scrollReady) return;
 
+      const mobile = isMobileViewport();
       const scrollerEl = scrollContainerRef?.current ?? getScrollScroller();
-      const stCommon = {
-        trigger: el,
-        scroller: scrollerEl,
-        start: scrollStart,
-        end: scrollEnd,
-        scrub,
-      } as const;
+
+      const showVisible = (targets: gsap.TweenTarget) => {
+        gsap.set(targets, {
+          opacity: 1,
+          yPercent: 0,
+          scaleY: 1,
+          scaleX: 1,
+          clearProps: 'willChange',
+        });
+      };
 
       if (splitMode === 'line') {
         const target = lineTargetRef.current;
         if (!target) return;
+
+        if (mobile) {
+          showVisible(target);
+          return;
+        }
+
         gsap.fromTo(
           target,
           {
@@ -98,7 +111,13 @@ export function ScrollFloat({
             yPercent: 0,
             scaleY: 1,
             scaleX: 1,
-            scrollTrigger: stCommon,
+            scrollTrigger: {
+              trigger: el,
+              scroller: scrollerEl,
+              start: scrollStart,
+              end: scrollEnd,
+              scrub,
+            },
           }
         );
         return;
@@ -106,6 +125,11 @@ export function ScrollFloat({
 
       const charElements = el.querySelectorAll('.char');
       if (charElements.length === 0) return;
+
+      if (mobile) {
+        showVisible(charElements);
+        return;
+      }
 
       gsap.fromTo(
         charElements,
@@ -125,7 +149,13 @@ export function ScrollFloat({
           scaleY: 1,
           scaleX: 1,
           stagger,
-          scrollTrigger: stCommon,
+          scrollTrigger: {
+            trigger: el,
+            scroller: scrollerEl,
+            start: scrollStart,
+            end: scrollEnd,
+            scrub,
+          },
         }
       );
     },

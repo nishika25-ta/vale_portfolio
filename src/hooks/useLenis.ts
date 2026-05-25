@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { getLenis, setLenis } from '@/utils/lenisRef';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 import { getScrollScroller } from '@/utils/scrollScroller';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -36,10 +37,17 @@ function clearLenisScrollProxy() {
 export function useLenis(showSplash: boolean): void {
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobile = isMobileViewport();
 
-    if (reducedMotion) {
+    if (reducedMotion || mobile) {
       setLenis(undefined);
       clearLenisScrollProxy();
+      ScrollTrigger.normalizeScroll(false);
+      ScrollTrigger.config({
+        limitCallbacks: true,
+        syncInterval: mobile ? 150 : 60,
+      });
+      requestAnimationFrame(() => ScrollTrigger.refresh());
       return;
     }
 
@@ -80,6 +88,9 @@ export function useLenis(showSplash: boolean): void {
       clearLenisScrollProxy();
       lenisInstance.destroy();
       setLenis(undefined);
+      document.querySelectorAll('.parallax-element').forEach((el) => {
+        (el as HTMLElement).style.transform = '';
+      });
     };
   }, []);
 

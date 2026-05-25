@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 
 export type MotionProfile = {
   isMobile: boolean;
@@ -22,9 +23,7 @@ export function readMotionProfile(): MotionProfile {
     return MOTION_PROFILE_SSR;
   }
 
-  const isMobile =
-    window.matchMedia('(max-width: 768px)').matches ||
-    window.matchMedia('(pointer: coarse)').matches;
+  const isMobile = isMobileViewport();
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const saveData = Boolean(
     (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData

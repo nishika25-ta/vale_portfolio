@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 import { getScrollScroller } from '@/utils/scrollScroller';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,10 +16,10 @@ export function useScrollReveal(enabled: boolean): void {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const scroller = getScrollScroller();
+    const mobile = isMobileViewport();
 
     const ctx = gsap.context(() => {
       document.querySelectorAll<HTMLElement>('[data-reveal-stagger]').forEach((root) => {
-        const animation = root.dataset.revealAnim === 'fade-up' ? 'fade-up' : 'bounce-up';
         const stagger = parseFloat(root.getAttribute('data-reveal-stagger') || '0.12');
         const start = root.dataset.revealStart || 'top 92%';
         const items = gsap.utils.toArray<HTMLElement>(
@@ -26,8 +27,12 @@ export function useScrollReveal(enabled: boolean): void {
         );
         if (items.length === 0) return;
 
-        const y = animation === 'fade-up' ? 48 : 56;
-        const ease = animation === 'fade-up' ? 'power3.out' : 'back.out(1.1)';
+        const animation =
+          mobile || root.dataset.revealAnim === 'fade-up' ? 'fade-up' : 'bounce-up';
+        const y = mobile ? 20 : animation === 'fade-up' ? 48 : 56;
+        const ease = 'power2.out';
+        const duration = mobile ? 0.45 : 0.85;
+        const staggerAmount = mobile ? Math.min(stagger, 0.06) : stagger;
 
         gsap.set(items, { opacity: 0, y });
 
@@ -39,9 +44,9 @@ export function useScrollReveal(enabled: boolean): void {
             gsap.to(batch, {
               opacity: 1,
               y: 0,
-              duration: 0.85,
+              duration,
               ease,
-              stagger,
+              stagger: staggerAmount,
               overwrite: 'auto',
             });
           },

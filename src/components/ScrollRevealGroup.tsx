@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useScrollAnimationsReady } from '@/context/ScrollAnimationContext';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 import { getScrollScroller } from '@/utils/scrollScroller';
 import { createElement, useRef, type ElementType, type ReactNode } from 'react';
 
@@ -53,9 +54,17 @@ export function ScrollRevealGroup({
       const items = gsap.utils.toArray<HTMLElement>(root.children);
       if (items.length === 0) return;
 
-      const preset = PRESETS[animation];
+      const mobile = isMobileViewport();
+      const resolvedAnimation = mobile && animation === 'bounce-up' ? 'fade-up' : animation;
+      const preset = PRESETS[resolvedAnimation];
+      const revealDuration = mobile ? Math.min(duration, 0.5) : duration;
+      const revealStagger = mobile ? Math.min(stagger, 0.06) : stagger;
 
-      gsap.set(items, { opacity: 0, y: preset.y, scale: preset.scale });
+      gsap.set(items, {
+        opacity: 0,
+        y: mobile ? 20 : preset.y,
+        scale: mobile ? 1 : preset.scale,
+      });
 
       const scroller = getScrollScroller();
 
@@ -68,9 +77,9 @@ export function ScrollRevealGroup({
             opacity: 1,
             y: 0,
             scale: 1,
-            duration,
-            ease: preset.ease,
-            stagger,
+            duration: revealDuration,
+            ease: mobile ? 'power2.out' : preset.ease,
+            stagger: revealStagger,
             overwrite: 'auto',
           });
         },

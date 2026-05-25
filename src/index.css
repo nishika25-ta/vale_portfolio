@@ -29,6 +29,17 @@
     color-scheme: dark;
     -webkit-tap-highlight-color: transparent;
   }
+
+  @media (max-width: 768px), (pointer: coarse) {
+    html {
+      scroll-behavior: auto;
+      overscroll-behavior-y: none;
+    }
+
+    body {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
   body {
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 
 type LetterGlitchProps = {
   glitchColors?: string[];
@@ -112,11 +113,14 @@ export default function LetterGlitch({
       });
     };
 
+    const mobile = isMobileViewport();
+    let isVisible = true;
+
     const resizeCanvas = () => {
       const parent = canvas.parentElement;
       if (!parent) return;
 
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 2);
       const rect = parent.getBoundingClientRect();
 
       canvas.width = rect.width * dpr;
@@ -136,7 +140,8 @@ export default function LetterGlitch({
     const updateLetters = () => {
       if (lettersRef.current.length === 0) return;
 
-      const updateCount = Math.max(1, Math.floor(lettersRef.current.length * 0.05));
+      const updateRatio = mobile ? 0.025 : 0.05;
+      const updateCount = Math.max(1, Math.floor(lettersRef.current.length * updateRatio));
 
       for (let i = 0; i < updateCount; i += 1) {
         const index = Math.floor(Math.random() * lettersRef.current.length);
@@ -181,9 +186,16 @@ export default function LetterGlitch({
       if (needsRedraw) drawLetters();
     };
 
+    const effectiveGlitchSpeed = mobile ? Math.max(glitchSpeed, 90) : glitchSpeed;
+
     const animate = () => {
+      if (!isVisible) {
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
       const now = Date.now();
-      if (now - lastGlitchTimeRef.current >= glitchSpeed) {
+      if (now - lastGlitchTimeRef.current >= effectiveGlitchSpeed) {
         updateLetters();
         drawLetters();
         lastGlitchTimeRef.current = now;
@@ -193,6 +205,19 @@ export default function LetterGlitch({
 
       animationRef.current = requestAnimationFrame(animate);
     };
+
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry?.isIntersecting ?? true;
+      },
+      { root: null, threshold: 0.05 }
+    );
+    visibilityObserver.observe(canvas);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) isVisible = false;
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     resizeCanvas();
     animate();
@@ -216,6 +241,8 @@ export default function LetterGlitch({
         cancelAnimationFrame(animationRef.current);
       }
       clearTimeout(resizeTimeout);
+      visibilityObserver.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', handleResize);
     };
   }, [characters, glitchColors, glitchSpeed, smooth]);
