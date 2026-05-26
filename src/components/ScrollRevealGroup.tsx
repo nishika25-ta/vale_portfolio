@@ -50,20 +50,17 @@ export function ScrollRevealGroup({
       if (!root || !scrollReady) return;
 
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (isMobileViewport()) return;
 
       const items = gsap.utils.toArray<HTMLElement>(root.children);
       if (items.length === 0) return;
 
-      const mobile = isMobileViewport();
-      const resolvedAnimation = mobile && animation === 'bounce-up' ? 'fade-up' : animation;
-      const preset = PRESETS[resolvedAnimation];
-      const revealDuration = mobile ? Math.min(duration, 0.5) : duration;
-      const revealStagger = mobile ? Math.min(stagger, 0.06) : stagger;
+      const preset = PRESETS[animation];
 
       gsap.set(items, {
         opacity: 0,
-        y: mobile ? 20 : preset.y,
-        scale: mobile ? 1 : preset.scale,
+        y: preset.y,
+        scale: preset.scale,
       });
 
       const scroller = getScrollScroller();
@@ -77,9 +74,9 @@ export function ScrollRevealGroup({
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: revealDuration,
-            ease: mobile ? 'power2.out' : preset.ease,
-            stagger: revealStagger,
+            duration,
+            ease: preset.ease,
+            stagger,
             overwrite: 'auto',
           });
         },

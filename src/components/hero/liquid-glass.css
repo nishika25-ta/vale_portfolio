@@ -27,6 +27,7 @@
   inset: 0;
   z-index: 0;
   border-radius: var(--border-radius);
+  -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   filter: url(#hero-role-glass-blur);
 }
@@ -66,7 +67,9 @@
 
   .liquid-glass--hero-role .liquid-glass--bend {
     filter: none;
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.06);
   }
 }
 

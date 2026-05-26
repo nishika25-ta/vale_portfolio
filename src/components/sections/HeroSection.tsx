@@ -1,5 +1,9 @@
+ 'use client';
+
+import { useEffect, useState } from 'react';
 import LetterGlitch from '@/components/hero/LetterGlitch';
 import { HeroRoleLine } from '@/components/hero/HeroRoleLine';
+import { readMotionProfile } from '@/hooks/useMotionProfile';
 
 const HERO_GLITCH_COLORS = ['#2b4539', '#61dca3', '#61b3dc'];
 
@@ -7,6 +11,13 @@ const HERO_SUMMARY =
   'Building scalable backends, AI automation, and computer vision.';
 
 export function HeroSection() {
+  const [showGlitch, setShowGlitch] = useState(false);
+
+  useEffect(() => {
+    const p = readMotionProfile();
+    setShowGlitch(!p.isMobile && !p.prefersReducedMotion);
+  }, []);
+
   return (
     <section
       id="home"
@@ -14,13 +25,17 @@ export function HeroSection() {
     >
       <div className="absolute inset-0 z-0">
         <div className="hero-glitch-mask absolute inset-0">
-          <LetterGlitch
-            glitchColors={HERO_GLITCH_COLORS}
-            glitchSpeed={52}
-            smooth
-            outerVignette
-            centerVignette={false}
-          />
+          {showGlitch ? (
+            <LetterGlitch
+              glitchColors={HERO_GLITCH_COLORS}
+              glitchSpeed={52}
+              smooth
+              outerVignette
+              centerVignette={false}
+            />
+          ) : (
+            <div className="h-full w-full bg-[#050505]" aria-hidden />
+          )}
         </div>
         <div
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_45%_at_50%_42%,rgba(5,5,5,0.5)_0%,transparent_70%)]"

@@ -14,9 +14,9 @@ export function useScrollReveal(enabled: boolean): void {
     if (!enabled) return;
     if (typeof window === 'undefined') return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (isMobileViewport()) return;
 
     const scroller = getScrollScroller();
-    const mobile = isMobileViewport();
 
     const ctx = gsap.context(() => {
       document.querySelectorAll<HTMLElement>('[data-reveal-stagger]').forEach((root) => {
@@ -27,12 +27,11 @@ export function useScrollReveal(enabled: boolean): void {
         );
         if (items.length === 0) return;
 
-        const animation =
-          mobile || root.dataset.revealAnim === 'fade-up' ? 'fade-up' : 'bounce-up';
-        const y = mobile ? 20 : animation === 'fade-up' ? 48 : 56;
-        const ease = 'power2.out';
-        const duration = mobile ? 0.45 : 0.85;
-        const staggerAmount = mobile ? Math.min(stagger, 0.06) : stagger;
+        const animation = root.dataset.revealAnim === 'fade-up' ? 'fade-up' : 'bounce-up';
+        const y = animation === 'fade-up' ? 48 : 56;
+        const ease = animation === 'fade-up' ? 'power3.out' : 'back.out(1.1)';
+        const duration = 0.85;
+        const staggerAmount = stagger;
 
         gsap.set(items, { opacity: 0, y });
 
