@@ -1,9 +1,9 @@
- 'use client';
+'use client';
 
 import { useEffect, useState } from 'react';
 import LetterGlitch from '@/components/hero/LetterGlitch';
 import { HeroRoleLine } from '@/components/hero/HeroRoleLine';
-import { readMotionProfile } from '@/hooks/useMotionProfile';
+import { isNarrowViewport } from '@/utils/isMobileViewport';
 
 const HERO_GLITCH_COLORS = ['#2b4539', '#61dca3', '#61b3dc'];
 
@@ -14,8 +14,8 @@ export function HeroSection() {
   const [showGlitch, setShowGlitch] = useState(false);
 
   useEffect(() => {
-    const p = readMotionProfile();
-    setShowGlitch(!p.isMobile && !p.prefersReducedMotion);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setShowGlitch(!isNarrowViewport() && !reducedMotion);
   }, []);
 
   return (
