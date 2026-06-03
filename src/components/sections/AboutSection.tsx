@@ -10,29 +10,7 @@ const META_ROWS = [
   { label: 'Languages', value: 'English · Bahasa Melayu' },
 ];
 
-const STATS = [
-  {
-    label: 'YOLO Detection',
-    value: '92',
-    unit: '%',
-    note: 'Model accuracy · Oil palm project',
-    accent: 'from-content-primary to-content-secondary',
-  },
-  {
-    label: 'Automation Impact',
-    value: '60',
-    unit: '%',
-    note: 'Manual overhead reduced · Zenara Jaya',
-    accent: 'from-content-secondary to-fuchsia-400',
-  },
-  {
-    label: 'Languages',
-    value: '2',
-    unit: '',
-    note: 'Fluent · English, Bahasa Melayu',
-    accent: 'from-hero-primary to-hero-secondary',
-  },
-];
+
 
 export function AboutSection() {
   return (
@@ -94,25 +72,7 @@ export function AboutSection() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              {STATS.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="group surface-card p-5 transition-colors hover:border-content-primary/25"
-                >
-                  <p className="font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-slate-600">
-                    {stat.label}
-                  </p>
-                  <p className="mt-2 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-                    {stat.value}
-                    <span className={`bg-gradient-to-r ${stat.accent} bg-clip-text text-transparent`}>
-                      {stat.unit}
-                    </span>
-                  </p>
-                  <p className="mt-1.5 text-[11px] font-medium leading-relaxed text-slate-500">{stat.note}</p>
-                </div>
-              ))}
-            </div>
+
           </div>
         </ScrollRevealGroup>
       </div>
