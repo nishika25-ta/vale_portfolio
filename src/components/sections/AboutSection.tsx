@@ -39,7 +39,6 @@ export function AboutSection() {
     <section id="about" className="section-border section-pad">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <SectionHeader
-          number="01 // PROFILE"
           title="About"
           gradient="Me"
           description="Backend engineering, AI systems, and production-ready full-stack delivery."

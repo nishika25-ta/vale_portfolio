@@ -10,9 +10,9 @@ export default {
           deep: '#2b4539',
         },
         content: {
-          primary: '#818cf8',
-          secondary: '#a78bfa',
-          deep: '#1e1b4b',
+          primary: '#0ea5e9',
+          secondary: '#22d3ee',
+          deep: '#082f49',
         },
         ink: {
           50: '#f8fafc',

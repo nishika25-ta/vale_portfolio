@@ -45,7 +45,6 @@ export function EducationSection() {
     <section ref={sectionRef} id="education" className="section-border section-pad">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <SectionHeader
-          number="04 // EDUCATION"
           title="Education"
           gradient="Path"
           description="Cognitive Science training with focus on data science, AI/ML, and software development."
@@ -63,7 +62,6 @@ export function EducationSection() {
                 <h4 className="text-2xl !font-bold !leading-tight text-white sm:text-3xl">
                   Bachelor of Science in Cognitive Science
                 </h4>
-                <p className="mt-2 text-lg font-medium text-slate-400 sm:text-xl">University Malaysia Sarawak (UNIMAS)</p>
                 <p className="mt-1 text-sm text-slate-500">Kota Samarahan, Sarawak · Graduated Nov 2025</p>
               </div>
 

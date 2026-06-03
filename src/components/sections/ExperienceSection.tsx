@@ -40,7 +40,6 @@ export function ExperienceSection() {
     <section id="experience" className="section-border section-pad">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <SectionHeader
-          number="03 // CAREER"
           title="Working"
           gradient="Experience"
           description="Roles and impact aligned with my resume — backend engineering, AI delivery, and client-facing work."

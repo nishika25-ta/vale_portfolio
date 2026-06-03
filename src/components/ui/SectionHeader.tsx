@@ -14,13 +14,13 @@ type SectionHeaderProps = {
 
 const accentMap: Record<Accent, { text: string; grad: string; rail: string }> = {
   hero: {
-    text: 'text-hero-primary/90',
-    grad: 'from-hero-primary via-white to-hero-secondary',
-    rail: 'from-transparent via-hero-primary/40 to-transparent',
+    text: 'text-content-primary/90',
+    grad: 'from-content-primary to-content-secondary',
+    rail: 'from-transparent via-content-primary/40 to-transparent',
   },
   content: {
     text: 'text-content-primary/90',
-    grad: 'from-content-primary via-white to-content-secondary',
+    grad: 'from-content-primary to-content-secondary',
     rail: 'from-transparent via-content-primary/40 to-transparent',
   },
 };

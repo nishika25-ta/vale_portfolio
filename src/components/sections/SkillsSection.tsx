@@ -123,7 +123,6 @@ export function SkillsSection() {
     <section id="skills" className="section-border section-pad">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <SectionHeader
-          number="05 // STACK"
           title="Technical"
           gradient="Stack"
           description="Languages, models, and platforms from my resume — backend APIs, AI/ML, and full-stack delivery."

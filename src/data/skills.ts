@@ -1,25 +1,41 @@
-/** Technical skills — aligned with Valentine_Resume_2026.pdf. */
+/** Technical skills — aligned with Valentine_Resume_2026_Data.pdf. */
 export const programmingSkills = [
   'Python',
-  'C++',
   'SQL',
   'JavaScript',
+  'C++',
   'FastAPI',
   'REST APIs',
-  'Supabase',
   'n8n Automation',
 ];
 
-export const aiSkills = ['TensorFlow', 'YOLO', 'OpenCV', 'Scikit-learn', 'OCR', 'Computer Vision'];
-
-export const fullStackSkills = [
-  'React.js',
-  'Next.js',
-  'Flutter',
-  'PostgreSQL',
-  'Firebase',
-  'DigitalOcean',
-  'Microservices',
+export const aiSkills = [
+  'TensorFlow',
+  'YOLO',
+  'OpenCV',
+  'Scikit-learn',
+  'Anomaly Detection',
+  'Pattern Classification',
+  'Computer Vision',
+  'OCR',
 ];
 
-export const designDataSkills = ['Git', 'Power BI', 'QGIS', 'Global Mapper', 'RBAC Security'];
+export const fullStackSkills = [
+  'PostgreSQL',
+  'Supabase',
+  'Firebase',
+  'DigitalOcean',
+  'RBAC Security',
+  'Web Development',
+];
+
+export const designDataSkills = [
+  'Power BI',
+  'Excel',
+  'QGIS',
+  'Global Mapper',
+  'Git',
+  'Fraud Detection',
+  'Data Cleaning',
+  'Trend Analysis',
+];

@@ -48,8 +48,8 @@ export const metadata: Metadata = {
     'Sarawak',
   ],
   icons: {
-    icon: '/vale.webp',
-    apple: '/vale.webp',
+    icon: '/cat.png',
+    apple: '/cat.png',
   },
   openGraph: {
     title: SITE_TITLE,

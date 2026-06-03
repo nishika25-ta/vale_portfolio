@@ -53,14 +53,18 @@ function CertificateCard({
         </span>
       </button>
 
-      <div className={`flex flex-1 flex-col gap-2.5 ${featured ? 'p-6 sm:p-7' : 'p-5 sm:p-6'}`}>
-        <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-content-primary/90 sm:text-[11px]">
-          {issuer}
-        </p>
+      <div className={`flex flex-1 flex-col items-center text-center gap-2.5 ${featured ? 'p-6 sm:p-7' : 'p-5 sm:p-6'}`}>
+        {issuer ? (
+          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-content-primary/90 sm:text-[11px]">
+            {issuer}
+          </p>
+        ) : null}
         <h3 className={`font-bold leading-snug text-white ${featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'}`}>
           {title}
         </h3>
-        <p className={`leading-relaxed text-slate-500 ${featured ? 'text-sm sm:text-base' : 'text-sm'}`}>{subtitle}</p>
+        {subtitle ? (
+          <p className={`leading-relaxed text-slate-500 ${featured ? 'text-sm sm:text-base' : 'text-sm'}`}>{subtitle}</p>
+        ) : null}
       </div>
     </article>
   );
@@ -146,7 +150,6 @@ export function CertificatesSection() {
     <section id="certificates" className="section-border section-pad">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <SectionHeader
-          number="02 // CREDENTIALS"
           title="Certificates"
           gradient="& Awards"
           description="Professional certification, academic recognition, and degree credentials."
@@ -154,17 +157,7 @@ export function CertificatesSection() {
         />
 
         <ScrollRevealGroup className="flex flex-col gap-10" stagger={0.14}>
-          <div className="flex flex-wrap items-center justify-center gap-2 md:justify-start">
-            {certificates.map((cert) => (
-              <span
-                key={`badge-${cert.id}`}
-                className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400"
-              >
-                <ShieldCheck className="h-3 w-3 text-content-primary" aria-hidden />
-                {cert.issuer.split(' ')[0]}
-              </span>
-            ))}
-          </div>
+
 
           <div className="flex flex-col items-center gap-8 lg:gap-10">
             <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">

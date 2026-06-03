@@ -16,7 +16,7 @@ export function ContactFooter() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-8">
-        <div className="pointer-events-none mb-16 text-center md:text-left" data-reveal-stagger="0.14">
+        <div className="pointer-events-none mb-16 text-center" data-reveal-stagger="0.14">
           <div data-reveal-item className="pointer-events-auto">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-hero-primary/25 bg-hero-primary/[0.06] px-4 py-1.5 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -27,7 +27,7 @@ export function ContactFooter() {
               Available for new opportunities
             </span>
           </div>
-          <h3 className="mx-auto max-w-3xl text-3xl font-extrabold !leading-[1.1] tracking-tight text-white md:mx-0 md:text-5xl">
+          <h3 className="mx-auto max-w-3xl text-3xl font-extrabold !leading-[1.1] tracking-tight text-white md:text-5xl">
             Have a project in mind?{' '}
             <span className="bg-gradient-to-r from-content-primary to-hero-secondary bg-clip-text text-transparent">
               Let&apos;s create something amazing.

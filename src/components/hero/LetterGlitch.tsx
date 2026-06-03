@@ -40,6 +40,20 @@ function hexToRgb(hex: string): Rgb | null {
   };
 }
 
+function parseColorToRgb(color: string): Rgb | null {
+  if (color.startsWith('rgb')) {
+    const match = /rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/.exec(color);
+    if (match) {
+      return {
+        r: parseInt(match[1], 10),
+        g: parseInt(match[2], 10),
+        b: parseInt(match[3], 10),
+      };
+    }
+  }
+  return hexToRgb(color);
+}
+
 function interpolateColor(start: Rgb, end: Rgb, factor: number): string {
   const r = Math.round(start.r + (end.r - start.r) * factor);
   const g = Math.round(start.g + (end.g - start.g) * factor);
@@ -66,6 +80,7 @@ export default function LetterGlitch({
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const lastGlitchTimeRef = useRef(Date.now());
   const fromRgbRef = useRef<Map<number, Rgb>>(new Map());
+  const dprRef = useRef(1);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -100,8 +115,8 @@ export default function LetterGlitch({
       const ctx = contextRef.current;
       if (!ctx || lettersRef.current.length === 0) return;
 
-      const { width, height } = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, width, height);
+      const dpr = dprRef.current;
+      ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
       ctx.font = `${FONT_SIZE}px monospace`;
       ctx.textBaseline = 'top';
 
@@ -121,6 +136,7 @@ export default function LetterGlitch({
       if (!parent) return;
 
       const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 2);
+      dprRef.current = dpr;
       const rect = parent.getBoundingClientRect();
 
       canvas.width = rect.width * dpr;
@@ -156,7 +172,7 @@ export default function LetterGlitch({
           letter.colorProgress = 1;
           fromRgbRef.current.delete(index);
         } else {
-          const from = hexToRgb(letter.color) ?? hexToRgb(letter.targetColor);
+          const from = parseColorToRgb(letter.color) ?? hexToRgb(letter.targetColor);
           if (from) fromRgbRef.current.set(index, from);
           letter.colorProgress = 0;
         }
@@ -170,7 +186,7 @@ export default function LetterGlitch({
         if (letter.colorProgress >= 1) return;
 
         letter.colorProgress = Math.min(1, letter.colorProgress + 0.05);
-        const startRgb = fromRgbRef.current.get(index) ?? hexToRgb(letter.color);
+        const startRgb = fromRgbRef.current.get(index) ?? parseColorToRgb(letter.color);
         const endRgb = hexToRgb(letter.targetColor);
 
         if (startRgb && endRgb) {
@@ -219,31 +235,39 @@ export default function LetterGlitch({
     };
     document.addEventListener('visibilitychange', onVisibilityChange);
 
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    const resizeObserver = new ResizeObserver(() => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resizeCanvas();
+      }, 100);
+    });
+
+    const parent = canvas.parentElement;
+    if (parent) {
+      resizeObserver.observe(parent);
+    }
+
+    // Initialize canvas size immediately on mount before the animation loop starts.
+    // ResizeObserver only fires on changes, not the initial layout.
     resizeCanvas();
     animate();
 
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (animationRef.current != null) {
-          cancelAnimationFrame(animationRef.current);
-        }
-        resizeCanvas();
-        animate();
-      }, 100);
-    };
-
-    window.addEventListener('resize', handleResize);
+    // Safety net: re-run sizing one frame later in case CSS layout hadn't fully
+    // settled yet during the synchronous mount call above.
+    const rafId = requestAnimationFrame(() => {
+      resizeCanvas();
+    });
 
     return () => {
       if (animationRef.current != null) {
         cancelAnimationFrame(animationRef.current);
       }
+      cancelAnimationFrame(rafId);
       clearTimeout(resizeTimeout);
+      resizeObserver.disconnect();
       visibilityObserver.disconnect();
       document.removeEventListener('visibilitychange', onVisibilityChange);
-      window.removeEventListener('resize', handleResize);
     };
   }, [characters, glitchColors, glitchSpeed, smooth]);
 

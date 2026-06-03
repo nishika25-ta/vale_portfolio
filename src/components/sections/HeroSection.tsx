@@ -3,19 +3,27 @@
 import { useEffect, useState } from 'react';
 import LetterGlitch from '@/components/hero/LetterGlitch';
 import { HeroRoleLine } from '@/components/hero/HeroRoleLine';
-import { isNarrowViewport } from '@/utils/isMobileViewport';
 
 const HERO_GLITCH_COLORS = ['#2b4539', '#61dca3', '#61b3dc'];
 
 const HERO_SUMMARY =
   'Building scalable backends, AI automation, and computer vision.';
 
+function isDesktop() {
+  return typeof window !== 'undefined' && window.innerWidth > 768;
+}
+
 export function HeroSection() {
   const [showGlitch, setShowGlitch] = useState(false);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    setShowGlitch(!isNarrowViewport() && !reducedMotion);
+    // Check on mount
+    setShowGlitch(isDesktop());
+
+    // Re-check on resize so toggling works when the user resizes the window
+    const onResize = () => setShowGlitch(isDesktop());
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   return (

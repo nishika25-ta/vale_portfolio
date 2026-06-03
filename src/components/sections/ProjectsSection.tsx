@@ -29,11 +29,10 @@ export function ProjectsSection() {
     <section id="projects" className="section-border section-pad">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <SectionHeader
-          number="06 // WORK"
           title="Live"
           gradient="Showcase"
           description="Tap a demo clip to play it in the player above. For screenshots and write-ups, open a card in the portfolio archive below."
-          accent="hero"
+          accent="content"
         />
 
         <ScrollRevealGroup className="flex flex-col gap-16 md:gap-20" stagger={0.15}>
@@ -90,16 +89,16 @@ export function ProjectsSection() {
                   onClick={() => setActiveDemoIndex(index)}
                   className={`group relative aspect-video w-full overflow-hidden rounded-xl border bg-black text-left shadow-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1117] ${
                     activeDemoIndex === index
-                      ? 'ring-2 ring-indigo-500 ring-offset-2 ring-offset-[#0d1117]'
+                      ? 'ring-2 ring-cyan-500 ring-offset-2 ring-offset-[#0d1117]'
                       : 'border-white/[0.08] hover:border-white/20'
                   }`}
                   aria-label={`Play ${demo.title} in showcase`}
                   aria-current={activeDemoIndex === index ? 'true' : undefined}
                 >
-                  <ShowcaseVideoThumb title={demo.title} isActive={activeDemoIndex === index} />
+                  <ShowcaseVideoThumb title={demo.title} videoUrl={demo.videoUrl} isActive={activeDemoIndex === index} />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />
                   {activeDemoIndex === index ? (
-                    <span className="pointer-events-none absolute right-2 top-2 h-2 w-2 rounded-full bg-indigo-400 shadow-[0_0_10px_rgba(129,140,248,0.9)]" />
+                    <span className="pointer-events-none absolute right-2 top-2 h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.9)]" />
                   ) : null}
                 </button>
               ))}
@@ -112,9 +111,7 @@ export function ProjectsSection() {
         <div className="mt-20 md:mt-24">
           <div className="mb-10 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-content-primary/90">
-                Portfolio archive
-              </p>
+
               <h3 className="mt-2 text-2xl font-extrabold text-white md:text-3xl">Project galleries</h3>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-500">
                 Screenshots and concise descriptions. Tap a tile to view the gallery.
