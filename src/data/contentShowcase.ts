@@ -36,9 +36,9 @@ const FOLDER_MANIFEST = [
   },
   {
     folder: 'Palm_Detection',
-    title: 'Palm Detection',
-    desc: 'Computer vision and project collateral for palm detection work.',
-    tags: ['YOLO', 'CV', 'ML'],
+    title: 'Oil Palm Object Detection',
+    desc: 'Deep learning computer vision model for automated oil palm anomaly detection from aerial imagery. Achieved 92% detection accuracy using YOLO, TensorFlow, and OpenCV with an automated detection-to-report workflow.',
+    tags: ['YOLO', 'TensorFlow', 'OpenCV', 'Deep Learning'],
     files: ['icons/palms.webp', 'Detection.webp', 'FullStack.webp', 'Poster.webp', 'vale_poster.webp'],
   },
   {

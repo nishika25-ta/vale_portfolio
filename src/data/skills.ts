@@ -1,41 +1,48 @@
-/** Technical skills — aligned with Valentine_Resume_2026_Data.pdf. */
+/** Technical skills — aligned with Valentine Agam resume (2026). */
 export const programmingSkills = [
   'Python',
-  'SQL',
   'JavaScript',
+  'SQL',
   'C++',
+  'Dart',
   'FastAPI',
   'REST APIs',
-  'n8n Automation',
 ];
 
 export const aiSkills = [
   'TensorFlow',
-  'YOLO',
   'OpenCV',
   'Scikit-learn',
-  'Anomaly Detection',
-  'Pattern Classification',
+  'YOLO',
   'Computer Vision',
+  'Deep Learning',
+  'Machine Learning',
   'OCR',
+  'NLP',
 ];
 
 export const fullStackSkills = [
-  'PostgreSQL',
-  'Supabase',
-  'Firebase',
+  'Next.js',
+  'React',
+  'HTML5',
+  'CSS3',
+  'Responsive Design',
+  'Docker',
+  'Kubernetes',
   'DigitalOcean',
-  'RBAC Security',
-  'Web Development',
+  'Linux',
+  'Git',
 ];
 
 export const designDataSkills = [
+  'PostgreSQL',
+  'Adminer',
+  'Database Design',
   'Power BI',
   'Excel',
+  'Pandas',
+  'Data Visualization',
   'QGIS',
   'Global Mapper',
-  'Git',
-  'Fraud Detection',
-  'Data Cleaning',
-  'Trend Analysis',
+  'GIS',
 ];

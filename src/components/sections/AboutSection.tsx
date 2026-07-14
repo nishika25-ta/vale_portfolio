@@ -4,9 +4,9 @@ import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 const META_ROWS = [
-  { label: 'Location', value: 'Miri, Sarawak' },
-  { label: 'Focus', value: 'Backend · AI · Full-Stack' },
-  { label: 'Status', value: 'Open to roles · 2026' },
+  { label: 'Location', value: 'Miri, Sarawak, Malaysia' },
+  { label: 'Focus', value: 'Full-Stack · Digital Transformation · AI' },
+  { label: 'Status', value: 'Hospital Miri (MySTEP) · 2026' },
   { label: 'Languages', value: 'English · Bahasa Melayu' },
 ];
 
@@ -19,7 +19,7 @@ export function AboutSection() {
         <SectionHeader
           title="About"
           gradient="Me"
-          description="Backend engineering, AI systems, and production-ready full-stack delivery."
+          description="Full-stack development, digital transformation, and AI-powered enterprise systems."
           accent="content"
         />
 
@@ -60,15 +60,15 @@ export function AboutSection() {
           <div className="lg:col-span-8 space-y-8">
             <div className="surface-card p-6 sm:p-8 md:p-10">
               <p className="text-[1.0625rem] font-medium leading-[1.6] text-slate-200 md:text-[1.1875rem]">
-                Backend and AI-focused software engineer with a background in{' '}
-                <strong className="font-semibold text-white">Cognitive Science</strong>, building scalable web
-                applications, automation systems, and computer vision solutions with Python, FastAPI, Next.js,
-                TensorFlow, and Supabase.
+                Software engineer with experience designing and delivering full-stack applications, AI-powered solutions,
+                backend systems, and enterprise software that solve real-world business problems. Background in{' '}
+                <strong className="font-semibold text-white">Cognitive Science</strong> with a minor in Computer Science
+                from UNIMAS.
               </p>
               <p className="mt-5 border-l-2 border-content-primary/40 pl-4 text-[0.9375rem] leading-relaxed text-slate-400 md:text-[1rem]">
-                From high-accuracy <strong className="font-semibold text-white">YOLO</strong> detection (92%) to AI-powered
-                recruitment workflows that cut manual processing by 60% — I deliver ATS platforms, n8n automation, and GIS
-                tooling through freelance and contract work.
+                Currently at <strong className="font-semibold text-white">Hospital Miri</strong>, independently developing
+                enterprise systems that digitize manual workflows, from employee onboarding and asset tracking to hospital
+                wayfinding. Passionate about production-ready software with Next.js, PostgreSQL, Docker, and applied ML.
               </p>
             </div>
 

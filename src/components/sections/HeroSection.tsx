@@ -7,7 +7,7 @@ import { HeroRoleLine } from '@/components/hero/HeroRoleLine';
 const HERO_GLITCH_COLORS = ['#2b4539', '#61dca3', '#61b3dc'];
 
 const HERO_SUMMARY =
-  'Building scalable backends, AI automation, and computer vision.';
+  'Designing enterprise systems, full-stack applications, and AI-powered solutions for real-world impact.';
 
 function isDesktop() {
   return typeof window !== 'undefined' && window.innerWidth > 768;

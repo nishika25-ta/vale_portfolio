@@ -24,12 +24,12 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 });
 
-const SITE_TITLE = 'Valentine Agam — Backend & AI Engineer';
+const SITE_TITLE = 'Valentine Agam — Software Engineer & Full-Stack Developer';
 const SITE_DESCRIPTION =
-  'Portfolio of Valentine Agam — Backend & AI engineer specializing in FastAPI, Next.js, TensorFlow, and production ML systems. Based in Miri, Sarawak.';
+  'Portfolio of Valentine Agam — Software engineer specializing in full-stack development, digital transformation, Next.js, PostgreSQL, AI/ML, and enterprise systems. Based in Miri, Sarawak, Malaysia.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://valentineagam.dev'),
+  metadataBase: new URL('https://www.valeport.space'),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   applicationName: 'Valentine Agam Portfolio',
@@ -37,15 +37,19 @@ export const metadata: Metadata = {
   creator: 'Valentine Agam',
   keywords: [
     'Valentine Agam',
+    'Software Engineer',
+    'Full-Stack Developer',
     'Backend Engineer',
-    'AI Engineer',
-    'FastAPI',
+    'Digital Transformation',
     'Next.js',
-    'TensorFlow',
-    'YOLO',
-    'Computer Vision',
+    'PostgreSQL',
+    'AI Engineer',
+    'Machine Learning',
+    'Docker',
+    'Kubernetes',
     'Portfolio',
     'Sarawak',
+    'Miri',
   ],
   icons: {
     icon: '/cat.png',

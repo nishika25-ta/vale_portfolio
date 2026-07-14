@@ -42,7 +42,7 @@ export function ExperienceSection() {
         <SectionHeader
           title="Working"
           gradient="Experience"
-          description="Roles and impact aligned with my resume — backend engineering, AI delivery, and client-facing work."
+          description="Digital transformation, enterprise development, and full-stack delivery across healthcare and industry."
           accent="content"
         />
 

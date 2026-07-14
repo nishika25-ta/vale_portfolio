@@ -1,5 +1,5 @@
 /**
- * Working history — aligned with Valentine_Resume_2026_Data.pdf.
+ * Working history — aligned with Valentine Agam resume (2026).
  */
 export type WorkRole = {
   title: string;
@@ -19,22 +19,41 @@ export type WorkExperienceItem = {
 
 export const workExperience: WorkExperienceItem[] = [
   {
-    id: 'freelance',
-    company: 'Self-Employed',
+    id: 'hospital-miri',
+    company: 'Hospital Miri, Jabatan Kesihatan Sarawak',
+    location: 'Miri, Sarawak',
+    dateRange: 'Jun 2026 – Present',
+    roles: [
+      {
+        title: 'Pegawai Informasi Maklumat dan Komunikasi Korporat (MySTEP)',
+        highlights: [
+          'Designed, developed, and maintained the official Hospital Miri website, leading digital transformation initiatives that modernize hospital operations.',
+          'Built a full-stack Employee Digital Onboarding System that replaces paper-based forms with a centralized digital workflow, including PostgreSQL database architecture and Next.js responsive interfaces.',
+          'Developed a Wheelchair Tracking System to improve asset accountability and resource availability across hospital departments.',
+          'Currently developing a digital hospital wayfinding platform to improve navigation for patients, visitors, and healthcare staff.',
+          'Independently managed the complete software development lifecycle from planning to deployment and maintenance, deploying applications with Docker and Kubernetes.',
+        ],
+      },
+    ],
+    stack: ['Next.js', 'PostgreSQL', 'Docker', 'Kubernetes', 'Adminer', 'JavaScript', 'HTML', 'CSS', 'Git'],
+  },
+  {
+    id: 'scribear',
+    company: 'Scribear',
     location: 'Miri, Sarawak',
     dateRange: 'Mar 2026 – Present',
     roles: [
       {
-        title: 'Data Analyst & Full Stack Developer',
+        title: 'Co-Founder & Full-Stack Developer',
         highlights: [
-          'Reduced client reporting turnaround by 40% by writing SQL queries and Python scripts to automate recurring data analysis workflows, replacing manual Excel-based processes with reproducible pipelines.',
-          'Improved data quality for 3+ client projects by performing systematic data cleaning filtering, handling missing values, and error correction before surfacing findings to non-technical stakeholders via Power BI dashboards.',
-          'Delivered trend analysis reports and stakeholder presentations translating backend system metrics into actionable business recommendations.',
-          'Increased application reliability by 30% by building scalable APIs with FastAPI and Supabase PostgreSQL, enabling structured data capture for downstream statistical analysis.',
+          'Designed and developed custom web applications for businesses, delivering responsive frontend interfaces and scalable backend services.',
+          'Developed REST APIs and relational database solutions, deploying and maintaining production systems for client projects.',
+          'Worked directly with clients to gather requirements and translate business needs into scalable software solutions.',
+          'Managed the full software development lifecycle from concept to production deployment and ongoing maintenance.',
         ],
       },
     ],
-    stack: ['Python', 'SQL', 'FastAPI', 'Supabase', 'PostgreSQL', 'Power BI', 'Excel'],
+    stack: ['Next.js', 'React', 'PostgreSQL', 'REST APIs', 'JavaScript', 'Docker', 'Git'],
   },
   {
     id: 'zenara-jaya',
@@ -44,20 +63,20 @@ export const workExperience: WorkExperienceItem[] = [
     logoSrc: '/company-logos/zenara.webp',
     roles: [
       {
-        title: 'Junior Data & Backend Engineer (Contract)',
+        title: 'Junior Data & Backend Engineer',
         highlights: [
-          'Reduced manual candidate screening time by 60% by building an AI-powered applicant classification system that identified and categorised normal vs. flagged candidate profiles using statistical pattern matching and the Claude API.',
-          'Improved fraud and bot detection coverage by developing an anomaly identification layer that cross-referenced applicant data via SQL queries against a PostgreSQL database, flagging suspicious duplicate and bot-generated submissions.',
-          'Ensured data integrity across 100+ candidate records by implementing structured data cleaning pipelines with OCR fallback for missing or malformed fields documented for reproducibility and team handover.',
-          'Automated end-to-end recruitment operations using n8n workflows, cutting manual processing from 5 hours to under 2 hours per weekly cycle and generating weekly summary reports for management stakeholders.',
+          'Developed backend applications supporting business operations, including an AI-assisted recruitment platform with resume parsing, OCR document extraction, and candidate fraud detection.',
+          'Designed SQL databases and optimized data workflows, managing PostgreSQL databases and implementing reporting solutions for stakeholders.',
+          'Automated internal business processes with role-based access control, audit logging, and management dashboards.',
+          'Troubleshot backend systems and production issues while producing technical documentation for team handover.',
         ],
       },
     ],
-    stack: ['FastAPI', 'PostgreSQL', 'Claude API', 'n8n', 'SQL', 'Python', 'OCR'],
+    stack: ['FastAPI', 'Python', 'PostgreSQL', 'Claude API', 'OCR', 'SQL', 'REST APIs'],
   },
   {
     id: 'sarawak-oil-palm',
-    company: 'Sarawak Oil Palms',
+    company: 'Sarawak Oil Palms Berhad',
     location: 'Miri, Sarawak',
     dateRange: 'Jul 2024 – Oct 2024',
     logoSrc: '/company-logos/sarawak-oil-palms.png',
@@ -65,10 +84,10 @@ export const workExperience: WorkExperienceItem[] = [
       {
         title: 'GIS Data Analyst Intern',
         highlights: [
-          'Achieved 92% detection accuracy on a large-scale spatial dataset by training custom YOLO and TensorFlow models to automatically classify soil hole anomalies applying statistical methods to distinguish normal vs flagged conditions.',
-          'Improved field data processing efficiency by 35% by writing Python automation scripts to convert and clean FIT-to-GPX datasets, eliminating a recurring manual data-handling bottleneck.',
-          'Produced 3D data visualisation reports and stakeholder presentations using Global Mapper and QGIS, communicating geospatial trend analysis to management for land planning decisions.',
-          'Conducted palm census correlation studies across multi-hectare datasets, performing SQL-structured data cleaning and trend analysis before reporting insights to the GIS team.',
+          'Processed and analysed large geospatial datasets, supporting GIS data processing and spatial analysis across plantation operations.',
+          'Achieved 92% detection accuracy by developing a YOLO and TensorFlow computer vision model for automated oil palm anomaly detection from aerial imagery.',
+          'Worked with satellite imagery and remote sensing technologies, preparing operational reports and mapping outputs for management.',
+          'Collaborated with technical teams to improve data quality and built automated detection-to-report workflows using Python, OpenCV, and QGIS.',
         ],
       },
     ],

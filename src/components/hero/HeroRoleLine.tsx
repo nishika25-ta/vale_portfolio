@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { HeroRoleLiquidGlass } from '@/components/hero/HeroRoleLiquidGlass';
 
 const ROLES = [
-  'Software developer',
-  'AI/ML engineer',
-  'learner',
-  'Data Analyst',
-  'Cybersecurity',
+  'Software Engineer',
+  'Full-Stack Developer',
+  'Backend Engineer',
+  'AI & Machine Learning',
+  'Digital Transformation',
 ] as const;
 
 const TYPE_MS = 58;

@@ -159,15 +159,10 @@ export function CertificatesSection() {
         <ScrollRevealGroup className="flex flex-col gap-10" stagger={0.14}>
 
 
-          <div className="flex flex-col items-center gap-8 lg:gap-10">
-            <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
-              {certificates.slice(0, 2).map((cert) => (
-                <CertificateCard key={cert.id} {...cert} onOpen={() => setOpenCert(cert)} />
-              ))}
-            </div>
-            <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-              <CertificateCard {...certificates[2]} featured onOpen={() => setOpenCert(certificates[2])} />
-            </div>
+          <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+            {certificates.map((cert) => (
+              <CertificateCard key={cert.id} {...cert} onOpen={() => setOpenCert(cert)} />
+            ))}
           </div>
         </ScrollRevealGroup>
       </div>

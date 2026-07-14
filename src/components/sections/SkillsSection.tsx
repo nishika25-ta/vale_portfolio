@@ -49,8 +49,8 @@ const accentStyles: Record<Accent, { ring: string; iconBg: string; iconText: str
 const ROWS: SkillRow[] = [
   {
     id: 'backend',
-    title: 'Backend & Orchestration',
-    subtitle: 'APIs, automation, and managed infrastructure',
+    title: 'Programming & Backend',
+    subtitle: 'Languages, APIs, and server-side development',
     icon: Code2,
     accent: 'content',
     skills: programmingSkills,
@@ -58,23 +58,23 @@ const ROWS: SkillRow[] = [
   {
     id: 'ai',
     title: 'AI & Machine Learning',
-    subtitle: 'Computer vision, deep learning, classical ML',
+    subtitle: 'Computer vision, deep learning, OCR, and NLP',
     icon: Brain,
     accent: 'emerald',
     skills: aiSkills,
   },
   {
     id: 'fullstack',
-    title: 'Frontend & Cloud',
-    subtitle: 'Web, mobile, and deployment platforms',
+    title: 'Frontend & DevOps',
+    subtitle: 'Web development, containers, and cloud deployment',
     icon: Globe,
     accent: 'sky',
     skills: fullStackSkills,
   },
   {
     id: 'data',
-    title: 'Data & Tooling',
-    subtitle: 'BI dashboards, spatial analysis, security',
+    title: 'Database & Analytics',
+    subtitle: 'Relational databases, BI dashboards, and GIS tooling',
     icon: Palette,
     accent: 'violet',
     skills: designDataSkills,
@@ -83,8 +83,8 @@ const ROWS: SkillRow[] = [
 
 const PROFICIENCY = [
   { label: 'Python', value: 92 },
-  { label: 'FastAPI', value: 86 },
-  { label: 'TensorFlow', value: 78 },
+  { label: 'Next.js', value: 88 },
+  { label: 'PostgreSQL', value: 85 },
 ];
 
 function SkillRow({ row }: { row: SkillRow }) {
@@ -125,7 +125,7 @@ export function SkillsSection() {
         <SectionHeader
           title="Technical"
           gradient="Stack"
-          description="Languages, models, and platforms from my resume — backend APIs, AI/ML, and full-stack delivery."
+          description="Languages, frameworks, and platforms for full-stack development, AI/ML, and enterprise delivery."
           accent="content"
         />
 

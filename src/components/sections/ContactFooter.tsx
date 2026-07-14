@@ -102,6 +102,19 @@ export function ContactFooter() {
                 <dd className="text-right text-[12px] font-medium text-slate-200">+60 14-652 1429</dd>
               </div>
               <div className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2">
+                <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Portfolio</dt>
+                <dd className="text-right text-[12px] font-medium text-slate-200">
+                  <a
+                    href="https://www.valeport.space"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors hover:text-content-primary"
+                  >
+                    www.valeport.space
+                  </a>
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2">
                 <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Based in</dt>
                 <dd className="text-right text-[12px] font-medium text-slate-200">Miri, Sarawak · MY</dd>
               </div>

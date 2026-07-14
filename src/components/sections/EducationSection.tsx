@@ -60,9 +60,11 @@ export function EducationSection() {
                   <Calendar size={14} /> Oct 2022 — Nov 2025
                 </div>
                 <h4 className="text-2xl !font-bold !leading-tight text-white sm:text-3xl">
-                  Bachelor of Science in Cognitive Science
+                  Bachelor of Cognitive Science
                 </h4>
-                <p className="mt-1 text-sm text-slate-500">Kota Samarahan, Sarawak · Graduated Nov 2025</p>
+                <p className="mt-1 text-sm text-slate-500">
+                  Universiti Malaysia Sarawak (UNIMAS) · Graduated Nov 2025
+                </p>
               </div>
 
               {/* Timeline rail */}
@@ -96,10 +98,15 @@ export function EducationSection() {
                     </span>
                   </div>
                   <p className="relative z-10 text-sm leading-relaxed text-slate-400 sm:text-[15px]">
-                    Focus areas: <strong className="font-semibold text-white">Data Science</strong>,{' '}
-                    <strong className="font-semibold text-white">AI/ML</strong>, and{' '}
-                    <strong className="font-semibold text-white">Software Development</strong>. Coursework included
-                    Data Analysis, Software Development, Web Development, and Artificial Intelligence.
+                    Relevant coursework:{' '}
+                    <strong className="font-semibold text-white">Artificial Intelligence</strong>,{' '}
+                    <strong className="font-semibold text-white">Machine Learning</strong>,{' '}
+                    <strong className="font-semibold text-white">Data Analytics</strong>,{' '}
+                    <strong className="font-semibold text-white">Database Systems</strong>,{' '}
+                    <strong className="font-semibold text-white">Software Engineering</strong>,{' '}
+                    <strong className="font-semibold text-white">Human-Computer Interaction</strong>,{' '}
+                    <strong className="font-semibold text-white">Web Development</strong>, and{' '}
+                    <strong className="font-semibold text-white">Statistics</strong>.
                   </p>
                   <div className="mt-6 flex flex-wrap items-baseline gap-2 border-t border-white/[0.05] pt-5">
                     <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">CGPA</span>
