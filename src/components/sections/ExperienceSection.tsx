@@ -13,7 +13,7 @@ function CompanyLogoBadge({ company, src }: { company: string; src: string }) {
         <img
           src={src}
           alt={`${company} logo`}
-          className="block h-full w-full object-contain p-1"
+          className="block h-full w-full object-cover"
           onError={() => setFailed(true)}
         />
       ) : (
