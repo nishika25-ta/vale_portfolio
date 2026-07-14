@@ -7,6 +7,7 @@ import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { useScrollAnimationsReady } from '@/context/ScrollAnimationContext';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { getScrollScroller } from '@/utils/scrollScroller';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +21,8 @@ export function EducationSection() {
       const section = sectionRef.current;
       const fill = lineFillRef.current;
       if (!section || !fill || !scrollReady) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (isMobileViewport()) return;
 
       gsap.fromTo(
         fill,
