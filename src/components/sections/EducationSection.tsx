@@ -46,7 +46,7 @@ export function EducationSection() {
 
   return (
     <section ref={sectionRef} id="education" className="section-border section-pad">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
         <SectionHeader
           title="Education"
           gradient="Path"
@@ -55,7 +55,7 @@ export function EducationSection() {
         />
 
         <ScrollRevealGroup className="mx-auto w-full min-w-0 max-w-5xl" stagger={0.14} animation="fade-up">
-          <div className="flex flex-col gap-12 md:gap-0">
+          <div className="flex flex-col gap-10 md:gap-0">
             <div className="grid grid-cols-1 items-start gap-x-6 gap-y-10 md:grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] md:grid-rows-[auto_auto] md:gap-x-8 md:gap-y-16">
               {/* UNIMAS — meta */}
               <div className="order-2 min-w-0 md:order-none md:col-start-1 md:row-start-1 md:pr-2 md:text-right">

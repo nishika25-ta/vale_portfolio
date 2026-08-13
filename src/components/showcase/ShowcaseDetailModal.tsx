@@ -56,7 +56,7 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-4 md:p-8"
       role="dialog"
       aria-modal="true"
       aria-labelledby="showcase-detail-title"
@@ -68,10 +68,10 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
         onClick={onClose}
       />
       <div
-        className="relative z-10 flex max-h-[min(92vh,900px)] w-full max-w-4xl flex-col overflow-hidden overscroll-contain rounded-3xl border border-white/10 bg-[#0a0a0a] shadow-2xl"
+        className="relative z-10 flex max-h-[94dvh] w-full max-w-4xl flex-col overflow-hidden overscroll-contain rounded-t-3xl border border-white/10 bg-[#0a0a0a] shadow-2xl sm:max-h-[min(92vh,900px)] sm:rounded-3xl"
         onWheel={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-5 sm:py-4">
           <h2 id="showcase-detail-title" className="text-lg font-bold tracking-tight text-white md:text-xl">
             {project.title}
           </h2>
@@ -132,7 +132,7 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
             ))}
           </div>
 
-          <div className="space-y-6 px-6 pb-8 pt-4">
+          <div className="space-y-5 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-4 sm:space-y-6 sm:px-6 sm:pb-8">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400/90">
               {project.category}
             </p>

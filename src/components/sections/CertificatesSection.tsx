@@ -14,13 +14,16 @@ function CertificateCard({
   imageSrc,
   imageAlt,
   featured = false,
+  centered = false,
   onOpen,
-}: Certificate & { featured?: boolean; onOpen: () => void }) {
+}: Certificate & { featured?: boolean; centered?: boolean; onOpen: () => void }) {
   const [failed, setFailed] = useState(false);
 
   return (
     <article
       className={`group surface-card flex h-full flex-col overflow-hidden transition-all duration-500 hover:border-content-primary/25 hover:shadow-[0_24px_60px_-30px_rgba(129,140,248,0.35)] ${
+        centered ? 'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-1rem)]' : ''
+      } ${
         featured ? 'sm:min-h-[22rem]' : 'sm:min-h-[20rem]'
       }`}
     >
@@ -99,7 +102,7 @@ function CertificateLightbox({ cert, onClose }: { cert: Certificate | null; onCl
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-4 md:p-8"
       role="dialog"
       aria-modal="true"
       aria-labelledby="cert-lightbox-title"
@@ -110,8 +113,8 @@ function CertificateLightbox({ cert, onClose }: { cert: Certificate | null; onCl
         aria-label="Close"
         onClick={onClose}
       />
-      <div className="relative z-10 flex max-h-[min(92vh,900px)] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a] shadow-2xl">
-        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+      <div className="relative z-10 flex max-h-[94dvh] w-full max-w-4xl flex-col overflow-hidden rounded-t-3xl border border-white/10 bg-[#0a0a0a] shadow-2xl sm:max-h-[min(92vh,900px)] sm:rounded-3xl">
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-5 sm:py-4">
           <div className="flex flex-col">
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-content-primary/90">
               {cert.issuer}
@@ -136,7 +139,7 @@ function CertificateLightbox({ cert, onClose }: { cert: Certificate | null; onCl
             className="mx-auto max-h-[min(75vh,720px)] w-full object-contain"
           />
         </div>
-        <div className="border-t border-white/10 px-5 py-4 text-sm text-slate-400">{cert.subtitle}</div>
+        <div className="border-t border-white/10 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 text-sm text-slate-400 sm:px-5 sm:pb-4">{cert.subtitle}</div>
       </div>
     </div>
   );
@@ -148,7 +151,7 @@ export function CertificatesSection() {
 
   return (
     <section id="certificates" className="section-border section-pad">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
         <SectionHeader
           title="Certificates"
           gradient="& Awards"
@@ -161,7 +164,12 @@ export function CertificatesSection() {
 
           <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
             {certificates.map((cert) => (
-              <CertificateCard key={cert.id} {...cert} onOpen={() => setOpenCert(cert)} />
+              <CertificateCard
+                key={cert.id}
+                {...cert}
+                centered={cert.id === 'unimas-degree'}
+                onOpen={() => setOpenCert(cert)}
+              />
             ))}
           </div>
         </ScrollRevealGroup>

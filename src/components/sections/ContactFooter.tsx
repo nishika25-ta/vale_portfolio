@@ -7,7 +7,7 @@ export function ContactFooter() {
   return (
     <footer
       id="contact"
-      className="relative min-h-[600px] overflow-hidden border-t border-white/[0.06] bg-[#050505] pt-24 md:min-h-[640px] md:pt-32"
+      className="relative min-h-[600px] overflow-hidden border-t border-white/[0.06] bg-[#050505] pb-24 pt-20 md:min-h-[640px] md:pb-0 md:pt-32"
     >
       <div className="absolute inset-0 z-0">
         <FooterChrome />
@@ -15,8 +15,8 @@ export function ContactFooter() {
         <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.08]" aria-hidden />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-8">
-        <div className="pointer-events-none mb-16 text-center" data-reveal-stagger="0.14">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+        <div className="pointer-events-none mb-12 text-center sm:mb-16" data-reveal-stagger="0.14">
           <div data-reveal-item className="pointer-events-auto">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-hero-primary/25 bg-hero-primary/[0.06] px-4 py-1.5 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
@@ -27,7 +27,7 @@ export function ContactFooter() {
               Available for new opportunities
             </span>
           </div>
-          <h3 className="mx-auto max-w-3xl text-3xl font-extrabold !leading-[1.1] tracking-tight text-white md:text-5xl">
+          <h3 className="mx-auto max-w-3xl text-[1.75rem] font-extrabold !leading-[1.15] tracking-tight text-white sm:text-3xl md:text-5xl">
             Have a project in mind?{' '}
             <span className="bg-gradient-to-r from-content-primary to-hero-secondary bg-clip-text text-transparent">
               Let&apos;s create something amazing.
@@ -95,7 +95,7 @@ export function ContactFooter() {
             <dl className="mt-5 space-y-3 text-sm">
               <div className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2">
                 <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Email</dt>
-                <dd className="text-right text-[12px] font-medium text-slate-200">valentineagam6@gmail.com</dd>
+                <dd className="min-w-0 break-all text-right text-[12px] font-medium text-slate-200">valentineagam6@gmail.com</dd>
               </div>
               <div className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2">
                 <dt className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Phone</dt>

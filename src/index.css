@@ -161,7 +161,7 @@
     }
   }
   .section-pad {
-    @apply py-24 md:py-32;
+    @apply py-20 md:py-32;
   }
   .section-border {
     @apply border-t border-white/5;
@@ -176,6 +176,12 @@
     .hero-fade {
       opacity: 1;
       transform: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .surface-card {
+      border-radius: 1.25rem;
     }
   }
 }

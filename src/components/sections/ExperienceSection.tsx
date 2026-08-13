@@ -38,7 +38,7 @@ function extractYearLabel(range: string): string {
 export function ExperienceSection() {
   return (
     <section id="experience" className="section-border section-pad">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
         <SectionHeader
           title="Working"
           gradient="Experience"
@@ -61,7 +61,7 @@ export function ExperienceSection() {
                 </div>
 
                 <article
-                  className={`surface-card group mb-8 overflow-hidden p-6 transition-all duration-500 hover:border-content-primary/25 md:mb-10 md:p-8 ${
+                  className={`surface-card group mb-6 overflow-hidden p-5 transition-all duration-500 hover:border-content-primary/25 sm:p-6 md:mb-10 md:p-8 ${
                     jobIdx === 0 ? '' : ''
                   }`}
                 >
@@ -75,7 +75,7 @@ export function ExperienceSection() {
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
-                        <h3 className="truncate text-xl font-bold text-white sm:text-2xl">{job.company}</h3>
+                        <h3 className="line-clamp-2 text-lg font-bold leading-tight text-white sm:text-2xl">{job.company}</h3>
                         <p className="mt-0.5 flex items-center gap-1.5 text-[12px] text-slate-500">
                           <MapPin className="h-3 w-3 shrink-0" aria-hidden />
                           {job.location}

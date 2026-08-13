@@ -22,6 +22,7 @@ export const workExperience: WorkExperienceItem[] = [
     id: 'hospital-miri',
     company: 'Hospital Miri, Jabatan Kesihatan Sarawak',
     location: 'Miri, Sarawak',
+    logoSrc: '/company-logos/Hospital_Miri_Logo.webp',
     dateRange: 'Jun 2026 – Present',
     roles: [
       {
@@ -41,6 +42,7 @@ export const workExperience: WorkExperienceItem[] = [
     id: 'scribear',
     company: 'Scribear',
     location: 'Miri, Sarawak',
+    logoSrc: '/company-logos/scribear.png',
     dateRange: 'Mar 2026 – Present',
     roles: [
       {

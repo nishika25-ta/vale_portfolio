@@ -91,7 +91,7 @@ function SkillRow({ row }: { row: SkillRow }) {
   const a = accentStyles[row.accent];
   const Icon = row.icon;
   return (
-    <div className={`surface-card overflow-hidden p-5 transition-colors ${a.ring} hover:${a.ring}`}>
+    <div className={`surface-card overflow-hidden p-4 transition-colors sm:p-5 ${a.ring} hover:${a.ring}`}>
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-6">
         <div className="flex shrink-0 items-start gap-3 md:w-60">
           <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${a.iconBg}`}>
@@ -121,7 +121,7 @@ function SkillRow({ row }: { row: SkillRow }) {
 export function SkillsSection() {
   return (
     <section id="skills" className="section-border section-pad">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
         <SectionHeader
           title="Technical"
           gradient="Stack"
@@ -136,7 +136,7 @@ export function SkillsSection() {
             ))}
           </div>
 
-          <div className="surface-card p-6 sm:p-8">
+          <div className="surface-card p-5 sm:p-8">
           <div className="mb-6 flex items-center gap-3">
             <Cpu className="h-4 w-4 text-content-primary" aria-hidden />
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">

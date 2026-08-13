@@ -39,7 +39,7 @@ export function SectionHeader({
   const alignJustify = align === 'center' ? 'justify-center' : 'justify-center md:justify-start';
 
   return (
-    <header className={`mb-14 ${alignText} md:mb-16 ${className}`}>
+    <header className={`mb-10 ${alignText} sm:mb-14 md:mb-16 ${className}`}>
       {number ? (
         <div className={`mb-5 flex items-center gap-3 ${alignJustify}`}>
           <span className={`font-mono text-[10px] font-bold tracking-[0.4em] ${a.text}`}>{number}</span>
@@ -50,7 +50,7 @@ export function SectionHeader({
       <div className={`flex min-w-0 max-w-full flex-wrap items-baseline gap-x-2 ${alignJustify}`} aria-hidden>
         <ScrollFloat
           as="span"
-          textClassName="text-4xl !font-extrabold !tracking-tight text-white md:text-5xl"
+          textClassName="text-3xl !font-extrabold !tracking-tight text-white sm:text-4xl md:text-5xl"
           containerClassName="inline-block max-w-full min-w-0"
           scrub={0.75}
         >
@@ -59,7 +59,7 @@ export function SectionHeader({
         {gradient ? (
           <ScrollFloat
             as="span"
-            textClassName={`text-4xl !font-extrabold !tracking-tight bg-gradient-to-r ${a.grad} bg-clip-text text-transparent md:text-5xl`}
+            textClassName={`text-3xl !font-extrabold !tracking-tight bg-gradient-to-r ${a.grad} bg-clip-text text-transparent sm:text-4xl md:text-5xl`}
             containerClassName="inline-block max-w-full min-w-0"
             scrub={0.75}
           >

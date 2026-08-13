@@ -15,7 +15,7 @@ const META_ROWS = [
 export function AboutSection() {
   return (
     <section id="about" className="section-border section-pad">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
         <SectionHeader
           title="About"
           gradient="Me"
@@ -23,7 +23,7 @@ export function AboutSection() {
           accent="content"
         />
 
-        <ScrollRevealGroup className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12" stagger={0.14}>
+        <ScrollRevealGroup className="grid grid-cols-1 gap-6 sm:gap-10 lg:grid-cols-12 lg:gap-12" stagger={0.14}>
           {/* ID-card portrait */}
           <aside className="lg:col-span-4">
             <figure className="surface-card overflow-hidden p-3">
@@ -45,11 +45,11 @@ export function AboutSection() {
               </div>
               <div className="mt-4 space-y-2.5 px-2 pb-2">
                 {META_ROWS.map((row) => (
-                  <div key={row.label} className="flex items-baseline justify-between gap-3 border-b border-white/[0.04] pb-2 last:border-0 last:pb-0">
+                  <div key={row.label} className="flex flex-col gap-1 border-b border-white/[0.04] pb-2 last:border-0 last:pb-0 min-[420px]:flex-row min-[420px]:items-baseline min-[420px]:justify-between min-[420px]:gap-3">
                     <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-600">
                       {row.label}
                     </span>
-                    <span className="text-right text-[12px] font-medium text-slate-300">{row.value}</span>
+                    <span className="text-left text-[12px] font-medium text-slate-300 min-[420px]:text-right">{row.value}</span>
                   </div>
                 ))}
               </div>
@@ -58,7 +58,7 @@ export function AboutSection() {
 
           {/* Editorial bio + stats */}
           <div className="lg:col-span-8 space-y-8">
-            <div className="surface-card p-6 sm:p-8 md:p-10">
+            <div className="surface-card p-5 sm:p-8 md:p-10">
               <p className="text-[1.0625rem] font-medium leading-[1.6] text-slate-200 md:text-[1.1875rem]">
                 Software engineer with experience designing and delivering full-stack applications, AI-powered solutions,
                 backend systems, and enterprise software that solve real-world business problems. Background in{' '}

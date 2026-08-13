@@ -27,7 +27,7 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" className="section-border section-pad">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
         <SectionHeader
           title="Live"
           gradient="Showcase"
@@ -35,9 +35,9 @@ export function ProjectsSection() {
           accent="content"
         />
 
-        <ScrollRevealGroup className="flex flex-col gap-16 md:gap-20" stagger={0.15}>
+        <ScrollRevealGroup className="flex flex-col gap-12 sm:gap-16 md:gap-20" stagger={0.15}>
         <div className="relative flex w-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#0d1117] p-4 showcase-stage-shell sm:rounded-[2.5rem] sm:p-6 md:p-12">
-          <div className="relative mb-12 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/5 bg-black shadow-inner">
+          <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/5 bg-black shadow-inner sm:mb-12 sm:rounded-2xl">
             <div className="absolute left-4 top-4 z-20 flex gap-2">
               <div className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
               <div className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
@@ -55,7 +55,7 @@ export function ProjectsSection() {
                 e.stopPropagation();
                 setActiveDemoIndex((prev) => (prev - 1 + demoCount) % demoCount);
               }}
-              className="absolute left-4 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white transition-all hover:bg-black/75 sm:bg-black/40 sm:backdrop-blur-md"
+              className="absolute left-2 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white transition-all hover:bg-black/75 sm:left-4 sm:bg-black/40 sm:backdrop-blur-md"
               aria-label="Previous demo clip"
             >
               <ChevronLeft size={20} />
@@ -66,7 +66,7 @@ export function ProjectsSection() {
                 e.stopPropagation();
                 setActiveDemoIndex((prev) => (prev + 1) % demoCount);
               }}
-              className="absolute right-4 top-1/2 z-30 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white transition-all hover:bg-black/75 sm:bg-black/40 sm:backdrop-blur-md"
+              className="absolute right-2 top-1/2 z-30 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-black/60 text-white transition-all hover:bg-black/75 sm:right-4 sm:bg-black/40 sm:backdrop-blur-md"
               aria-label="Next demo clip"
             >
               <ChevronRight size={20} />
@@ -115,7 +115,7 @@ export function ProjectsSection() {
 
         <ShowcaseDetailModal open={detailOpen} project={detailProject} onClose={closeDetail} />
 
-        <div className="mt-20 md:mt-24">
+        <div className="mt-12 sm:mt-20 md:mt-24">
           <div className="mb-10 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
 
@@ -132,7 +132,7 @@ export function ProjectsSection() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {showcaseData.map((project, index) => (
               <button
                 key={`archive-${project.id}`}
@@ -140,7 +140,7 @@ export function ProjectsSection() {
                 onClick={() => openProjectDetail(index)}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-[#0a0a0c] text-left shadow-2xl transition-all duration-500 hover:border-content-primary/30 hover:shadow-[0_20px_60px_-20px_rgba(129,140,248,0.18)] sm:rounded-[1.5rem] project-archive-card"
               >
-                <div className="relative h-32 w-full overflow-hidden border-b border-white/[0.05] bg-[#0f0f12] sm:h-48">
+                <div className="relative h-44 w-full overflow-hidden border-b border-white/[0.05] bg-[#0f0f12] sm:h-48">
                   <img
                     src={project.thumb}
                     alt=""
@@ -189,4 +189,3 @@ export function ProjectsSection() {
     </section>
   );
 }
-
