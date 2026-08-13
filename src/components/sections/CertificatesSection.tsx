@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { ExternalLink, ShieldCheck, X } from 'lucide-react';
+import { Award, Eye, GraduationCap, ShieldCheck, X } from 'lucide-react';
 import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { certificates, type Certificate } from '@/data/certificates';
@@ -18,10 +18,13 @@ function CertificateCard({
   onOpen,
 }: Certificate & { featured?: boolean; centered?: boolean; onOpen: () => void }) {
   const [failed, setFailed] = useState(false);
+  const isDegree = title === "Bachelor's Degree";
+  const credentialType = isDegree ? 'Academic credential' : title.includes('Award') ? 'Achievement' : 'Professional certification';
+  const CredentialIcon = isDegree ? GraduationCap : Award;
 
   return (
     <article
-      className={`group surface-card flex h-full flex-col overflow-hidden transition-all duration-500 hover:border-content-primary/25 hover:shadow-[0_24px_60px_-30px_rgba(129,140,248,0.35)] ${
+      className={`group surface-card relative flex h-full flex-col overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-content-primary/30 hover:shadow-[0_28px_70px_-30px_rgba(14,165,233,0.32)] ${
         centered ? 'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-1rem)]' : ''
       } ${
         featured ? 'sm:min-h-[22rem]' : 'sm:min-h-[20rem]'
@@ -30,17 +33,22 @@ function CertificateCard({
       <button
         type="button"
         onClick={onOpen}
-        className={`relative block overflow-hidden rounded-t-[1.75rem] border-b border-white/[0.06] bg-black/40 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-primary ${
+        className={`relative block overflow-hidden rounded-t-[1.75rem] border-b border-white/[0.06] bg-[#08090b] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-primary ${
           featured ? 'aspect-[5/4] min-h-[220px] sm:min-h-[260px]' : 'aspect-[5/4] min-h-[200px] sm:min-h-[220px]'
         }`}
         aria-label={`Preview ${title} certificate`}
       >
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(14,165,233,0.10),transparent_65%)]" />
+        <div className="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/65 px-3 py-1.5 backdrop-blur-md">
+          <CredentialIcon className="h-3 w-3 text-content-primary" aria-hidden />
+          <span className="font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-slate-300 sm:text-[9px]">{credentialType}</span>
+        </div>
         {!failed ? (
           <img
             src={imageSrc}
             alt={imageAlt}
-            className={`h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02] ${
-              featured ? 'p-4 sm:p-5' : 'p-3.5 sm:p-4'
+            className={`h-full w-full object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.025] ${
+              featured ? 'p-5 pt-14 sm:p-6 sm:pt-16' : 'p-5 pt-14 sm:p-6 sm:pt-16'
             }`}
             loading="lazy"
             onError={() => setFailed(true)}
@@ -51,23 +59,27 @@ function CertificateCard({
             <span className="text-xs font-medium text-slate-500">Certificate preview unavailable</span>
           </div>
         )}
-        <span className="pointer-events-none absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/65 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 group-hover:opacity-100">
-          <ExternalLink className="h-4 w-4" aria-hidden />
+        <span className="pointer-events-none absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/70 text-white shadow-lg backdrop-blur-md transition-all duration-300 group-hover:border-content-primary/30 group-hover:bg-content-primary group-hover:text-black">
+          <Eye className="h-4 w-4" aria-hidden />
         </span>
       </button>
 
-      <div className={`flex flex-1 flex-col items-center text-center gap-2.5 ${featured ? 'p-6 sm:p-7' : 'p-5 sm:p-6'}`}>
+      <div className={`flex flex-1 flex-col ${featured ? 'p-6 sm:p-7' : 'p-5 sm:p-6'}`}>
         {issuer ? (
-          <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-content-primary/90 sm:text-[11px]">
+          <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-content-primary/90 sm:text-[10px]">
             {issuer}
           </p>
         ) : null}
-        <h3 className={`font-bold leading-snug text-white ${featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'}`}>
+        <h3 className={`mt-2 font-bold leading-snug text-white ${featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'}`}>
           {title}
         </h3>
         {subtitle ? (
-          <p className={`leading-relaxed text-slate-500 ${featured ? 'text-sm sm:text-base' : 'text-sm'}`}>{subtitle}</p>
+          <p className={`mt-2 flex-1 leading-relaxed text-slate-500 ${featured ? 'text-sm sm:text-base' : 'text-sm'}`}>{subtitle}</p>
         ) : null}
+        <button type="button" onClick={onOpen} className="mt-5 inline-flex min-h-11 w-full items-center justify-between border-t border-white/[0.06] pt-4 text-left text-xs font-semibold text-slate-400 transition-colors hover:text-content-primary">
+          <span>View credential</span>
+          <Eye className="h-4 w-4" aria-hidden />
+        </button>
       </div>
     </article>
   );
@@ -159,9 +171,11 @@ export function CertificatesSection() {
           accent="content"
         />
 
-        <ScrollRevealGroup className="flex flex-col gap-10" stagger={0.14}>
-
-
+        <ScrollRevealGroup className="flex flex-col gap-8 sm:gap-10" stagger={0.14}>
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+            <span className="rounded-full border border-content-primary/20 bg-content-primary/[0.06] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-content-primary">3 verified credentials</span>
+            <span className="rounded-full border border-white/[0.08] bg-white/[0.025] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Tap any card to inspect</span>
+          </div>
           <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
             {certificates.map((cert) => (
               <CertificateCard

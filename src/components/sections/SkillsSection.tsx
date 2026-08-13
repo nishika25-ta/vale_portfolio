@@ -1,177 +1,192 @@
-import { Brain, Code2, Cpu, Globe, Palette } from 'lucide-react';
+import { BrainCircuit, Braces, Check, CloudCog, Cpu, Database, Layers3, Workflow } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { aiSkills, designDataSkills, fullStackSkills, programmingSkills } from '@/data/skills';
 
-type Accent = 'content' | 'emerald' | 'sky' | 'violet';
-
-type SkillRow = {
+type StackGroup = {
   id: string;
+  index: string;
   title: string;
   subtitle: string;
   icon: LucideIcon;
-  accent: Accent;
   skills: string[];
+  featured: string[];
+  accent: string;
+  glow: string;
 };
 
-const accentStyles: Record<Accent, { ring: string; iconBg: string; iconText: string; chipHover: string; dot: string }> = {
-  content: {
-    ring: 'border-content-primary/20',
-    iconBg: 'bg-content-primary/10 border-content-primary/25',
-    iconText: 'text-content-primary',
-    chipHover: 'hover:border-content-primary/40 hover:bg-content-primary/[0.08] hover:text-white',
-    dot: 'bg-content-primary',
-  },
-  emerald: {
-    ring: 'border-emerald-500/20',
-    iconBg: 'bg-emerald-500/10 border-emerald-400/25',
-    iconText: 'text-emerald-300',
-    chipHover: 'hover:border-emerald-400/40 hover:bg-emerald-500/[0.08] hover:text-white',
-    dot: 'bg-emerald-400',
-  },
-  sky: {
-    ring: 'border-sky-500/20',
-    iconBg: 'bg-sky-500/10 border-sky-400/25',
-    iconText: 'text-sky-300',
-    chipHover: 'hover:border-sky-400/40 hover:bg-sky-500/[0.08] hover:text-white',
-    dot: 'bg-sky-400',
-  },
-  violet: {
-    ring: 'border-violet-500/20',
-    iconBg: 'bg-violet-500/10 border-violet-400/25',
-    iconText: 'text-violet-300',
-    chipHover: 'hover:border-violet-400/40 hover:bg-violet-500/[0.08] hover:text-white',
-    dot: 'bg-violet-400',
-  },
-};
-
-const ROWS: SkillRow[] = [
+const STACK_GROUPS: StackGroup[] = [
   {
     id: 'backend',
+    index: '01',
     title: 'Programming & Backend',
-    subtitle: 'Languages, APIs, and server-side development',
-    icon: Code2,
-    accent: 'content',
+    subtitle: 'Robust APIs, business logic, and maintainable server-side systems.',
+    icon: Braces,
     skills: programmingSkills,
+    featured: ['Python', 'FastAPI', 'REST APIs'],
+    accent: 'text-sky-300 border-sky-400/25 bg-sky-400/10',
+    glow: 'group-hover:bg-sky-400/[0.08]',
   },
   {
     id: 'ai',
+    index: '02',
     title: 'AI & Machine Learning',
-    subtitle: 'Computer vision, deep learning, OCR, and NLP',
-    icon: Brain,
-    accent: 'emerald',
+    subtitle: 'Applied intelligence for vision, documents, and automation.',
+    icon: BrainCircuit,
     skills: aiSkills,
+    featured: ['TensorFlow', 'Computer Vision', 'OCR'],
+    accent: 'text-emerald-300 border-emerald-400/25 bg-emerald-400/10',
+    glow: 'group-hover:bg-emerald-400/[0.07]',
   },
   {
     id: 'fullstack',
+    index: '03',
     title: 'Frontend & DevOps',
-    subtitle: 'Web development, containers, and cloud deployment',
-    icon: Globe,
-    accent: 'sky',
+    subtitle: 'Responsive products shipped through reliable deployment workflows.',
+    icon: CloudCog,
     skills: fullStackSkills,
+    featured: ['Next.js', 'Docker', 'Kubernetes'],
+    accent: 'text-cyan-300 border-cyan-400/25 bg-cyan-400/10',
+    glow: 'group-hover:bg-cyan-400/[0.07]',
   },
   {
     id: 'data',
+    index: '04',
     title: 'Database & Analytics',
-    subtitle: 'Relational databases, BI dashboards, and GIS tooling',
-    icon: Palette,
-    accent: 'violet',
+    subtitle: 'Structured data, spatial analysis, and decision-ready reporting.',
+    icon: Database,
     skills: designDataSkills,
+    featured: ['PostgreSQL', 'Power BI', 'QGIS'],
+    accent: 'text-violet-300 border-violet-400/25 bg-violet-400/10',
+    glow: 'group-hover:bg-violet-400/[0.07]',
   },
 ];
 
-const PROFICIENCY = [
-  { label: 'Python', value: 92 },
-  { label: 'Next.js', value: 88 },
-  { label: 'PostgreSQL', value: 85 },
+const CORE_TOOLKIT = [
+  { label: 'Primary language', value: 'Python', detail: 'Backend · AI · Automation' },
+  { label: 'Product framework', value: 'Next.js', detail: 'React · Full-stack web' },
+  { label: 'Data foundation', value: 'PostgreSQL', detail: 'Schema · Queries · APIs' },
 ];
 
-function SkillRow({ row }: { row: SkillRow }) {
-  const a = accentStyles[row.accent];
-  const Icon = row.icon;
+function StackCard({ group }: { group: StackGroup }) {
+  const Icon = group.icon;
+
   return (
-    <div className={`surface-card overflow-hidden p-4 transition-colors sm:p-5 ${a.ring} hover:${a.ring}`}>
-      <div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-6">
-        <div className="flex shrink-0 items-start gap-3 md:w-60">
-          <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${a.iconBg}`}>
-            <Icon className={`h-4 w-4 ${a.iconText}`} aria-hidden />
+    <article className="group relative flex min-h-full flex-col overflow-hidden rounded-3xl border border-white/[0.07] bg-[#09090b] p-5 transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.14] sm:p-7">
+      <div className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${group.glow}`} />
+      <div className="relative flex flex-1 flex-col">
+        <div className="flex items-start justify-between gap-4">
+          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${group.accent}`}>
+            <Icon className="h-5 w-5" aria-hidden />
           </div>
-          <div className="min-w-0">
-            <h3 className="text-[15px] font-bold text-white">{row.title}</h3>
-            <p className="mt-0.5 text-[11.5px] leading-relaxed text-slate-500">{row.subtitle}</p>
-          </div>
+          <span className="font-mono text-[10px] font-bold tracking-[0.24em] text-slate-700">{group.index}</span>
         </div>
-        <div className="flex flex-1 flex-wrap gap-1.5">
-          {row.skills.map((skill) => (
-            <span
-              key={skill}
-              className={`inline-flex items-center gap-1.5 rounded-md border border-white/[0.08] bg-white/[0.025] px-2.5 py-1.5 text-[12px] font-medium text-slate-300 transition-all duration-200 ${a.chipHover}`}
-            >
-              <span className={`h-1 w-1 rounded-full ${a.dot}`} aria-hidden />
+
+        <div className="mt-7">
+          <h3 className="text-xl font-bold text-white sm:text-2xl">{group.title}</h3>
+          <p className="mt-2 max-w-sm text-[13px] leading-relaxed text-slate-500">{group.subtitle}</p>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-2">
+          {group.featured.map((skill) => (
+            <span key={skill} className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold ${group.accent}`}>
               {skill}
             </span>
           ))}
         </div>
+
+        <div className="mt-7 border-t border-white/[0.06] pt-5">
+          <p className="mb-3 font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-slate-600">Supporting toolkit</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-2.5">
+            {group.skills.filter((skill) => !group.featured.includes(skill)).map((skill) => (
+              <span key={skill} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-slate-400 transition-colors group-hover:text-slate-300">
+                <span className="h-1 w-1 rounded-full bg-slate-600" aria-hidden />
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 export function SkillsSection() {
+  const totalSkills = STACK_GROUPS.reduce((total, group) => total + group.skills.length, 0);
+
   return (
     <section id="skills" className="section-border section-pad">
       <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
         <SectionHeader
           title="Technical"
           gradient="Stack"
-          description="Languages, frameworks, and platforms for full-stack development, AI/ML, and enterprise delivery."
+          description="A production-focused toolkit for building, deploying, and improving intelligent software systems."
           accent="content"
         />
 
-        <ScrollRevealGroup className="flex flex-col gap-10" stagger={0.12}>
-          <div className="flex flex-col gap-4">
-            {ROWS.map((row) => (
-              <SkillRow key={row.id} row={row} />
-            ))}
-          </div>
-
-          <div className="surface-card p-5 sm:p-8">
-          <div className="mb-6 flex items-center gap-3">
-            <Cpu className="h-4 w-4 text-content-primary" aria-hidden />
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-content-primary/90">
-              Top proficiencies
-            </p>
-            <span className="h-px flex-1 bg-gradient-to-r from-content-primary/30 via-white/[0.05] to-transparent" />
-          </div>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-            {PROFICIENCY.map((p) => (
-              <div key={p.label}>
-                <div className="mb-2 flex items-baseline justify-between">
-                  <span className="text-sm font-semibold text-white">{p.label}</span>
-                  <span className="font-mono text-[11px] text-slate-500">{p.value}%</span>
+        <ScrollRevealGroup className="flex flex-col gap-6 sm:gap-8" stagger={0.12}>
+          <div className="relative overflow-hidden rounded-3xl border border-content-primary/15 bg-[linear-gradient(120deg,rgba(14,165,233,0.10),rgba(10,10,12,0.92)_42%,rgba(34,211,238,0.05))] p-5 sm:p-8">
+            <div className="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full bg-content-primary/10 blur-3xl" />
+            <div className="relative flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-2xl">
+                <div className="mb-4 flex items-center gap-2 text-content-primary">
+                  <Workflow className="h-4 w-4" aria-hidden />
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.25em]">Engineering approach</span>
                 </div>
-                <div className="h-1 w-full overflow-hidden rounded-full bg-white/[0.05]">
-                  <div
-                    className="h-full rounded-full bg-gradient-to-r from-content-primary to-content-secondary"
-                    style={{ width: `${p.value}%` }}
-                    aria-hidden
-                  />
+                <h3 className="text-2xl font-bold leading-tight text-white sm:text-3xl">From idea to production.</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-400 sm:text-[15px]">
+                  I work across the complete delivery path: interface, API, data, infrastructure, and applied intelligence.
+                </p>
+              </div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                <div className="rounded-2xl border border-white/[0.08] bg-black/20 px-3 py-3 text-center sm:px-5">
+                  <p className="text-xl font-bold text-white sm:text-2xl">{totalSkills}+</p>
+                  <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.16em] text-slate-600">Tools</p>
+                </div>
+                <div className="rounded-2xl border border-white/[0.08] bg-black/20 px-3 py-3 text-center sm:px-5">
+                  <p className="text-xl font-bold text-white sm:text-2xl">04</p>
+                  <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.16em] text-slate-600">Domains</p>
+                </div>
+                <div className="rounded-2xl border border-white/[0.08] bg-black/20 px-3 py-3 text-center sm:px-5">
+                  <p className="text-xl font-bold text-content-primary sm:text-2xl">E2E</p>
+                  <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.16em] text-slate-600">Delivery</p>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
-          </div>
-        </ScrollRevealGroup>
 
-        <ScrollRevealGroup className="mt-10" animation="fade-up" stagger={0}>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-t border-white/[0.05] pt-8 text-center">
-          <div className="flex items-center gap-2 text-slate-600">
-            <Cpu size={14} className="text-slate-500" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.25em]">
-              Built for scale · Ship with confidence
-            </span>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
+            {STACK_GROUPS.map((group) => <StackCard key={group.id} group={group} />)}
           </div>
+
+          <div className="surface-card overflow-hidden p-5 sm:p-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-xs">
+                <div className="flex items-center gap-2 text-content-primary">
+                  <Cpu className="h-4 w-4" aria-hidden />
+                  <p className="font-mono text-[9px] font-bold uppercase tracking-[0.24em]">Core toolkit</p>
+                </div>
+                <h3 className="mt-3 text-xl font-bold text-white">The technologies I reach for first.</h3>
+              </div>
+              <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3 lg:max-w-2xl">
+                {CORE_TOOLKIT.map((item) => (
+                  <div key={item.value} className="rounded-2xl border border-white/[0.07] bg-white/[0.025] p-4">
+                    <div className="flex items-center gap-2">
+                      <Check className="h-3.5 w-3.5 text-content-primary" aria-hidden />
+                      <span className="font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-slate-600">{item.label}</span>
+                    </div>
+                    <p className="mt-4 text-lg font-bold text-white">{item.value}</p>
+                    <p className="mt-1 text-[11px] text-slate-500">{item.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center gap-2 pt-2 text-slate-600">
+            <Layers3 className="h-3.5 w-3.5" aria-hidden />
+            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.22em]">Built for scale · Shipped with confidence</span>
           </div>
         </ScrollRevealGroup>
       </div>

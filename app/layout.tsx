@@ -26,7 +26,7 @@ const instrumentSerif = Instrument_Serif({
 
 const SITE_TITLE = 'Valentine Agam — Software Engineer & Full-Stack Developer';
 const SITE_DESCRIPTION =
-  'Portfolio of Valentine Agam — Software engineer specializing in full-stack development, digital transformation, Next.js, PostgreSQL, AI/ML, and enterprise systems. Based in Miri, Sarawak, Malaysia.';
+  'Portfolio of Valentine Agam — Software engineer specializing in full-stack development, digital transformation, Next.js, PostgreSQL, AI/ML, and enterprise systems.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.valeport.space'),

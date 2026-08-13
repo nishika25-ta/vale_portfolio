@@ -9,7 +9,7 @@ export const dockApps: DockAppItem[] = [
   { id: 'education', name: 'Education', icon: <GraduationCap /> },
   { id: 'skills', name: 'Skills', icon: <TerminalSquare /> },
   { id: 'projects', name: 'Work', icon: <FolderOpen /> },
-  { id: 'contact', name: 'Contact', icon: <Mail /> },
+  { id: 'contact', name: 'Finish', icon: <Mail /> },
   {
     id: 'divider',
     name: '',
