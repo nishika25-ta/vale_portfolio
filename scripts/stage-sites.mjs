@@ -6,10 +6,7 @@ const output = join(root, 'dist');
 
 await rm(output, { recursive: true, force: true });
 await mkdir(join(output, 'server'), { recursive: true });
-await cp(join(root, 'out'), join(output, 'client'), {
-  recursive: true,
-  filter: (source) => !source.includes(`${join('public', 'videos')}`) && !source.includes(`${join('out', 'videos')}`),
-});
+await cp(join(root, 'out'), join(output, 'client'), { recursive: true });
 
 await writeFile(
   join(output, 'server', 'index.js'),
