@@ -24,9 +24,9 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 });
 
-const SITE_TITLE = 'Valentine Agam — Software Engineer & Full-Stack Developer';
+const SITE_TITLE = 'Valentine Agam — Software Engineer, Data & AI';
 const SITE_DESCRIPTION =
-  'Portfolio of Valentine Agam — Software engineer specializing in full-stack development, digital transformation, Next.js, PostgreSQL, AI/ML, and enterprise systems. Based in Miri, Sarawak, Malaysia.';
+  'Valentine Agam designs and ships full-stack products, enterprise workflows, data systems, and applied AI from Miri, Sarawak, Malaysia.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.valeport.space'),
@@ -61,17 +61,19 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: 'Valentine Agam Portfolio',
+    images: [{ url: '/og.png', width: 1739, height: 909, alt: 'Valentine Agam — Software, Data, AI' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: ['/og.png'],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#050505',
-  colorScheme: 'dark',
+  themeColor: '#f1efe8',
+  colorScheme: 'light',
   width: 'device-width',
   initialScale: 1,
 };
@@ -82,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
     >
-      <body className="bg-[#050505] text-slate-300 antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
