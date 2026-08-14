@@ -29,7 +29,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#050505] pb-28"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#050505] px-1 pb-24 sm:pb-28"
     >
       <div className="absolute inset-0 z-0">
         <div className="hero-glitch-mask absolute inset-0">
@@ -56,10 +56,10 @@ export function HeroSection() {
       </div>
 
       <div
-        className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center parallax-element sm:px-8"
+        className="relative z-10 mx-auto w-full max-w-4xl px-4 text-center parallax-element sm:px-8"
         data-speed="0.03"
       >
-        <h1 className="hero-fade hero-fade-1 font-display text-[clamp(4rem,16vw,7.75rem)] font-normal leading-[0.98] tracking-[-0.02em] text-white">
+        <h1 className="hero-fade hero-fade-1 font-display text-[clamp(3.35rem,16vw,7.75rem)] font-normal leading-[0.98] tracking-[-0.03em] text-white">
           Valentine{' '}
           <span className="italic text-white/80">Agam</span>
         </h1>
@@ -67,7 +67,7 @@ export function HeroSection() {
         <HeroRoleLine />
 
         <div
-          className="hero-fade hero-fade-3 mx-auto my-9 h-px w-14 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+          className="hero-fade hero-fade-3 mx-auto my-7 h-px w-14 bg-gradient-to-r from-transparent via-white/25 to-transparent sm:my-9"
           aria-hidden
         />
 

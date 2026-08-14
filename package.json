@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build && node scripts/stage-sites.mjs",
     "start": "next start",
     "lint": "next lint",
     "video-thumbs": "node scripts/generate-video-thumbs.mjs"
