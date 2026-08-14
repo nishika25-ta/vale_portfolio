@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { HeroRoleLiquidGlass } from '@/components/hero/HeroRoleLiquidGlass';
+import { useMotionProfile } from '@/hooks/useMotionProfile';
 
 const ROLES = [
   'Software Engineer',
@@ -18,8 +19,13 @@ const PAUSE_EMPTY_MS = 380;
 
 export function HeroRoleLine() {
   const [displayText, setDisplayText] = useState('');
+  const { isMobile } = useMotionProfile();
 
   useEffect(() => {
+    if (isMobile) {
+      setDisplayText(ROLES[0]);
+      return;
+    }
     let cancelled = false;
     let timeoutId = 0;
     let charIndex = 0;
@@ -61,7 +67,7 @@ export function HeroRoleLine() {
       cancelled = true;
       window.clearTimeout(timeoutId);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="hero-fade hero-fade-2 mt-7 flex justify-center font-sans">

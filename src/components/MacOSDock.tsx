@@ -157,7 +157,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
     >
       <div
         ref={dockRef}
-        className="backdrop-blur-2xl transition-all duration-300 ease-out flex items-center justify-center"
+        className="macos-dock-shell backdrop-blur-2xl transition-all duration-300 ease-out flex items-center justify-center"
         style={{
           width: `${dockWidth}px`,
           background: 'rgba(12, 12, 12, 0.9)',

@@ -153,6 +153,29 @@
       content-visibility: auto;
       contain-intrinsic-size: auto 220px;
     }
+
+    .mobile-performance-mode .macos-dock-shell {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      transition: none;
+    }
+
+    .mobile-performance-mode main > section,
+    .mobile-performance-mode footer {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 900px;
+    }
+
+    .mobile-performance-mode .surface-card,
+    .mobile-performance-mode .showcase-stage-shell,
+    .mobile-performance-mode .project-archive-card {
+      box-shadow: none;
+    }
+
+    .mobile-performance-mode .group,
+    .mobile-performance-mode .group * {
+      transition-duration: 0s !important;
+    }
   }
 
   @media (max-width: 768px) {

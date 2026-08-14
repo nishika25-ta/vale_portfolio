@@ -43,12 +43,14 @@ export function useLenis(showSplash: boolean): void {
       setLenis(undefined);
       clearLenisScrollProxy();
       ScrollTrigger.normalizeScroll(false);
-      ScrollTrigger.config({
-        limitCallbacks: true,
-        syncInterval: mobile ? 150 : 60,
-      });
-      requestAnimationFrame(() => ScrollTrigger.refresh());
-      return;
+      if (mobile) {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        document.documentElement.classList.add('mobile-performance-mode');
+      } else {
+        ScrollTrigger.config({ limitCallbacks: true, syncInterval: 60 });
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      }
+      return () => document.documentElement.classList.remove('mobile-performance-mode');
     }
 
     const lenisInstance = new Lenis({

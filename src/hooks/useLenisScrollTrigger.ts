@@ -8,14 +8,10 @@ export function useLenisScrollTrigger(enabled: boolean): void {
     if (!enabled) return;
 
     const mobile = isMobileViewport();
+    if (mobile) return;
     let resizeTimer: ReturnType<typeof setTimeout> | undefined;
 
     const onResize = () => {
-      if (mobile) {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
-        return;
-      }
       ScrollTrigger.refresh();
     };
 
@@ -23,7 +19,7 @@ export function useLenisScrollTrigger(enabled: boolean): void {
 
     const refresh = () => ScrollTrigger.refresh();
     requestAnimationFrame(refresh);
-    const t = setTimeout(refresh, mobile ? 400 : 250);
+    const t = setTimeout(refresh, 250);
 
     return () => {
       window.removeEventListener('resize', onResize);
