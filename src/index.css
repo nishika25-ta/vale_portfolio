@@ -167,6 +167,17 @@
       backdrop-filter: none;
       contain: layout paint;
       touch-action: manipulation;
+      box-shadow: none !important;
+    }
+
+    .mobile-performance-mode .hero-fade,
+    .mobile-performance-mode .hero-typewriter-cursor {
+      animation: none !important;
+    }
+
+    .mobile-performance-mode .hero-fade {
+      opacity: 1;
+      transform: none;
     }
   }
 

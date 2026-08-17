@@ -1,5 +1,4 @@
 import { getLenis } from '@/utils/lenisRef';
-import { isMobileViewport } from '@/utils/isMobileViewport';
 
 export function scrollToSection(appId: string, offset = -60): void {
   if (appId === 'resume') {
@@ -12,9 +11,10 @@ export function scrollToSection(appId: string, offset = -60): void {
   if (lenis) {
     lenis.scrollTo(element, { offset });
   } else {
+    const documentTop = window.scrollY + element.getBoundingClientRect().top;
     window.scrollTo({
-      top: element.offsetTop + offset,
-      behavior: isMobileViewport() ? 'auto' : 'smooth',
+      top: Math.max(0, documentTop + offset),
+      behavior: 'smooth',
     });
   }
 }

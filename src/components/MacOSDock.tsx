@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { DockAppItem } from '../types/portfolio';
 import { isMobileViewport } from '@/utils/isMobileViewport';
+import { useActiveSection } from '@/hooks/useActiveSection';
 
 type MacOSDockProps = {
   apps: DockAppItem[];
@@ -10,6 +11,8 @@ type MacOSDockProps = {
 };
 
 export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: MacOSDockProps) {
+  const observedActiveSection = useActiveSection();
+  const effectiveOpenApps = openApps.length > 0 ? openApps : [observedActiveSection];
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && isMobileViewport());
   const [mouseX, setMouseX] = useState<number | null>(null);
@@ -170,7 +173,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
         <div className="mobile-pill-nav rounded-2xl border border-white/10 bg-[#0c0c0f] p-1.5 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
           <div className="grid grid-cols-6 items-center gap-0.5">
             {mobileApps.map((app) => {
-              const active = openApps.includes(app.id);
+              const active = effectiveOpenApps.includes(app.id);
               return (
                 <button
                   key={app.id}
@@ -247,7 +250,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
                     strokeWidth: app.isDivider ? 1 : 2,
                   } as { size?: number; strokeWidth?: number })}
                 </div>
-                {openApps.includes(app.id) && !app.isDivider && (
+                {effectiveOpenApps.includes(app.id) && !app.isDivider && (
                   <div
                     className="absolute rounded-full"
                     style={{

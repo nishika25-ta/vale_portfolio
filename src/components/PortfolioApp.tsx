@@ -7,7 +7,6 @@ import { SplashScreen } from '@/components/SplashScreen';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { ScrollAnimationProvider } from '@/context/ScrollAnimationContext';
 import { dockApps } from '@/data/dockApps';
-import { useActiveSection } from '@/hooks/useActiveSection';
 import { useLenis } from '@/hooks/useLenis';
 import { useLenisScrollTrigger } from '@/hooks/useLenisScrollTrigger';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -44,8 +43,6 @@ const ContactFooter = dynamic(
 
 export default function PortfolioApp() {
   const [showSplash, setShowSplash] = useState(true);
-  const activeSection = useActiveSection();
-
   useLenis(showSplash);
   useLenisScrollTrigger(!showSplash);
   useScrollReveal(!showSplash);
@@ -68,7 +65,7 @@ export default function PortfolioApp() {
         }}
       >
         {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
-        <MacOSDock apps={dockApps} onAppClick={handleNavClick} openApps={[activeSection]} />
+        <MacOSDock apps={dockApps} onAppClick={handleNavClick} />
 
         <HeroSection />
 
