@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import type { DockAppItem } from '../types/portfolio';
+import { isMobileViewport } from '@/utils/isMobileViewport';
 
 type MacOSDockProps = {
   apps: DockAppItem[];
@@ -10,6 +11,7 @@ type MacOSDockProps = {
 
 export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: MacOSDockProps) {
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && isMobileViewport());
   const [mouseX, setMouseX] = useState<number | null>(null);
   const [currentScales, setCurrentScales] = useState(() => apps.map(() => 1));
   const [currentPositions, setCurrentPositions] = useState<number[]>([]);
@@ -55,11 +57,15 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
 
   useEffect(() => {
     setConfig(getResponsiveConfig());
+    setIsMobile(isMobileViewport());
     setMounted(true);
   }, [getResponsiveConfig]);
 
   useEffect(() => {
-    const handleResize = () => setConfig(getResponsiveConfig());
+    const handleResize = () => {
+      setConfig(getResponsiveConfig());
+      setIsMobile(isMobileViewport());
+    };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [getResponsiveConfig]);
@@ -95,10 +101,11 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   );
 
   useEffect(() => {
+    if (isMobile) return;
     const initialScales = apps.map(() => minScale);
     setCurrentScales(initialScales);
     setCurrentPositions(calculatePositions(initialScales));
-  }, [apps, calculatePositions, minScale, config]);
+  }, [apps, calculatePositions, minScale, config, isMobile]);
 
   const animateToTarget = useCallback(() => {
     const targetScales = calculateTargetMagnification(mouseX);
@@ -113,12 +120,13 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   }, [mouseX, calculateTargetMagnification, calculatePositions, currentScales, currentPositions]);
 
   useEffect(() => {
+    if (isMobile) return;
     if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     animationFrameRef.current = requestAnimationFrame(animateToTarget);
     return () => {
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
     };
-  }, [animateToTarget]);
+  }, [animateToTarget, isMobile]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const now = performance.now();
@@ -150,6 +158,39 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
       : apps.length * (baseIconSize + baseSpacing) - baseSpacing + horizontalPadding;
 
   if (!mounted) return null;
+
+  if (isMobile) {
+    const mobileApps = apps.filter((app) => !app.isDivider);
+    return (
+      <nav
+        className={`fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-1/2 z-50 w-[calc(100vw-16px)] max-w-md -translate-x-1/2 ${className}`}
+        aria-label="Portfolio sections"
+      >
+        <div className="mobile-pill-nav overflow-x-auto rounded-2xl border border-white/10 bg-[#0c0c0f]/95 p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.55)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex min-w-max items-center justify-center gap-1">
+            {mobileApps.map((app) => {
+              const active = openApps.includes(app.id);
+              return (
+                <button
+                  key={app.id}
+                  type="button"
+                  onClick={() => onAppClick(app.id)}
+                  className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-content-primary ${
+                    active ? 'bg-content-primary/15 text-content-primary' : 'text-white/55 active:bg-white/10 active:text-white'
+                  }`}
+                  aria-label={app.name}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {React.cloneElement(app.icon, { size: 19, strokeWidth: 2 } as { size?: number; strokeWidth?: number })}
+                  {active ? <span className="absolute bottom-1 h-1 w-1 rounded-full bg-content-primary" aria-hidden /> : null}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <div

@@ -33,7 +33,7 @@
   @media (max-width: 768px), (pointer: coarse) {
     html {
       scroll-behavior: auto;
-      overscroll-behavior-y: none;
+      overscroll-behavior-y: auto;
     }
 
     body {
@@ -149,21 +149,10 @@
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     }
 
-    .project-archive-card {
-      content-visibility: auto;
-      contain-intrinsic-size: auto 220px;
-    }
-
     .mobile-performance-mode .macos-dock-shell {
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
       transition: none;
-    }
-
-    .mobile-performance-mode main > section,
-    .mobile-performance-mode footer {
-      content-visibility: auto;
-      contain-intrinsic-size: auto 900px;
     }
 
     .mobile-performance-mode .surface-card,
@@ -175,6 +164,13 @@
     .mobile-performance-mode .group,
     .mobile-performance-mode .group * {
       transition-duration: 0s !important;
+    }
+
+    .mobile-pill-nav {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x pan-y;
     }
   }
 

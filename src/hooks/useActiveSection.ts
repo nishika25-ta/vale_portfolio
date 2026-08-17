@@ -10,7 +10,7 @@ export function useActiveSection(): string {
           if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0, rootMargin: '-18% 0px -72% 0px' }
     );
     document.querySelectorAll('section, footer').forEach((section) => observer.observe(section));
     return () => observer.disconnect();
