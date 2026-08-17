@@ -17,13 +17,6 @@ export const certificates: Certificate[] = [
     imageAlt: 'CompTIA Security+ certification',
   },
   {
-    id: 'ibm-python-data-science',
-    title: 'Python for Data Science',
-    subtitle: 'Python foundations for data analysis and data science workflows',
-    issuer: 'IBM Cognitive Class',
-    imageAlt: 'IBM Cognitive Class Python for Data Science credential',
-  },
-  {
     id: 'mobile-dev-award',
     title: 'Mobile Application Development Award',
     subtitle: 'Recognition for mobile application development excellence · 2024',
