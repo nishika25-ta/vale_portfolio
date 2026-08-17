@@ -24,9 +24,9 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 });
 
-const SITE_TITLE = 'Valentine Agam — Software Engineer & Full-Stack Developer';
+const SITE_TITLE = 'Valentine Agam — Software Engineer | Full-Stack, Backend & AI/ML';
 const SITE_DESCRIPTION =
-  'Portfolio of Valentine Agam — Software engineer specializing in full-stack development, digital transformation, Next.js, PostgreSQL, AI/ML, and enterprise systems.';
+  'Portfolio of Valentine Agam — software engineer and product builder delivering full-stack applications, backend services, enterprise workflows, and applied AI/ML systems.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.valeport.space'),

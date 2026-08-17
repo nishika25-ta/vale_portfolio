@@ -15,9 +15,9 @@ const FOLDER_MANIFEST = [
   },
   {
     folder: 'DarkLace',
-    title: 'DarkLace',
-    desc: 'Brand identity and interface concepts for DarkLace.',
-    tags: ['Branding', 'UI'],
+    title: 'Darklace AI Assistant',
+    desc: 'Real-time desktop meeting assistant with voice input, persistent WebSocket streaming, low-latency language-model responses, and a maintainable always-on-top workflow.',
+    tags: ['Python', 'React', 'Electron', 'WebSockets'],
     files: ['DARKLACE_logo.webp', 'Darklace.webp'],
   },
   {
@@ -43,9 +43,9 @@ const FOLDER_MANIFEST = [
   },
   {
     folder: 'Super_Dim',
-    title: 'Super Dim',
-    desc: 'Flutter app UI for adaptive screen brightness.',
-    tags: ['Flutter', 'Mobile'],
+    title: 'Super Dim Mobile Application',
+    desc: 'Flutter application for adaptive screen-brightness control, using a dark overlay and an accessible responsive interface for more comfortable low-light viewing.',
+    tags: ['Flutter', 'Dart', 'Mobile', 'Accessibility'],
     files: ['icons/dimmer_icon.webp', 'super_dim.webp'],
   },
   {
@@ -65,8 +65,8 @@ const FOLDER_MANIFEST = [
   {
     folder: 'XAI',
     title: 'XAI-PE Analyzer',
-    desc: 'Explainable PE malware detector—GPU-trained XGBoost/LightGBM on EMBER (1.1M samples), SHAP on 412 static features (pefile), with Flask API, web dashboard, and CLI batch scanning.',
-    tags: ['Python', 'XGBoost', 'SHAP', 'Flask', 'ML'],
+    desc: 'Explainable malware-analysis platform across 412 engineered PE security features with ranked SHAP contributions, single-file analysis, batch scanning, and an EMBER-compatible GPU-ready pipeline for up to 1.1 million samples.',
+    tags: ['Python', 'XGBoost', 'LightGBM', 'SHAP', 'Flask'],
     files: ['icons/xai.webp', 'XAI.webp'],
   },
   {

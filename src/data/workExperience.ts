@@ -28,15 +28,14 @@ export const workExperience: WorkExperienceItem[] = [
       {
         title: 'Pegawai Informasi Maklumat dan Komunikasi Korporat (MySTEP)',
         highlights: [
-          'Designed, developed, and maintained the official Hospital Miri website, leading digital transformation initiatives that modernize hospital operations.',
-          'Built a full-stack Employee Digital Onboarding System that replaces paper-based forms with a centralized digital workflow, including PostgreSQL database architecture and Next.js responsive interfaces.',
-          'Developed a Wheelchair Tracking System to improve asset accountability and resource availability across hospital departments.',
-          'Currently developing a digital hospital wayfinding platform to improve navigation for patients, visitors, and healthcare staff.',
-          'Independently managed the complete software development lifecycle from planning to deployment and maintenance, deploying applications with Docker and Kubernetes.',
+          'Lead end-to-end delivery of digital systems supporting hospital operations, public information, and accessibility initiatives.',
+          'Built a full-stack employee onboarding and document workflow using Next.js, PostgreSQL, Docker, and Kubernetes to replace repetitive paper-based processes and reduce duplicate data entry.',
+          'Developed wheelchair asset tracking and a hospital-wide wayfinding platform to improve equipment visibility and navigation for patients, visitors, and emergency responders.',
+          'Design and maintain the official Hospital Miri website while coordinating requirements across technical and non-technical stakeholders.',
         ],
       },
     ],
-    stack: ['Next.js', 'PostgreSQL', 'Docker', 'Kubernetes', 'Adminer', 'JavaScript', 'HTML', 'CSS', 'Git'],
+    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Docker', 'Kubernetes', 'GitHub', 'CI/CD'],
   },
   {
     id: 'scribear',
@@ -48,14 +47,13 @@ export const workExperience: WorkExperienceItem[] = [
       {
         title: 'Co-Founder & Full-Stack Developer',
         highlights: [
-          'Designed and developed custom web applications for businesses, delivering responsive frontend interfaces and scalable backend services.',
-          'Developed REST APIs and relational database solutions, deploying and maintaining production systems for client projects.',
-          'Worked directly with clients to gather requirements and translate business needs into scalable software solutions.',
-          'Managed the full software development lifecycle from concept to production deployment and ongoing maintenance.',
+          'Deliver custom full-stack applications for paying clients, owning discovery, architecture, interface development, APIs, relational data models, deployment, and support.',
+          'Manage production databases, access controls, CI/CD workflows, technical documentation, and issue resolution across the complete product lifecycle.',
+          'Translate client operations into responsive, secure, and maintainable digital products.',
         ],
       },
     ],
-    stack: ['Next.js', 'React', 'PostgreSQL', 'REST APIs', 'JavaScript', 'Docker', 'Git'],
+    stack: ['Next.js', 'TypeScript', 'React', 'PostgreSQL', 'REST APIs', 'Docker', 'CI/CD'],
   },
   {
     id: 'zenara-jaya',
@@ -65,16 +63,14 @@ export const workExperience: WorkExperienceItem[] = [
     logoSrc: '/company-logos/zenara.webp',
     roles: [
       {
-        title: 'Junior Data & Backend Engineer',
+        title: 'Junior Data & Backend Engineer (Contract)',
         highlights: [
-          'Developed backend applications supporting business operations, including an AI-assisted recruitment platform with resume parsing, OCR document extraction, and candidate fraud detection.',
-          'Designed SQL databases and optimized data workflows, managing PostgreSQL databases and implementing reporting solutions for stakeholders.',
-          'Automated internal business processes with role-based access control, audit logging, and management dashboards.',
-          'Troubleshot backend systems and production issues while producing technical documentation for team handover.',
+          'Developed an AI-assisted applicant tracking system with FastAPI, Next.js, Claude API, PDF extraction, and OCR fallback for scanned documents.',
+          'Built and deployed a resume-parsing microservice on DigitalOcean with Supabase PostgreSQL, object storage, caching, role-based access control, and audit-ready workflows.',
         ],
       },
     ],
-    stack: ['FastAPI', 'Python', 'PostgreSQL', 'Claude API', 'OCR', 'SQL', 'REST APIs'],
+    stack: ['FastAPI', 'Next.js', 'Python', 'Supabase', 'PostgreSQL', 'Claude API', 'OCR', 'DigitalOcean'],
   },
   {
     id: 'sarawak-oil-palm',
@@ -86,10 +82,9 @@ export const workExperience: WorkExperienceItem[] = [
       {
         title: 'GIS Data Analyst Intern',
         highlights: [
-          'Processed and analysed large geospatial datasets, supporting GIS data processing and spatial analysis across plantation operations.',
-          'Achieved 92% detection accuracy by developing a YOLO and TensorFlow computer vision model for automated oil palm anomaly detection from aerial imagery.',
-          'Worked with satellite imagery and remote sensing technologies, preparing operational reports and mapping outputs for management.',
-          'Collaborated with technical teams to improve data quality and built automated detection-to-report workflows using Python, OpenCV, and QGIS.',
+          'Developed a YOLO and TensorFlow aerial-imagery pipeline that achieved 92% detection accuracy for oil-palm anomaly identification.',
+          'Processed remote-sensing datasets and automated detection-to-report workflows using Python, OpenCV, QGIS, and SQL-based validation.',
+          'Produced technical reports and collaborated with operational teams to improve GIS data quality, reliability, and software utilization.',
         ],
       },
     ],
