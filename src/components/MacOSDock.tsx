@@ -160,14 +160,15 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   if (!mounted) return null;
 
   if (isMobile) {
-    const mobileApps = apps.filter((app) => !app.isDivider);
+    const mobileIds = new Set(['home', 'about', 'experience', 'skills', 'projects', 'resume']);
+    const mobileApps = apps.filter((app) => mobileIds.has(app.id));
     return (
       <nav
         className={`fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-1/2 z-50 w-[calc(100vw-16px)] max-w-md -translate-x-1/2 ${className}`}
         aria-label="Portfolio sections"
       >
-        <div className="mobile-pill-nav overflow-x-auto rounded-2xl border border-white/10 bg-[#0c0c0f]/95 p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.55)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex min-w-max items-center justify-center gap-1">
+        <div className="mobile-pill-nav rounded-2xl border border-white/10 bg-[#0c0c0f] p-1.5 shadow-[0_10px_28px_rgba(0,0,0,0.45)]">
+          <div className="grid grid-cols-6 items-center gap-0.5">
             {mobileApps.map((app) => {
               const active = openApps.includes(app.id);
               return (
@@ -175,7 +176,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
                   key={app.id}
                   type="button"
                   onClick={() => onAppClick(app.id)}
-                  className={`relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-content-primary ${
+                  className={`relative flex h-10 w-full items-center justify-center rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-content-primary ${
                     active ? 'bg-content-primary/15 text-content-primary' : 'text-white/55 active:bg-white/10 active:text-white'
                   }`}
                   aria-label={app.name}

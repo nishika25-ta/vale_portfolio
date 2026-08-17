@@ -61,7 +61,7 @@ export default function PortfolioApp() {
   return (
     <ScrollAnimationProvider ready={scrollReady}>
       <div
-        className="min-h-screen overflow-x-hidden bg-[#050505] text-slate-300 selection:bg-indigo-600 selection:text-white"
+        className="min-h-screen overflow-x-clip bg-[#050505] text-slate-300 selection:bg-indigo-600 selection:text-white"
         style={{
           fontFamily:
             "var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",

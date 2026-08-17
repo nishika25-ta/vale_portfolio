@@ -28,6 +28,7 @@
   html {
     color-scheme: dark;
     -webkit-tap-highlight-color: transparent;
+    overflow-x: clip;
   }
 
   @media (max-width: 768px), (pointer: coarse) {
@@ -161,16 +162,11 @@
       box-shadow: none;
     }
 
-    .mobile-performance-mode .group,
-    .mobile-performance-mode .group * {
-      transition-duration: 0s !important;
-    }
-
     .mobile-pill-nav {
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
-      overscroll-behavior-x: contain;
-      touch-action: pan-x pan-y;
+      contain: layout paint;
+      touch-action: manipulation;
     }
   }
 
