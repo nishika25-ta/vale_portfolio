@@ -43,7 +43,7 @@ function CertificateCard({
           <CredentialIcon className="h-3 w-3 text-content-primary" aria-hidden />
           <span className="font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-slate-300 sm:text-[9px]">{credentialType}</span>
         </div>
-        {!failed ? (
+        {imageSrc && !failed ? (
           <img
             src={imageSrc}
             alt={imageAlt}
@@ -145,11 +145,18 @@ function CertificateLightbox({ cert, onClose }: { cert: Certificate | null; onCl
           </button>
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto bg-black/40 p-4 md:p-6">
-          <img
-            src={cert.imageSrc}
-            alt={cert.imageAlt}
-            className="mx-auto max-h-[min(75vh,720px)] w-full object-contain"
-          />
+          {cert.imageSrc ? (
+            <img
+              src={cert.imageSrc}
+              alt={cert.imageAlt}
+              className="mx-auto max-h-[min(75vh,720px)] w-full object-contain"
+            />
+          ) : (
+            <div className="flex min-h-64 flex-col items-center justify-center gap-3 text-center">
+              <ShieldCheck className="h-12 w-12 text-content-primary/60" aria-hidden />
+              <p className="text-sm font-medium text-slate-400">Credential image not included in this portfolio.</p>
+            </div>
+          )}
         </div>
         <div className="border-t border-white/10 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 text-sm text-slate-400 sm:px-5 sm:pb-4">{cert.subtitle}</div>
       </div>
@@ -173,7 +180,7 @@ export function CertificatesSection() {
 
         <ScrollRevealGroup className="flex flex-col gap-8 sm:gap-10" stagger={0.14}>
           <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-            <span className="rounded-full border border-content-primary/20 bg-content-primary/[0.06] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-content-primary">3 verified credentials</span>
+            <span className="rounded-full border border-content-primary/20 bg-content-primary/[0.06] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-content-primary">{certificates.length} credentials</span>
             <span className="rounded-full border border-white/[0.08] bg-white/[0.025] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Tap any card to inspect</span>
           </div>
           <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">

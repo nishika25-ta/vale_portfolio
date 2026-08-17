@@ -91,15 +91,13 @@ export function AboutSection() {
                 <span className="h-px flex-1 bg-gradient-to-r from-content-primary/30 to-transparent" />
               </div>
               <p className="text-[1.125rem] font-medium leading-[1.65] text-slate-200 sm:text-xl md:text-[1.35rem]">
-                Software engineer with experience designing and delivering full-stack applications, AI-powered solutions,
-                backend systems, and enterprise software that solve real-world business problems. Background in{' '}
-                <strong className="font-semibold text-white">Cognitive Science</strong> with a minor in Computer Science
-                from UNIMAS.
+                Software engineer and product builder delivering full-stack applications, backend services, enterprise
+                workflows, and applied AI/ML systems across healthcare, recruitment, geospatial analytics, and client-facing products.
               </p>
               <p className="mt-6 border-l-2 border-content-primary/50 pl-4 text-[0.9375rem] leading-relaxed text-slate-400 sm:pl-5 md:text-[1rem]">
-                Currently at <strong className="font-semibold text-white">Hospital Miri</strong>, independently developing
-                enterprise systems that digitize manual workflows, from employee onboarding and asset tracking to hospital
-                wayfinding. Passionate about production-ready software with Next.js, PostgreSQL, Docker, and applied ML.
+                Skilled in translating operational needs into maintainable software from architecture and data modeling through
+                deployment and support, with practical strengths in Python, TypeScript, Next.js, FastAPI, PostgreSQL, Docker,
+                Kubernetes, computer vision, and automation.
               </p>
               <a
                 href="#projects"

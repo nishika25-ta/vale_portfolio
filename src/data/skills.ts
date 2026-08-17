@@ -1,11 +1,14 @@
 /** Technical skills — aligned with Valentine Agam resume (2026). */
 export const programmingSkills = [
   'Python',
+  'TypeScript',
   'JavaScript',
   'SQL',
   'C++',
   'Dart',
   'FastAPI',
+  'Flask',
+  'Node.js',
   'REST APIs',
 ];
 
@@ -14,35 +17,36 @@ export const aiSkills = [
   'OpenCV',
   'Scikit-learn',
   'YOLO',
-  'Computer Vision',
-  'Deep Learning',
-  'Machine Learning',
+  'XGBoost',
+  'LightGBM',
+  'SHAP',
   'OCR',
-  'NLP',
+  'Pandas',
 ];
 
 export const fullStackSkills = [
   'Next.js',
   'React',
-  'HTML5',
-  'CSS3',
-  'Responsive Design',
+  'HTML',
+  'CSS',
+  'Tailwind CSS',
+  'Flutter',
   'Docker',
   'Kubernetes',
   'DigitalOcean',
+  'Vercel',
   'Linux',
   'Git',
+  'GitHub',
+  'CI/CD',
 ];
 
 export const designDataSkills = [
   'PostgreSQL',
-  'Adminer',
-  'Database Design',
+  'MongoDB',
+  'Supabase',
   'Power BI',
-  'Excel',
-  'Pandas',
-  'Data Visualization',
   'QGIS',
-  'Global Mapper',
-  'GIS',
+  'Remote Sensing',
+  'Geospatial Processing',
 ];
