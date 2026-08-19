@@ -18,6 +18,7 @@ export type ShowcaseItem = {
   /** Carousel screens (excludes `icons/…` entries; those are thumb-only). */
   images: string[];
   thumb: string;
+  featured?: boolean;
   /** Optional demo clip from `public/videos/` */
   videoUrl?: string;
 };

@@ -29,7 +29,7 @@ export function ProjectsSection() {
         <SectionHeader
           title="Live"
           gradient="Showcase"
-          description="Product demos in motion, supported by detailed project galleries and implementation highlights."
+          description="Client product demos in motion, followed by selected case studies with screenshots and implementation notes."
           accent="content"
         />
 
@@ -43,7 +43,7 @@ export function ProjectsSection() {
                   <span className="h-2 w-2 rounded-full bg-[#27c93f]" />
                 </div>
                 <span className="hidden h-4 w-px bg-white/10 sm:block" />
-                <span className="hidden font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-slate-600 sm:inline">Product demo studio</span>
+                  <span className="hidden font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-slate-600 sm:inline">Client demo studio</span>
               </div>
               <span className="font-mono text-[9px] font-bold tracking-[0.18em] text-slate-500">
                 {String(activeDemoIndex + 1).padStart(2, '0')} / {String(demoCount).padStart(2, '0')}
@@ -69,7 +69,7 @@ export function ProjectsSection() {
                     <span className="font-mono text-[9px] font-bold uppercase tracking-[0.22em]">Now playing</span>
                   </div>
                   <h3 className="mt-5 text-2xl font-bold text-white">{activeDemo.title}</h3>
-                  <p className="mt-3 text-xs leading-relaxed text-slate-500">A live product walkthrough from the selected portfolio experience.</p>
+                  <p className="mt-3 text-xs leading-relaxed text-slate-500">{activeDemo.caption}</p>
                 </div>
 
                 <div className="mt-0 flex items-center justify-between gap-3 lg:mt-auto">
@@ -126,6 +126,11 @@ export function ProjectsSection() {
                     <img src={project.thumb} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]" loading="lazy" decoding="async" />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent opacity-80" />
                     <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/65 px-3 py-1.5 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-white/75 backdrop-blur-md">{project.category}</span>
+                    {project.featured ? (
+                      <span className="absolute left-4 top-12 rounded-full border border-content-primary/25 bg-content-primary/15 px-3 py-1 font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-content-primary backdrop-blur-md">
+                        Featured
+                      </span>
+                    ) : null}
                     <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/65 text-white backdrop-blur-md transition-colors group-hover:border-content-primary/30 group-hover:bg-content-primary group-hover:text-black"><ArrowRight className="h-4 w-4" aria-hidden /></span>
                   </div>
                   <div className="flex flex-1 flex-col p-5 sm:p-6">

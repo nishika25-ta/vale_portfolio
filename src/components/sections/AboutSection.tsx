@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { ArrowUpRight, Boxes, BrainCircuit, ServerCog } from 'lucide-react';
 import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { SocialLinks } from '@/components/ui/SocialLinks';
 
 const META_ROWS = [
   { label: 'Approach', value: 'Product-minded engineering' },
@@ -99,12 +100,15 @@ export function AboutSection() {
                 deployment and support, with practical strengths in Python, TypeScript, Next.js, FastAPI, PostgreSQL, Docker,
                 Kubernetes, computer vision, and automation.
               </p>
-              <a
-                href="#projects"
-                className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-full border border-content-primary/25 bg-content-primary/[0.08] px-5 py-2.5 text-sm font-semibold text-content-primary transition-colors hover:border-content-primary/45 hover:bg-content-primary/[0.14] hover:text-white"
-              >
-                Explore selected work <ArrowUpRight className="h-4 w-4" aria-hidden />
-              </a>
+              <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+                <a
+                  href="#projects"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-content-primary/25 bg-content-primary/[0.08] px-5 py-2.5 text-sm font-semibold text-content-primary transition-colors hover:border-content-primary/45 hover:bg-content-primary/[0.14] hover:text-white"
+                >
+                  Explore selected work <ArrowUpRight className="h-4 w-4" aria-hidden />
+                </a>
+                <SocialLinks />
+              </div>
               </div>
             </div>
 
