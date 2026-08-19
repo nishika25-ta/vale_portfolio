@@ -1,6 +1,14 @@
 import type { Metadata, Viewport } from 'next';
 import { Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google';
 import '@/index.css';
+import {
+  OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_HEADLINE,
+  SITE_NAME,
+  SITE_URL,
+  SOCIALS,
+} from '@/data/profile';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -24,17 +32,41 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
 });
 
-const SITE_TITLE = 'Valentine Agam — Software Engineer | Full-Stack, Backend & AI/ML';
-const SITE_DESCRIPTION =
-  'Portfolio of Valentine Agam — software engineer and product builder delivering full-stack applications, backend services, enterprise workflows, and applied AI/ML systems.';
+const SITE_TITLE = `${SITE_NAME} — ${SITE_HEADLINE}`;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE_NAME,
+  jobTitle: 'Software Engineer',
+  url: SITE_URL,
+  image: `${SITE_URL}${OG_IMAGE}`,
+  description: SITE_DESCRIPTION,
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'Sarawak',
+    addressCountry: 'MY',
+  },
+  knowsAbout: [
+    'Full-Stack Development',
+    'Backend Engineering',
+    'Artificial Intelligence',
+    'Machine Learning',
+    'Digital Transformation',
+  ],
+  sameAs: [SOCIALS.github.href, SOCIALS.linkedin.href],
+};
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.valeport.space'),
+  metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  applicationName: 'Valentine Agam Portfolio',
-  authors: [{ name: 'Valentine Agam' }],
-  creator: 'Valentine Agam',
+  applicationName: `${SITE_NAME} Portfolio`,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  alternates: {
+    canonical: '/',
+  },
   keywords: [
     'Valentine Agam',
     'Software Engineer',
@@ -52,20 +84,32 @@ export const metadata: Metadata = {
     'Miri',
   ],
   icons: {
-    icon: '/cat.png',
-    apple: '/cat.png',
+    icon: OG_IMAGE,
+    apple: OG_IMAGE,
   },
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     type: 'website',
-    locale: 'en_US',
-    siteName: 'Valentine Agam Portfolio',
+    locale: 'en_MY',
+    url: SITE_URL,
+    siteName: `${SITE_NAME} Portfolio`,
+    images: [
+      {
+        url: OG_IMAGE,
+        alt: `${SITE_NAME} — Software Engineer`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -82,7 +126,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
     >
-      <body className="bg-[#050505] text-slate-300 antialiased">{children}</body>
+      <body className="bg-[#050505] text-slate-300 antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

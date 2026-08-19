@@ -58,24 +58,30 @@ export default function PortfolioApp() {
   return (
     <ScrollAnimationProvider ready={scrollReady}>
       <div
-        className="min-h-screen overflow-x-clip bg-[#050505] text-slate-300 selection:bg-indigo-600 selection:text-white"
+        className="min-h-screen overflow-x-clip bg-[#050505] text-slate-300 selection:bg-content-primary selection:text-white"
         style={{
           fontFamily:
             "var(--font-inter), Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         }}
       >
         {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+        <a
+          href="#about"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-neutral-950"
+        >
+          Skip to content
+        </a>
         <MacOSDock apps={dockApps} onAppClick={handleNavClick} />
 
         <HeroSection />
 
-        <main className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-12">
+        <main id="main-content" className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-12">
           <AboutSection />
-          <CertificatesSection />
           <ExperienceSection />
-          <EducationSection />
-          <SkillsSection />
           <ProjectsSection />
+          <SkillsSection />
+          <EducationSection />
+          <CertificatesSection />
         </main>
 
         <ContactFooter />

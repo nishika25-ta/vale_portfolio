@@ -34,10 +34,19 @@ export function EducationSection() {
                 <p className="mt-7 font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-content-primary">Universiti Malaysia Sarawak (UNIMAS)</p>
                 <h3 className="mt-3 text-2xl font-bold leading-tight text-white sm:text-3xl">Bachelor of Science in Cognitive Science</h3>
                 <p className="mt-3 text-sm font-medium text-slate-400 sm:text-base">Minor in Computer Science (AI/ML)</p>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-500">
+                  Interdisciplinary training across cognition, software, and applied intelligence — used to design systems that people can actually operate.
+                </p>
 
-                <div className="mt-8 flex items-end gap-3 border-t border-white/[0.06] pt-6">
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-600">CGPA</span>
-                  <span className="text-3xl font-bold text-content-primary">3.12</span>
+                <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-white/[0.06] pt-6">
+                  <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3">
+                    <p className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-slate-600">Focus</p>
+                    <p className="mt-1 text-sm font-bold text-slate-200">AI/ML · Software</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] px-4 py-3">
+                    <p className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-slate-600">CGPA</p>
+                    <p className="mt-1 text-sm font-bold text-slate-200">3.12</p>
+                  </div>
                 </div>
               </div>
 

@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ArrowDownRight, FileText } from 'lucide-react';
 import LetterGlitch from '@/components/hero/LetterGlitch';
 import { HeroRoleLine } from '@/components/hero/HeroRoleLine';
+import { RESUME_HREF, SITE_TAGLINE } from '@/data/profile';
+import { scrollToSection } from '@/utils/navigation';
 
 const HERO_GLITCH_COLORS = ['#2b4539', '#61dca3', '#61b3dc'];
-
-const HERO_SUMMARY =
-  'Designing enterprise systems, full-stack applications, and AI-powered solutions for real-world impact.';
 
 function isDesktop() {
   return typeof window !== 'undefined' && window.innerWidth > 768;
@@ -72,8 +72,35 @@ export function HeroSection() {
         />
 
         <p className="hero-fade hero-fade-4 mx-auto max-w-md font-sans text-pretty text-[0.9375rem] font-light leading-[1.8] tracking-[0.01em] text-white/45 sm:text-base">
-          {HERO_SUMMARY}
+          {SITE_TAGLINE}
         </p>
+
+        <div className="hero-fade hero-fade-5 mt-8 flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => scrollToSection('projects')}
+            className="inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-neutral-950 transition-transform hover:scale-[1.02]"
+          >
+            View selected work
+            <ArrowDownRight className="h-4 w-4" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollToSection('contact')}
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/25 hover:bg-white/[0.08]"
+          >
+            Let&apos;s connect
+          </button>
+          <a
+            href={RESUME_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/10 px-5 text-sm font-semibold text-white/70 transition-colors hover:border-white/20 hover:text-white"
+          >
+            <FileText className="h-4 w-4" aria-hidden />
+            Resume
+          </a>
+        </div>
       </div>
     </section>
   );
