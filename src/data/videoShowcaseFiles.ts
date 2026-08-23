@@ -23,14 +23,26 @@ export function videoPosterUrl(filename: string): string {
   return `/video-thumbs/${encodeURIComponent(base)}.webp`;
 }
 
+const VIDEO_TITLES: Record<string, string> = {
+  Coffee: 'Coffee',
+  Coffee_Joa: 'Coffee Joa',
+  Collectors_world: 'Collectors World',
+  DASH: 'DASH',
+  Dynasty_Hotel: 'Dynasty Hotel',
+  Mal_Demo: 'MAL',
+  Pelita_Clinic: 'Pelita Clinic',
+  The_Yard: 'The Yard',
+};
+
 export function filenameToTitle(filename: string): string {
   const base = filename.replace(/\.[^.]+$/i, '');
-  return base.replace(/_/g, ' ').trim();
+  return VIDEO_TITLES[base] ?? base.replace(/_/g, ' ').trim();
 }
 
 export type VideoDemoClip = {
   id: string;
   title: string;
+  caption: string;
   videoUrl: string;
   posterUrl: string;
 };
@@ -41,6 +53,7 @@ export const videoDemoClips: VideoDemoClip[] = [...SHOWCASE_VIDEO_FILES]
   .map((file) => ({
     id: file.replace(/\.[^.]+$/i, '').toLowerCase(),
     title: filenameToTitle(file),
+    caption: 'Client product walkthrough from a shipped Scribear delivery.',
     videoUrl: videoPublicUrl(file),
     posterUrl: videoPosterUrl(file),
   }));

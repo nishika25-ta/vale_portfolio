@@ -203,6 +203,9 @@
       opacity: 1;
       transform: none;
     }
+    .animate-ping {
+      animation: none !important;
+    }
   }
 
   @media (max-width: 640px) {

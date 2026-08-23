@@ -125,7 +125,7 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
                 type="button"
                 onClick={() => setSlide(i)}
                 className={`h-2 rounded-full transition-all ${
-                  i === slide ? 'w-8 bg-indigo-500' : 'w-2 bg-white/20 hover:bg-white/40'
+                  i === slide ? 'w-8 bg-content-primary' : 'w-2 bg-white/20 hover:bg-white/40'
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
@@ -133,7 +133,7 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
           </div>
 
           <div className="space-y-5 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-4 sm:space-y-6 sm:px-6 sm:pb-8">
-            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-400/90">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-content-primary/90">
               {project.category}
             </p>
             <p className="text-sm leading-relaxed text-slate-400 md:text-base">{project.desc}</p>
@@ -141,7 +141,7 @@ export function ShowcaseDetailModal({ open, project, onClose }: ShowcaseDetailMo
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md border border-indigo-500/30 bg-indigo-500/20 px-3 py-1 text-[10px] font-bold uppercase text-indigo-400"
+                  className="rounded-md border border-content-primary/30 bg-content-primary/15 px-3 py-1 text-[10px] font-bold uppercase text-content-primary"
                 >
                   {tag}
                 </span>

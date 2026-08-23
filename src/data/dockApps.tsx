@@ -4,12 +4,12 @@ import type { DockAppItem } from '../types/portfolio';
 export const dockApps: DockAppItem[] = [
   { id: 'home', name: 'Home', icon: <Home /> },
   { id: 'about', name: 'About Me', icon: <User /> },
-  { id: 'certificates', name: 'Certs', icon: <Award /> },
   { id: 'experience', name: 'Experience', icon: <Briefcase /> },
-  { id: 'education', name: 'Education', icon: <GraduationCap /> },
-  { id: 'skills', name: 'Skills', icon: <TerminalSquare /> },
   { id: 'projects', name: 'Work', icon: <FolderOpen /> },
-  { id: 'contact', name: 'Finish', icon: <Mail /> },
+  { id: 'skills', name: 'Skills', icon: <TerminalSquare /> },
+  { id: 'education', name: 'Education', icon: <GraduationCap /> },
+  { id: 'certificates', name: 'Certs', icon: <Award /> },
+  { id: 'contact', name: 'Connect', icon: <Mail /> },
   {
     id: 'divider',
     name: '',

@@ -19,7 +19,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   const [currentScales, setCurrentScales] = useState(() => apps.map(() => 1));
   const [currentPositions, setCurrentPositions] = useState<number[]>([]);
   const dockRef = useRef<HTMLDivElement>(null);
-  const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const iconRefs = useRef<(HTMLElement | null)[]>([]);
   const animationFrameRef = useRef<number>(undefined);
   const lastMouseMoveTime = useRef(0);
 
@@ -142,6 +142,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   }, [padX]);
 
   const handleAppClick = (appId: string, index: number) => {
+    if (apps[index]?.isDivider) return;
     const el = iconRefs.current[index];
     if (el) {
       el.style.transition = 'transform 0.2s cubic-bezier(0.2, 0, 0.2, 1)';
@@ -163,7 +164,7 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   if (!mounted) return null;
 
   if (isMobile) {
-    const mobileIds = new Set(['home', 'about', 'experience', 'skills', 'projects', 'resume']);
+    const mobileIds = new Set(['home', 'about', 'experience', 'projects', 'contact', 'resume']);
     const mobileApps = apps.filter((app) => mobileIds.has(app.id));
     return (
       <nav
@@ -197,8 +198,9 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
   }
 
   return (
-    <div
+    <nav
       className={`fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 z-50 max-w-[calc(100vw-12px)] -translate-x-1/2 sm:bottom-6 ${className}`}
+      aria-label="Portfolio sections"
     >
       <div
         ref={dockRef}
@@ -221,13 +223,18 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
             const position = currentPositions[index] ?? 0;
             const scaledSize = baseIconSize * scale;
             return (
-              <div
+              <button
                 key={app.id}
+                type="button"
                 ref={(el) => {
                   iconRefs.current[index] = el;
                 }}
-                className="absolute cursor-pointer flex flex-col items-center justify-center group"
+                className="group absolute flex cursor-pointer flex-col items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-primary"
                 onClick={() => handleAppClick(app.id, index)}
+                aria-label={app.isDivider ? undefined : app.name}
+                aria-current={effectiveOpenApps.includes(app.id) && !app.isDivider ? 'page' : undefined}
+                tabIndex={app.isDivider ? -1 : 0}
+                disabled={app.isDivider}
                 style={{
                   left: `${position - scaledSize / 2}px`,
                   bottom: '1px',
@@ -257,19 +264,19 @@ export function MacOSDock({ apps, onAppClick, openApps = [], className = '' }: M
                       bottom: `-${Math.max(3, scaledSize * 0.1)}px`,
                       width: '3px',
                       height: '3px',
-                      background: app.id === 'home' ? '#61dca3' : '#818cf8',
+                      background: app.id === 'home' ? '#61dca3' : '#0ea5e9',
                       boxShadow:
                         app.id === 'home'
                           ? '0 0 8px rgba(97,220,163,0.85)'
-                          : '0 0 8px rgba(129,140,248,0.85)',
+                          : '0 0 8px rgba(14,165,233,0.85)',
                     }}
                   />
                 )}
-              </div>
+              </button>
             );
           })}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
