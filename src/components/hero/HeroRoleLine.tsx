@@ -17,11 +17,20 @@ const DELETE_MS = 32;
 const PAUSE_FULL_MS = 2400;
 const PAUSE_EMPTY_MS = 380;
 
-export function HeroRoleLine() {
+type HeroRoleLineProps = {
+  start?: boolean;
+};
+
+export function HeroRoleLine({ start = true }: HeroRoleLineProps) {
   const [displayText, setDisplayText] = useState('');
   const { isMobile } = useMotionProfile();
 
   useEffect(() => {
+    if (!start) {
+      setDisplayText('');
+      return;
+    }
+
     if (isMobile) {
       setDisplayText(ROLES[0]);
       return;
@@ -67,10 +76,14 @@ export function HeroRoleLine() {
       cancelled = true;
       window.clearTimeout(timeoutId);
     };
-  }, [isMobile]);
+  }, [isMobile, start]);
 
   return (
-    <div className="hero-fade hero-fade-2 mt-7 flex justify-center font-sans">
+    <div
+      className={`mt-7 flex justify-center font-sans ${
+        start ? 'hero-fade hero-fade-2' : 'opacity-0'
+      }`}
+    >
       <HeroRoleLiquidGlass>
         <span className="hero-typewriter">
           {displayText}
