@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { DecryptedText } from './DecryptedText';
 
@@ -9,52 +11,28 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
   const [stage, setStage] = useState(0);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) {
-      onComplete();
-      return;
-    }
-
     const t1 = setTimeout(() => setStage(1), 100);
     const t2 = setTimeout(() => setStage(2), 2200);
     const t3 = setTimeout(() => setStage(3), 2600);
     const t4 = setTimeout(onComplete, 3400);
 
-    const skip = () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-      onComplete();
-    };
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' || event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        skip();
-      }
-    };
-
-    window.addEventListener('keydown', onKey);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
       clearTimeout(t4);
-      window.removeEventListener('keydown', onKey);
     };
   }, [onComplete]);
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex cursor-pointer flex-col items-center justify-center bg-[#050505] transition-transform duration-[800ms] ease-[cubic-bezier(0.85,0,0.15,1)] ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050505] transition-transform duration-[800ms] ease-[cubic-bezier(0.85,0,0.15,1)] ${
         stage === 3 ? '-translate-y-full' : 'translate-y-0'
       }`}
       role="dialog"
       aria-label="Loading introduction"
       aria-live="polite"
-      onClick={onComplete}
     >
-      {/* Subtle scanline backdrop */}
       <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.08]" aria-hidden />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(97,220,163,0.08)_0%,transparent_60%)]" aria-hidden />
 
@@ -95,9 +73,6 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
           style={{ width: stage >= 1 ? '100%' : '0%' }}
         />
       </div>
-      <p className="relative z-10 mt-8 font-mono text-[10px] uppercase tracking-[0.28em] text-slate-600">
-        Tap anywhere to skip
-      </p>
     </div>
   );
 }

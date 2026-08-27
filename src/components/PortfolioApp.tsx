@@ -73,7 +73,7 @@ export default function PortfolioApp() {
         </a>
         <MacOSDock apps={dockApps} onAppClick={handleNavClick} />
 
-        <HeroSection />
+        <HeroSection introReady={scrollReady} />
 
         <main id="main-content" className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-12">
           <AboutSection />
