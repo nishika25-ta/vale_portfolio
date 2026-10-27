@@ -1,0 +1,54 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: #fff8ee;
+  color: #45372f;
+  font-family: var(--font-inter), Arial, sans-serif;
+  padding: 0 clamp(22px, 5vw, 88px);
+}
+.header { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 30px 0; border-bottom: 1px solid #e7ded2; }
+.wordmark { display: flex; align-items: center; gap: 7px; font-family: var(--font-display), Georgia, serif; font-size: 35px; letter-spacing: -1.5px; color: #45372f; text-decoration: none; }
+.wordmark span { color: #d65b47; font-family: Georgia, serif; font-size: 30px; }
+.status { display: flex; align-items: center; gap: 9px; font-size: 9px; font-weight: 600; letter-spacing: 1.7px; }
+.status > span { width: 7px; height: 7px; border-radius: 50%; background: #8c9a65; box-shadow: 0 0 0 4px #8c9a6518; flex-shrink: 0; }
+.hero { flex: 1; display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: 10px; max-width: 1440px; width: 100%; margin: 0 auto; padding: 70px 0 65px; }
+.copy { position: relative; z-index: 1; }
+.eyebrow { display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 2px; color: #8d6554; }
+.title { margin: 14px 0 23px; font-family: var(--font-display), Georgia, serif; font-size: clamp(80px, 10.5vw, 162px); font-weight: 400; line-height: .95; letter-spacing: -.065em; color: #45372f; }
+.title > span { color: #d65b47; }
+.message { margin: 0; font-family: var(--font-nunito), var(--font-inter), Arial, sans-serif; font-size: clamp(21px, 2.2vw, 31px); font-weight: 700; line-height: 1.5; letter-spacing: -.7px; color: #45372f; }
+.aside { margin: 22px 0 28px; font-size: 14px; line-height: 1.9; color: #7c6e63; }
+.contact { display: inline-flex; gap: 25px; align-items: center; padding: 15px 22px; background: #d65b47; color: #fff8ee; border: 1px solid #b44837; border-radius: 999px; font-size: 12px; font-weight: 600; box-shadow: 0 3px 0 #b44837; text-decoration: none; }
+.contact:hover { background: #bd4937; }
+.contact:focus-visible, .wordmark:focus-visible { outline: 3px solid #766297; outline-offset: 6px; }
+.contact span { font-size: 20px; line-height: 1; }
+.note { display: flex; align-items: center; gap: 8px; margin-top: 25px; font-size: 11px; color: #8d6554; }
+.note span { font-size: 21px; color: #d65b47; }
+.artwork { margin: 0 -24px 0 0; position: relative; padding-top: 50px; min-width: 0; }
+.artwork img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
+.sticker { position: absolute; top: 0; right: 12%; transform: rotate(8deg); padding: 13px 20px; border: 1px solid #d9b86f; background: #f8e7ad; box-shadow: 3px 4px 0 #e5ce9333; color: #70583c; font-family: var(--font-display), Georgia, serif; font-size: 22px; line-height: 1.1; text-align: center; }
+.sticker em { font-size: 17px; }
+.artwork figcaption { margin-top: 13px; color: #8d6554; font-family: var(--font-display), Georgia, serif; font-style: italic; font-size: 21px; text-align: center; }
+.artwork figcaption span { font-style: normal; font-size: 15px; }
+.footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; border-top: 1px solid #e7ded2; color: #8d7c6d; font-size: 8px; letter-spacing: 1.3px; }
+.footer > span:nth-child(2) { font-family: var(--font-display), Georgia, serif; font-style: italic; font-size: 18px; letter-spacing: 0; }
+@media (min-width: 1600px) { .hero { gap: 70px; } }
+@media (max-width: 760px) {
+  .header { padding: 20px 0; gap: 15px; }
+  .wordmark { font-size: 29px; }
+  .status { font-size: 7px; letter-spacing: .9px; max-width: 145px; line-height: 1.6; }
+  .hero { grid-template-columns: 1fr; padding: 45px 0 35px; gap: 38px; }
+  .copy { text-align: center; }
+  .eyebrow { font-size: 8px; letter-spacing: 1.5px; }
+  .title { font-size: clamp(85px, 22vw, 130px); margin-top: 16px; margin-bottom: 20px; }
+  .message { font-size: clamp(19px, 4.5vw, 27px); letter-spacing: -.4px; }
+  .aside { font-size: 12px; margin: 17px 0 23px; }
+  .note { justify-content: center; margin-top: 20px; }
+  .artwork { margin: 0 auto; width: 100%; max-width: 580px; padding-top: 40px; }
+  .sticker { right: 6%; font-size: 18px; padding: 9px 14px; }
+  .sticker em { font-size: 14px; }
+  .artwork figcaption { font-size: 18px; margin-top: 8px; }
+  .footer { flex-wrap: wrap; justify-content: center; text-align: center; gap: 12px 22px; padding: 20px 0; font-size: 7px; }
+  .footer > span:last-child { display: none; }
+}
