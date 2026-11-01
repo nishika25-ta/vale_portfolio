@@ -1,0 +1,42 @@
+[
+  {
+    "album": "Son Of Spergy",
+    "slug": "who-knows",
+    "artist": "Daniel Caesar",
+    "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/3b/c0/c5/3bc0c51d-33f2-ee19-e148-6d8f2c50df24/25UMGIM90843.rgb.jpg/600x600bb.jpg",
+    "title": "Who Knows",
+    "source": "https://music.apple.com/us/album/who-knows/1839352404?i=1839352411"
+  },
+  {
+    "album": "SWAG",
+    "slug": "yukon",
+    "artist": "Justin Bieber",
+    "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f9/09/36/f9093663-c05f-7f95-0a60-4e95d52fbb22/25UMGIM93915.rgb.jpg/600x600bb.jpg",
+    "title": "YUKON",
+    "source": "https://music.apple.com/us/album/yukon/1825994646?i=1825994651"
+  },
+  {
+    "album": "Messy",
+    "slug": "dive",
+    "artist": "Olivia Dean",
+    "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/26/8d/bb/268dbb59-4df1-36c3-525e-8d24c921ee25/23UMGIM04594.rgb.jpg/600x600bb.jpg",
+    "title": "Dive",
+    "source": "https://music.apple.com/us/album/dive/1676252821?i=1676252825"
+  },
+  {
+    "album": "The 1975",
+    "slug": "robbers",
+    "artist": "The 1975",
+    "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/7f/3b/6e/7f3b6e0f-ac35-98ff-f27f-fc51db0efea4/13UAAIM67470.rgb.jpg/600x600bb.jpg",
+    "title": "Robbers",
+    "source": "https://music.apple.com/us/album/robbers/1440818989?i=1440819287"
+  },
+  {
+    "album": "ICEMAN",
+    "slug": "whisper-my-name",
+    "artist": "Drake",
+    "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7f/39/61/7f396123-be56-bc11-eaab-976441808e58/26UMGIM63622.rgb.jpg/600x600bb.jpg",
+    "title": "Whisper My Name",
+    "source": "https://music.apple.com/us/album/whisper-my-name/6769649287?i=6769649303"
+  }
+]

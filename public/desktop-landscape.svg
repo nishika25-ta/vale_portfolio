@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" fill="none">
+<defs>
+<linearGradient id="sky" x1="200" y1="0" x2="1500" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#a3a8a2"/><stop offset=".38" stop-color="#bdab8d"/><stop offset=".65" stop-color="#efbd7b"/><stop offset="1" stop-color="#b85b3e"/></linearGradient>
+<radialGradient id="sun"><stop stop-color="#fff4c9"/><stop offset=".3" stop-color="#ffcf8d" stop-opacity=".8"/><stop offset="1" stop-color="#f3b66f" stop-opacity="0"/></radialGradient>
+<linearGradient id="ridge" x1="1800" y1="200" x2="500" y2="1200" gradientUnits="userSpaceOnUse"><stop stop-color="#ba7048"/><stop offset=".38" stop-color="#775f50"/><stop offset=".7" stop-color="#343d3d"/><stop offset="1" stop-color="#172629"/></linearGradient>
+<linearGradient id="front" x1="900" y1="650" x2="1000" y2="1200" gradientUnits="userSpaceOnUse"><stop stop-color="#5b5f55"/><stop offset=".4" stop-color="#2e3a39"/><stop offset="1" stop-color="#111e23"/></linearGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="30"/></filter>
+<filter id="texture"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".09"/></feComponentTransfer><feBlend in="SourceGraphic" mode="soft-light"/></filter>
+</defs>
+<g filter="url(#texture)"><path fill="url(#sky)" d="M0 0h1920v1200H0z"/><ellipse cx="1430" cy="260" rx="700" ry="580" fill="url(#sun)"/>
+<path d="M-100 420C430 660 620 420 1060 510S1510 360 2040 240" stroke="#ffebbf" stroke-opacity=".5" stroke-width="90" filter="url(#blur)"/>
+<path d="M-100 580C330 430 510 840 1040 690S1550 290 2030 450V1240H-100Z" fill="url(#ridge)"/>
+<path d="M-100 590C330 440 510 850 1040 700S1550 300 2030 460" stroke="#edbf85" stroke-opacity=".5" stroke-width="3"/>
+<path d="M-100 650C390 520 480 950 1060 785S1550 460 2030 550" stroke="#bd9a76" stroke-opacity=".22" stroke-width="4"/>
+<path d="M-100 680C390 550 480 980 1060 815S1550 490 2030 580" stroke="#d4b594" stroke-opacity=".14" stroke-width="2"/>
+<path d="M-100 910C300 640 530 810 790 950S1300 1130 1640 810S1900 650 2040 720V1240H-100Z" fill="url(#front)"/>
+<path d="M-100 910C300 640 530 810 790 950S1300 1130 1640 810S1900 650 2040 720" stroke="#d0b48d" stroke-opacity=".25" stroke-width="2"/>
+<path d="M-100 1000C300 730 530 900 790 1040S1300 1220 1640 900S1900 740 2040 810" stroke="#99a49c" stroke-opacity=".12" stroke-width="3"/>
+<path d="M-100 1040C300 770 530 940 790 1080S1300 1260 1640 940S1900 780 2040 850" stroke="#99a49c" stroke-opacity=".1" stroke-width="2"/>
+</g></svg>

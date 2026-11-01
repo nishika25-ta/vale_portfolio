@@ -1,0 +1,3 @@
+# Observatory visual leap
+
+Continue the accepted astronaut universe, prioritizing a clear visual leap instead of more utility buttons: luminous orbital portal, a satellite in orbit, holographic landing platform, more expressive editorial typography, glass planet bays with selected destination preview, and a layered canvas star field responding to pointer movement/touch. Preserve all existing play, palettes, data and one-screen phone home. Pointer interactions must never intercept controls. Motion pause and reduced motion must stop canvas animation and portal motion; stop drawing while hidden and remove listeners/frames on unmount. No dependencies, hosted publishing or data changes.

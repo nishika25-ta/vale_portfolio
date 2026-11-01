@@ -1,86 +1,42 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Award, Eye, GraduationCap, ShieldCheck, X } from 'lucide-react';
+import { ArrowUpRight, ShieldCheck, X } from 'lucide-react';
 import { ScrollRevealGroup } from '@/components/ScrollRevealGroup';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { certificates, type Certificate } from '@/data/certificates';
 import { getLenis } from '@/utils/lenisRef';
 
-function CertificateCard({
-  title,
-  subtitle,
-  issuer,
-  imageSrc,
-  imageAlt,
-  featured = false,
-  centered = false,
-  onOpen,
-}: Certificate & { featured?: boolean; centered?: boolean; onOpen: () => void }) {
+function CertificateCard({ title, subtitle, issuer, imageSrc, imageAlt, onOpen }: Certificate & { onOpen: () => void }) {
   const [failed, setFailed] = useState(false);
-  const isDegree = title === "Bachelor's Degree";
-  const credentialType = isDegree ? 'Academic credential' : title.includes('Award') ? 'Achievement' : 'Professional certification';
-  const CredentialIcon = isDegree ? GraduationCap : Award;
 
   return (
-    <article
-      className={`group surface-card relative flex h-full flex-col overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-content-primary/30 hover:shadow-[0_28px_70px_-30px_rgba(14,165,233,0.32)] ${
-        centered ? 'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-1rem)]' : ''
-      } ${
-        featured ? 'sm:min-h-[22rem]' : 'sm:min-h-[20rem]'
-      }`}
-    >
+    <article className="min-w-0">
       <button
         type="button"
         onClick={onOpen}
-        className={`relative block overflow-hidden rounded-t-[1.75rem] border-b border-white/[0.06] bg-[#08090b] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-primary ${
-          featured ? 'aspect-[5/4] min-h-[220px] sm:min-h-[260px]' : 'aspect-[5/4] min-h-[200px] sm:min-h-[220px]'
-        }`}
-        aria-label={`Preview ${title} certificate`}
+        aria-label={`View ${title} credential`}
+        className="group flex h-full w-full flex-col text-left focus-visible:rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-content-primary"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(14,165,233,0.10),transparent_65%)]" />
-        <div className="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/65 px-3 py-1.5 backdrop-blur-md">
-          <CredentialIcon className="h-3 w-3 text-content-primary" aria-hidden />
-          <span className="font-mono text-[8px] font-bold uppercase tracking-[0.18em] text-slate-300 sm:text-[9px]">{credentialType}</span>
+        <div className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-[#111416] p-5 transition-colors group-hover:border-white/25 sm:p-6">
+          {imageSrc && !failed ? (
+            <img src={imageSrc} alt={imageAlt} loading="lazy" decoding="async" onError={() => setFailed(true)} className="h-full w-full object-contain shadow-black/20 transition-transform duration-500 group-hover:scale-[1.035]" />
+          ) : (
+            <div className="flex flex-col items-center gap-3 text-center text-slate-500">
+              <ShieldCheck className="h-8 w-8" strokeWidth={1.5} aria-hidden />
+              <span className="text-xs">Preview unavailable</span>
+            </div>
+          )}
         </div>
-        {imageSrc && !failed ? (
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className={`h-full w-full object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.45)] transition-transform duration-500 group-hover:scale-[1.025] ${
-              featured ? 'p-5 pt-14 sm:p-6 sm:pt-16' : 'p-5 pt-14 sm:p-6 sm:pt-16'
-            }`}
-            loading="lazy"
-            onError={() => setFailed(true)}
-          />
-        ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center">
-            <ShieldCheck className="h-10 w-10 text-slate-600" aria-hidden />
-            <span className="text-xs font-medium text-slate-500">Certificate preview unavailable</span>
-          </div>
-        )}
-        <span className="pointer-events-none absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/70 text-white shadow-lg backdrop-blur-md transition-all duration-300 group-hover:border-content-primary/30 group-hover:bg-content-primary group-hover:text-black">
-          <Eye className="h-4 w-4" aria-hidden />
-        </span>
+        <div className="flex w-full flex-1 flex-col pt-5">
+          <p className="text-xs leading-relaxed text-slate-500">{issuer}</p>
+          <h3 className="mt-2 text-lg font-semibold leading-snug tracking-tight text-slate-100 transition-colors group-hover:text-white">{title}</h3>
+          <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-400">{subtitle}</p>
+          <span className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-medium text-slate-300">
+            View credential <ArrowUpRight className="h-4 w-4 text-slate-500 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+          </span>
+        </div>
       </button>
-
-      <div className={`flex flex-1 flex-col ${featured ? 'p-6 sm:p-7' : 'p-5 sm:p-6'}`}>
-        {issuer ? (
-          <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-content-primary/90 sm:text-[10px]">
-            {issuer}
-          </p>
-        ) : null}
-        <h3 className={`mt-2 font-bold leading-snug text-white ${featured ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'}`}>
-          {title}
-        </h3>
-        {subtitle ? (
-          <p className={`mt-2 flex-1 leading-relaxed text-slate-500 ${featured ? 'text-sm sm:text-base' : 'text-sm'}`}>{subtitle}</p>
-        ) : null}
-        <button type="button" onClick={onOpen} className="mt-5 inline-flex min-h-11 w-full items-center justify-between border-t border-white/[0.06] pt-4 text-left text-xs font-semibold text-slate-400 transition-colors hover:text-content-primary">
-          <span>View credential</span>
-          <Eye className="h-4 w-4" aria-hidden />
-        </button>
-      </div>
     </article>
   );
 }
@@ -170,29 +126,17 @@ export function CertificatesSection() {
 
   return (
     <section id="certificates" className="section-border section-pad">
-      <div className="mx-auto max-w-6xl px-0 sm:px-6 md:px-8">
+      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-10">
         <SectionHeader
           title="Certificates"
           gradient="& Awards"
-          description="Professional certification, academic recognition, and degree credentials."
           accent="content"
         />
 
-        <ScrollRevealGroup className="flex flex-col gap-8 sm:gap-10" stagger={0.14}>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-            <span className="rounded-full border border-content-primary/20 bg-content-primary/[0.06] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-content-primary">{certificates.length} credentials</span>
-            <span className="rounded-full border border-white/[0.08] bg-white/[0.025] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Tap any card to inspect</span>
-          </div>
-          <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
-            {certificates.map((cert) => (
-              <CertificateCard
-                key={cert.id}
-                {...cert}
-                centered={cert.id === 'unimas-degree'}
-                onOpen={() => setOpenCert(cert)}
-              />
-            ))}
-          </div>
+        <ScrollRevealGroup className="grid grid-cols-1 gap-x-7 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" animation="fade-up" stagger={0.1}>
+          {certificates.map(cert => (
+            <CertificateCard key={cert.id} {...cert} onOpen={() => setOpenCert(cert)} />
+          ))}
         </ScrollRevealGroup>
       </div>
 

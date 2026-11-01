@@ -1,0 +1,61 @@
+/* An observatory for a curious human. */
+.space-field-canvas { position: fixed; inset: 0; width: 100%; height: 100dvh; z-index: 0; pointer-events: none; opacity: .95; }
+.astro-portfolio .dream-stars { opacity: .32; }
+.astro-portfolio { background: radial-gradient(ellipse at 19% 57%,#53396c88,transparent 42%),radial-gradient(ellipse at 75% 34%,#336a6d44,transparent 42%),radial-gradient(ellipse at 95% 1%,#8d596a50,transparent 45%),#100f23; }
+.astro-portfolio .aurora-mint { top: -22%; right: -20%; opacity: .28; }.astro-portfolio .aurora-lilac { opacity: .32; }
+.astro-portfolio .dreamscape::after { opacity: .15; }
+.astro-portfolio .dream-planet { right: -11%; top: -22%; width: 480px; opacity: .42; }.astro-portfolio .planet-sphere { box-shadow: inset -15px -12px 28px #140e30aa,0 0 80px #bb8df026; }
+.astro-portfolio .dream-terrain { opacity: .38; height: 23%; }
+.astro-portfolio .astro-intro h1 { margin: 17px 0 20px; font-size: inherit; line-height: 1.05; }
+.astro-intro h1 .hero-name { display: block; font: 700 16px var(--font-nunito),sans-serif; letter-spacing: -.2px; color: #ccb6de; -webkit-text-fill-color: currentColor; background: none; margin-bottom: 17px; }
+.astro-intro h1 .hero-title { display: block; color: #f4eaff; background: none; -webkit-text-fill-color: currentColor; font-size: clamp(32px,3.7vw,57px); letter-spacing: -2.2px; line-height: 1.12; white-space: nowrap; }
+.astro-intro h1 > em { display: block; font: italic 400 clamp(45px,5.6vw,84px)/.98 var(--font-display),serif; color: #f6d9c6; letter-spacing: -2.2px; text-shadow: 0 0 45px #f9c1a01a; margin-top: 3px; white-space: nowrap; }
+.astro-portfolio .astro-eyebrow { font-size: 7px; letter-spacing: 2px; color: #b3daca; }
+.astro-portfolio .astro-summary { font-size: 12px; line-height: 1.9; color: #b7a9c6; max-width: 350px; }
+.astro-portfolio .astro-coordinates { color: #9885ac; margin-top: 24px; }
+.astro-portfolio .astro-station { isolation: isolate; }
+.orbital-portal { position: absolute; width: 78%; aspect-ratio: 1; left: -11%; top: -22%; z-index: 0; pointer-events: none; }
+.orbital-portal > svg { position: relative; width: 100%; height: 100%; overflow: visible; }
+.portal-bloom { position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle,transparent 40%,#b19de912 56%,#a3f1d724 65%,#cbb6f52b 68%,transparent 75%); filter: blur(14px); }
+.portal-core { position: absolute; inset: 15%; border-radius: 50%; background: radial-gradient(ellipse at 30% 30%,#9e7dc12b,transparent 70%),#1e193322; box-shadow: inset 0 0 80px #b1e7e20b; backdrop-filter: blur(1px); }
+.portal-dial { transform-origin: 300px 300px; animation: portal-dial-turn 90s linear infinite; }.portal-orbit { transform-origin: 300px 300px; animation: satellite-orbit 36s linear infinite; }
+.portal-coordinate { position: absolute; left: 24%; bottom: 7%; color: #a8cfc7; font: 5px var(--font-mono); letter-spacing: 1.5px; opacity: .7; rotate: 20deg; }
+.holo-platform { position: absolute; width: 75%; height: 24%; left: -4%; bottom: 2%; pointer-events: none; z-index: 1; border-radius: 50%; background: radial-gradient(ellipse,#acb5e511,transparent 68%); transform: perspective(450px) rotateX(35deg); }
+.holo-platform > i { position: absolute; inset: 9%; border: 1px solid #b0ecd93d; border-radius: 50%; box-shadow: 0 0 18px #a8f6e814,inset 0 0 18px #b1e7ed0b; }.holo-platform > i:nth-child(2) { inset: 19% 14%; border-color: #d6b8f52b; border-style: dashed; }.holo-platform > span { position: absolute; inset: -35% 8% 14%; border-radius: 50%; background: linear-gradient(transparent,#c4e9ea08); }
+.astro-portfolio .coding-astronaut { filter: drop-shadow(-3px 0 10px #c9b2f51a) drop-shadow(0 16px 22px #07091a55); }.coding-astronaut path[fill="url(#astro-rock)"] { opacity: .77; }
+.astro-portfolio .astro-console { background: linear-gradient(130deg,#433650df,#211e34eb); box-shadow: 0 18px 55px #08071966,inset 0 1px #efd5ff19,0 0 0 4px #e6c7ff03; border-color: #d8b9f563; rotate: 4deg; }.astro-portfolio .console-toolbar { background: #d1b3f20b; }.astro-portfolio .mission-launch { background: linear-gradient(110deg,#c0f3dc,#b7e4e5); border-color: #e0ffef; box-shadow: inset 0 1px #f0fff4; }
+.astro-portfolio .zero-g-button { border-color: #c3d6d94a; background: #2a293bdd; rotate: -6deg; z-index: 6; }
+@keyframes portal-dial-turn { to { rotate: -360deg; } }
+@keyframes satellite-orbit { to { rotate: 360deg; } }
+.astro-portfolio .planet-dock { border-color: #cebce326; background: linear-gradient(140deg,#3d2d481c,#18172890); border-radius: 23px; padding-top: 13px; box-shadow: 0 18px 60px #07081733,inset 0 1px #ecd4ff0a; }
+.astro-portfolio .dock-heading { padding: 0 5px; color: #bba7c9; letter-spacing: 1.5px; align-items: center; gap: 15px; }
+.astro-portfolio .dock-preview { display: flex; align-items: center; gap: 7px; max-width: 65%; min-width: 0; color: #a8cabc; font: 7px var(--font-mono); letter-spacing: 0; }.dock-preview > i { width: 4px; height: 4px; border-radius: 50%; box-shadow: 0 0 8px currentColor; flex-shrink: 0; }.preview-description { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }.dock-preview b { font-size: 6px; color: #9d85b2; font-weight: 400; padding-left: 8px; flex-shrink: 0; }
+.astro-portfolio .planet-grid { gap: 8px; margin-top: 11px; }
+.astro-portfolio .planet-destination { border: 1px solid #d4bde51c; background: radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--planet-color) 8%,transparent),transparent 74%); border-radius: 15px; padding-bottom: 10px; transition: background .3s,border-color .3s,transform .3s; }
+.planet-destination::before { content: ''; position: absolute; width: 62px; height: 62px; top: 8px; left: calc(50% - 31px); border: 1px solid color-mix(in srgb,var(--planet-color) 13%,transparent); border-radius: 50%; pointer-events: none; }
+.astro-portfolio .planet-destination .planet-art { position: relative; filter: drop-shadow(0 5px 12px color-mix(in srgb,var(--planet-color) 12%,transparent)); }
+.astro-portfolio .planet-destination:hover,.astro-portfolio .planet-destination.is-selected { border-color: color-mix(in srgb,var(--planet-color) 37%,transparent); background: radial-gradient(ellipse at 50% 10%,color-mix(in srgb,var(--planet-color) 13%,transparent),#d4b6f405); box-shadow: inset 0 0 23px color-mix(in srgb,var(--planet-color) 4%,transparent); }.astro-portfolio .planet-destination:hover { transform: translateY(-3px); }.astro-portfolio .planet-destination.is-selected::before { border-color: color-mix(in srgb,var(--planet-color) 33%,transparent); box-shadow: 0 0 20px color-mix(in srgb,var(--planet-color) 9%,transparent); }
+.astro-portfolio .planet-name { color: #e1d4ea; font-size: 11px; }.astro-portfolio .planet-detail { color: #ac99ba; }
+.astro-portfolio.home-view .home-bottom-bar { background: transparent; border-color: transparent; box-shadow: none; backdrop-filter: none; padding-left: 0; padding-right: 0; }.astro-portfolio.home-view .bottom-buttons button { border-radius: 20px; background: #221c30bc; border-color: #c1a5db2b; backdrop-filter: blur(8px); padding-left: 12px; padding-right: 12px; }.astro-portfolio .keyboard-guide { opacity: .6; }
+@media (max-width:900px) and (min-width:681px) and (min-height:501px) { .astro-intro h1 .hero-title { font-size: 30px; letter-spacing: -1.3px; }.astro-intro h1 > em { font-size: 49px; letter-spacing: -1.7px; }.astro-intro h1 .hero-name { font-size: 13px; }.astro-portfolio .dock-preview { font-size: 6px; } }
+@media (max-width:680px), (max-width:950px) and (max-height:500px) {
+  .astro-portfolio .astro-home { gap: 8px; }
+  .astro-portfolio .astro-intro h1 { margin: 7px 0 0; }.astro-intro h1 .hero-name { font-size: 11px; line-height: 1.3; margin-bottom: 5px; letter-spacing: 0; }.astro-intro h1 .hero-title { font-size: 31px; letter-spacing: -1.2px; line-height: 1.1; }.astro-intro h1 > em { font-size: 44px; letter-spacing: -1px; line-height: .98; margin-top: 0; }.astro-portfolio .astro-eyebrow { font-size: 5px; letter-spacing: 1.6px; }.astro-portfolio .astro-summary { font-size: 9px; line-height: 1.6; margin-top: 8px; max-width: 300px; }
+  .orbital-portal { width: 83%; left: -13%; top: -23%; }.portal-bloom { filter: blur(10px); }.portal-coordinate { font-size: 4px; letter-spacing: 1px; }.holo-platform { width: 78%; left: -7%; bottom: 1%; }.astro-portfolio .astro-console { rotate: 3deg; }
+  .astro-portfolio .planet-dock { padding: 9px 8px 7px; border-radius: 18px; }.astro-portfolio .dock-heading { padding: 0 2px; font-size: 5px; letter-spacing: .65px; gap: 7px; }.astro-portfolio .dock-preview { font-size: 5px; gap: 4px; max-width: 62%; }.dock-preview > i { width: 3px; height: 3px; }.dock-preview b { font-size: 4px; padding-left: 3px; }.astro-portfolio .planet-grid { gap: 5px; margin-top: 8px; }.astro-portfolio .planet-destination { border-radius: 12px; padding-bottom: 6px; }.planet-destination::before { width: 44px; height: 44px; left: calc(50% - 22px); top: 3px; }.astro-portfolio .planet-name { font-size: 9px; }.astro-portfolio .planet-detail { font-size: 5px; }
+  .astro-portfolio .dream-planet { width: 290px; right: -150px; top: -8%; opacity: .29; }.astro-portfolio .dream-terrain { opacity: .29; height: 15%; }.astro-portfolio .constellation { opacity: .16; }.astro-portfolio .aurora-lilac { top: 34%; left: -92%; }.astro-portfolio .aurora-mint { right: -65%; top: -19%; opacity: .3; }.astro-portfolio .astro-hint { font-size: 6px; color: #aa96ba; }
+  .astro-portfolio.home-view .home-bottom-bar { padding-left: 2px; padding-right: 2px; }.astro-portfolio.home-view .bottom-buttons button { padding-left: 10px; padding-right: 10px; }
+}
+@media (max-width:680px) and (max-height:740px) {
+  .astro-portfolio .astro-home { gap: 5px; }.astro-intro h1 .hero-name { font-size: 10px; margin-bottom: 3px; }.astro-intro h1 .hero-title { font-size: 28px; }.astro-intro h1 > em { font-size: 38px; }.astro-portfolio .astro-intro h1 { margin-top: 5px; }.astro-portfolio .astro-summary { font-size: 8px; line-height: 1.5; margin-top: 5px; }.astro-portfolio .planet-grid { gap: 4px; margin-top: 6px; }.astro-portfolio .planet-dock { padding: 7px; }.astro-portfolio .planet-name { font-size: 8px; }.astro-portfolio .planet-detail { font-size: 4px; }.astro-portfolio .planet-destination { padding-bottom: 5px; }
+}
+@media (max-width:680px) and (max-height:620px) {
+  .astro-portfolio .astro-home { gap: 4px; }.astro-intro h1 .hero-name { font-size: 9px; margin-bottom: 2px; }.astro-intro h1 .hero-title { font-size: 25px; line-height: 1.05; }.astro-intro h1 > em { font-size: 34px; }.astro-portfolio .astro-summary { display: none; }.astro-portfolio .astro-intro h1 { margin: 3px 0; }.astro-portfolio .planet-name { font-size: 7px; }.astro-portfolio .planet-detail { display: none; }.astro-portfolio .astro-console { top: 3%; }.portal-coordinate { display: none; }.astro-portfolio .planet-dock { padding: 6px; }
+}
+@media (max-width:950px) and (max-height:500px) and (orientation:landscape) {
+  .astro-portfolio .astro-home { gap: 8px 20px; }.astro-portfolio .astro-intro h1 { margin: 0; }.astro-intro h1 .hero-name { font-size: 9px; margin-bottom: 3px; }.astro-intro h1 .hero-title { font-size: 23px; line-height: 1.1; }.astro-intro h1 > em { font-size: 34px; }.astro-portfolio .astro-summary { display: none; }.astro-portfolio .planet-dock { padding: 6px; }.astro-portfolio .planet-grid { gap: 3px; margin-top: 5px; }.astro-portfolio .planet-name { font-size: 7px; }.planet-destination::before { width: 34px; height: 34px; left: calc(50% - 17px); }.astro-portfolio .dock-preview { display: none; }.astro-portfolio .dream-planet { width: 260px; top: -45%; right: -70px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-on:not(.is-calm) .portal-dial { animation: portal-dial-turn 90s linear infinite !important; }
+  .motion-on:not(.is-calm) .portal-orbit { animation: satellite-orbit 36s linear infinite !important; }
+}

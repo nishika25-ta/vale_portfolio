@@ -1,0 +1,3 @@
+# Astro Universe Expansion
+
+User chose both visual depth and playful interactions. Extend accepted space direction: layered nebula lighting and three switchable sky palettes; interactive zero-gravity astronaut; runnable code-console demo with visible result; small optional star-catching game in an accessible dialog; flight/warp transition when opening destinations; cohesive dark mission panels for all destination content and dialogs. Preserve every portfolio entry, navigation and current phone one-screen home. Respect motion controls, OS reduced motion, dialog focus and keyboard access. No new dependencies; local and existing temporary tunnel only.

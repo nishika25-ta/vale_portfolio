@@ -1,0 +1,3 @@
+# Valentine dreamscape
+
+Replace the reference-like seaside setting with an original cosmic playground: midnight violet atmosphere, mint and lilac auroras, star constellations, a ringed planet, luminous terrain, and a small orbiting explorer. Keep the seven tape navigation, actual portfolio content, and complete one-screen phone home. Style the intro as a translucent flight card and the player as a lavender space radio. Remove scallops, ocean, boat, paper intro tape, and hanging wind chime. Decorative motion must be pointer-transparent, hidden from accessibility, and respect the existing motion control and reduced-motion setting. Detail content remains on a readable light panel. No dependencies or hosted publishing.

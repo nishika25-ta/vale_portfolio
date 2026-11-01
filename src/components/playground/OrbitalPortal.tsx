@@ -1,0 +1,10 @@
+export function OrbitalPortal() {
+  return <div className="orbital-portal" aria-hidden="true"><div className="portal-bloom" /><div className="portal-core" /><svg viewBox="0 0 600 600" fill="none"><defs><linearGradient id="portal-spectrum" x1="52" y1="88" x2="535" y2="515" gradientUnits="userSpaceOnUse"><stop stopColor="#e7b9ff" /><stop offset=".36" stopColor="#baffeb" /><stop offset=".65" stopColor="#88cfe9" /><stop offset="1" stopColor="#d2a7ff" /></linearGradient><filter id="portal-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5" /></filter></defs>
+    <circle cx="300" cy="300" r="231" stroke="url(#portal-spectrum)" strokeWidth="8" opacity=".24" filter="url(#portal-glow)" />
+    <circle cx="300" cy="300" r="231" stroke="url(#portal-spectrum)" strokeWidth="1.8" opacity=".85" />
+    <circle cx="300" cy="300" r="218" stroke="url(#portal-spectrum)" strokeWidth=".6" opacity=".22" />
+    <g className="portal-dial"><circle cx="300" cy="300" r="247" stroke="url(#portal-spectrum)" strokeWidth="2.5" strokeDasharray="1 17" opacity=".45" /><circle cx="300" cy="300" r="264" stroke="#d4c0fa" strokeWidth=".65" strokeDasharray="70 18 8 18" opacity=".27" /><path d="M300 21v23m0 512v23M21 300h23m512 0h23" stroke="#c6f7e7" strokeWidth="1.5" opacity=".5" /></g>
+    <g className="portal-orbit"><circle cx="300" cy="300" r="277" stroke="#d4c0fa" strokeWidth=".5" strokeDasharray="2 7" opacity=".15" /><g transform="translate(565 270) rotate(22)"><rect x="-10" y="-10" width="20" height="25" rx="5" fill="#b6a0d9" stroke="#ddc7f5" /><path d="M0-10v-9m0 0 5-5" stroke="#cfb8e8" strokeWidth="2" /><rect x="-32" y="-7" width="20" height="19" rx="2" fill="#77bfb7" stroke="#bcf3de" /><rect x="12" y="-7" width="20" height="19" rx="2" fill="#77bfb7" stroke="#bcf3de" /><path d="M-25-5v15m6-15v15M19-5v15m6-15v15" stroke="#38597e" strokeWidth="1" /><circle cx="0" cy="1" r="4" fill="#e7e2ff" /></g></g>
+    <path d="m118 118 3 9 9 3-9 3-3 9-3-9-9-3 9-3Zm372 306 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z" fill="#c5ffdf" opacity=".8" />
+  </svg><span className="portal-coordinate">VA / EXPLORER 001</span></div>;
+}

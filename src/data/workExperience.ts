@@ -28,10 +28,10 @@ export const workExperience: WorkExperienceItem[] = [
       {
         title: 'Pegawai Informasi Maklumat dan Komunikasi Korporat (MySTEP)',
         highlights: [
-          'Lead end-to-end delivery of digital systems supporting hospital operations, public information, and accessibility initiatives.',
+          'Develop digital systems for hospital operations, public information, and accessibility.',
           'Built a full-stack employee onboarding and document workflow using Next.js, PostgreSQL, Docker, and Kubernetes to replace repetitive paper-based processes and reduce duplicate data entry.',
           'Developed wheelchair asset tracking and a hospital-wide wayfinding platform to improve equipment visibility and navigation for patients, visitors, and emergency responders.',
-          'Design and maintain the official Hospital Miri website while coordinating requirements across technical and non-technical stakeholders.',
+          'Design and maintain the official Hospital Miri website, working with staff to define requirements.',
         ],
       },
     ],
@@ -47,9 +47,9 @@ export const workExperience: WorkExperienceItem[] = [
       {
         title: 'Co-Founder & Full-Stack Developer',
         highlights: [
-          'Deliver custom full-stack applications for paying clients, owning discovery, architecture, interface development, APIs, relational data models, deployment, and support.',
-          'Manage production databases, access controls, CI/CD workflows, technical documentation, and issue resolution across the complete product lifecycle.',
-          'Translate client operations into responsive, secure, and maintainable digital products.',
+          'Build applications for clients, from requirements and database design to interfaces, APIs, deployment, and support.',
+          'Manage production databases, access controls, CI/CD, documentation, and bug fixes.',
+          'Work with clients to turn their business processes into application features.',
         ],
       },
     ],
@@ -84,7 +84,7 @@ export const workExperience: WorkExperienceItem[] = [
         highlights: [
           'Developed a YOLO and TensorFlow aerial-imagery pipeline that achieved 92% detection accuracy for oil-palm anomaly identification.',
           'Processed remote-sensing datasets and automated detection-to-report workflows using Python, OpenCV, QGIS, and SQL-based validation.',
-          'Produced technical reports and collaborated with operational teams to improve GIS data quality, reliability, and software utilization.',
+          'Prepared technical reports and worked with operational teams to check GIS data quality and use GIS software.',
         ],
       },
     ],

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google';
+import { Instrument_Serif, Inter, JetBrains_Mono, Outfit } from 'next/font/google';
 import '@/index.css';
 import {
   OG_IMAGE,
@@ -14,6 +14,13 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-outfit',
   display: 'swap',
 });
 
@@ -84,8 +91,11 @@ export const metadata: Metadata = {
     'Miri',
   ],
   icons: {
-    icon: OG_IMAGE,
-    apple: OG_IMAGE,
+    icon: [
+      { url: '/favicon.svg?v=2', type: 'image/svg+xml' },
+      { url: '/favicon.ico?v=2', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+    ],
+    apple: { url: '/apple-touch-icon.png?v=2', sizes: '180x180', type: 'image/png' },
   },
   openGraph: {
     title: SITE_TITLE,
@@ -124,7 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
+      className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="bg-[#050505] text-slate-300 antialiased">
         <script

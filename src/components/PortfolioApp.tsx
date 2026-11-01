@@ -28,10 +28,6 @@ const EducationSection = dynamic(
   () => import('@/components/sections/EducationSection').then((m) => ({ default: m.EducationSection })),
   { ssr: true }
 );
-const SkillsSection = dynamic(
-  () => import('@/components/sections/SkillsSection').then((m) => ({ default: m.SkillsSection })),
-  { ssr: true }
-);
 const ProjectsSection = dynamic(
   () => import('@/components/sections/ProjectsSection').then((m) => ({ default: m.ProjectsSection })),
   { ssr: true }
@@ -75,11 +71,10 @@ export default function PortfolioApp() {
 
         <HeroSection introReady={scrollReady} />
 
-        <main id="main-content" className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-12">
+        <main id="main-content" className="relative z-10">
           <AboutSection />
           <ExperienceSection />
           <ProjectsSection />
-          <SkillsSection />
           <EducationSection />
           <CertificatesSection />
         </main>

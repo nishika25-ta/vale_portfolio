@@ -5,9 +5,9 @@ export const SITE_NAME = 'Valentine Agam';
 export const SITE_ROLE = 'Software Engineer';
 export const SITE_HEADLINE = 'Software Engineer | Full-Stack, Backend & AI/ML';
 export const SITE_TAGLINE =
-  'Designing enterprise systems, full-stack applications, and AI-powered solutions for real-world impact.';
+  'I build web applications, backend services, and machine-learning tools.';
 export const SITE_DESCRIPTION =
-  'Portfolio of Valentine Agam — software engineer and product builder delivering full-stack applications, backend services, enterprise workflows, and applied AI/ML systems.';
+  'Valentine Agam is a software engineer in Sarawak, Malaysia. View his projects, skills, and experience in web development, backend systems, and machine learning.';
 export const SITE_LOCATION = 'Sarawak, Malaysia';
 export const RESUME_HREF = '/Valentine_Resume_2026_Data.pdf?v=aug-2026';
 export const OG_IMAGE = '/vale.webp';

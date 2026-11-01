@@ -1,0 +1,56 @@
+.playlistButton{gap:5px!important;display:flex!important;margin-left:6px;padding:3px!important}.playlistButton>span{font-size:8px;color:#969ca8;font-variant-numeric:tabular-nums}.progress{display:flex;align-items:center;gap:8px;margin-top:9px;color:#a1a5af;font-size:7px;font-variant-numeric:tabular-nums}.progress input{flex:1;min-width:0;appearance:none;background:#d8dce5;height:3px;border-radius:4px;cursor:pointer;accent-color:#007aff}.progress input::-webkit-slider-thumb{appearance:none;width:8px;height:8px;border-radius:50%;background:#7f8fa5;box-shadow:0 0 0 2px #f6f7fc}.progress input::-moz-range-thumb{width:8px;height:8px;border:0;border-radius:50%;background:#7f8fa5}.progress input:disabled{cursor:default;opacity:.5}.progress input:focus-visible{outline:2px solid #007aff;outline-offset:5px}.playlist{position:fixed;inset:auto max(20px,calc((100vw - 1260px)/2)) 115px auto;width:300px;max-width:calc(100vw - 30px);max-height:70svh;margin:0;padding:11px;border-radius:14px;border:1px solid #ffffffc0;background:#f5f6fcf5;color:#343943;box-shadow:0 15px 60px #101d3930;backdrop-filter:blur(25px);font-family:var(--font-inter),sans-serif}.playlist header{display:flex;gap:11px;align-items:center;padding:9px 9px 16px;color:#007aff}.playlist header h2{font-size:13px;font-weight:600;letter-spacing:-.2px;color:#414752;margin:0 0 5px}.playlist header p{font-size:9px;color:#969ca9;margin:0}.playlist>button{width:100%;display:flex;align-items:center;gap:11px;padding:12px 10px!important;text-align:left;border:0;border-radius:8px;background:none;color:#798394}.playlist>button:hover{background:#e6edfa}.playlist>button[aria-pressed=true]{background:#007aff10;color:#007aff}.trackNumber{width:18px;font-size:9px;font-variant-numeric:tabular-nums}.trackName{flex:1;min-width:0}.trackName strong{display:block;color:#3b4350;font-size:11px;font-weight:550;line-height:1.5}.trackName small{display:block;font-size:9px;color:#9299a7;margin-top:3px}.trackTime{font-size:8px;color:#a0a6b2;font-variant-numeric:tabular-nums}.playlist button:focus-visible{outline:2px solid #007aff;outline-offset:-2px}.error{padding:0 20px 12px!important;font-size:10px;color:#b45a4f;line-height:1.7}
+.cover{position:relative;z-index:1;width:100%;height:100%;object-fit:cover}.trackCover{width:36px;height:36px;flex-shrink:0;object-fit:cover;border-radius:5px;box-shadow:0 2px 5px #101d3915}
+
+:global([data-theme=dark]) .playlist{background:#26272df5;color:var(--theme-text);border-color:var(--theme-border)}
+:global([data-theme=dark]) :is(.playlist header h2,.trackName strong){color:var(--theme-text)}
+:global([data-theme=dark]) :is(.playlist>button,.trackName small,.playlistButton>span,.progress){color:var(--theme-secondary)}
+:global([data-theme=dark]) .playlist>button:hover{background:var(--theme-inset)}
+:global([data-theme=dark]) .playlist>button[aria-pressed=true]{background:#0a84ff24;color:var(--theme-blue)}
+:global([data-theme=dark]) .progress input{background:#555761}
+/* Crossfade the artwork itself; no runtime image sampling or animation loop. */
+.shell{position:relative;isolation:isolate;overflow:clip;background:#faf9fb!important;--player-text:#36333b;--player-muted:#77717c}
+.ambience{position:absolute;inset:-35px;z-index:-1;pointer-events:none;filter:blur(28px) saturate(1.45) brightness(1.15);opacity:.28}
+.ambience>span{position:absolute;inset:0;background-position:center 42%;background-size:cover;opacity:0;transition:opacity 1.25s cubic-bezier(.22,1,.36,1);animation:ambientDrift 16s ease-in-out infinite alternate paused}
+.ambience>span[data-active=true]{opacity:1}
+.shell[data-playing=true] .ambience>span[data-active=true]{animation-play-state:running}
+.shell .artwork{border-radius:10px;box-shadow:0 5px 13px #23202b26,0 0 0 1px #ffffff70;animation:artworkFloat 7s ease-in-out infinite paused}
+.shell[data-playing=true] .artwork{animation-play-state:running}
+.cover{animation:coverIn .65s cubic-bezier(.16,1,.3,1) both}
+.shell .trackInfo>span{font-size:8px;letter-spacing:.4px;color:var(--player-muted)}
+.shell .trackInfo h2{color:var(--player-text);font-weight:600}
+.shell .trackInfo p{color:var(--player-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trackInfo p>span{opacity:.8}
+.shell .controls{gap:9px;margin-top:8px}
+.shell .controls>button{width:26px;height:26px;border-radius:50%;color:var(--player-text);transition:background-color .25s,color .25s,transform .25s}
+.shell .controls>button:hover{background:#ffffff55}
+.shell .controls>button:active{transform:scale(.91)}
+.shell .controls .playButton{width:29px;height:29px;background:var(--album-accent)!important;color:#fff!important;box-shadow:0 2px 7px #00000014,inset 0 1px 0 #ffffff20;transition:background-color 1.2s,box-shadow .3s,transform .25s}
+.shell .controls .playButton:hover{box-shadow:0 3px 12px #00000025,inset 0 1px 0 #ffffff30;transform:scale(1.06)}
+.shell .controls .playButton:active{transform:scale(.94)}
+.shell .controls .playlistButton{width:auto;margin-left:1px;border-radius:6px}
+.shell .playlistButton>span{color:var(--player-muted)}
+.shell .controls>span i{background:var(--album-accent);opacity:.55;transition:background-color 1.2s,opacity .3s}
+.shell[data-playing=true] .controls>span i{opacity:1}
+.shell button:focus-visible{outline-color:var(--album-accent)!important}
+.shell .progress{color:var(--player-muted);margin-top:9px}
+.seek{position:relative;display:flex;align-items:center;flex:1;min-width:0;height:12px}
+.seek:before{content:'';position:absolute;inset:4.5px 0;height:3px;border-radius:4px;background:#5d506424;pointer-events:none}
+.seekFill{position:absolute;left:0;top:4.5px;height:3px;width:var(--track-progress);border-radius:4px;background:var(--album-accent);pointer-events:none;transition:background-color 1.2s}
+.shell .progress input{position:relative;z-index:1;width:100%;margin:0;background:transparent;opacity:1;accent-color:var(--album-accent)}
+.shell .progress input::-webkit-slider-thumb{background:var(--album-accent);box-shadow:0 0 0 2px #ffffffb3;transition:background-color 1.2s,transform .2s}
+.shell .progress input::-moz-range-thumb{background:var(--album-accent);transition:background-color 1.2s}
+.shell .progress input:disabled{opacity:.6}
+.shell .progress input:hover::-webkit-slider-thumb{transform:scale(1.15)}
+.shell .progress input:focus-visible{outline-color:var(--album-accent)}
+:global([data-theme=dark]) .shell{background:#222329!important;--player-text:#f1edf3;--player-muted:#c2b9c8}
+:global([data-theme=dark]) .ambience{opacity:.34;filter:blur(28px) saturate(1.35)}
+:global([data-theme=dark]) .shell .artwork{box-shadow:0 6px 17px #0005,0 0 0 1px #ffffff1a}
+:global([data-theme=dark]) .seek:before{background:#ffffff26}
+:global([data-theme=dark]) .seekFill{background:color-mix(in srgb,var(--album-accent),white 28%)}
+:global([data-theme=dark]) .shell .controls>button:hover{background:#ffffff12}
+:global([data-theme=dark]) .shell .progress input::-webkit-slider-thumb{box-shadow:0 0 0 2px #ffffff30;background:color-mix(in srgb,var(--album-accent),white 28%)}
+:global([data-theme=dark]) .shell .progress input::-moz-range-thumb{background:color-mix(in srgb,var(--album-accent),white 28%)}
+@keyframes ambientDrift{from{transform:translate3d(-3%,-3%,0) scale(1.08) rotate(-3deg)}to{transform:translate3d(4%,3%,0) scale(1.2) rotate(4deg)}}
+@keyframes artworkFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes coverIn{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.shell,.shell *{animation:none!important;transition:none!important}}

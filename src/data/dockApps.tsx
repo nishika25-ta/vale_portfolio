@@ -1,4 +1,4 @@
-import { Award, Briefcase, FileText, FolderOpen, GraduationCap, Home, Mail, TerminalSquare, User } from 'lucide-react';
+import { Award, Briefcase, FileText, FolderOpen, GraduationCap, Home, Mail, User } from 'lucide-react';
 import type { DockAppItem } from '../types/portfolio';
 
 export const dockApps: DockAppItem[] = [
@@ -6,7 +6,6 @@ export const dockApps: DockAppItem[] = [
   { id: 'about', name: 'About Me', icon: <User /> },
   { id: 'experience', name: 'Experience', icon: <Briefcase /> },
   { id: 'projects', name: 'Work', icon: <FolderOpen /> },
-  { id: 'skills', name: 'Skills', icon: <TerminalSquare /> },
   { id: 'education', name: 'Education', icon: <GraduationCap /> },
   { id: 'certificates', name: 'Certs', icon: <Award /> },
   { id: 'contact', name: 'Connect', icon: <Mail /> },
