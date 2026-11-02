@@ -112,7 +112,6 @@ export default function PortfolioDesktop() {
   const [menu, setMenu] = useState(false);
   const [locked, setLocked] = useState(true);
 
-  const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([initialMessage]);
   const [input, setInput] = useState('');
@@ -121,7 +120,6 @@ export default function PortfolioDesktop() {
   const dialog = useRef<HTMLDialogElement>(null);
   const appContent = useRef<HTMLDivElement>(null);
   const chat = useRef<HTMLDivElement>(null);
-  const search = useRef<HTMLInputElement>(null);
   const dock = useRef<HTMLElement>(null);
   const windowAnimation = useRef<Animation | null>(null);
   const launchOrigin = useRef<{ x: number; y: number; width: number; height: number; element: HTMLElement } | null>(null);
@@ -706,7 +704,6 @@ export default function PortfolioDesktop() {
         const y = source ? Math.max(-45, Math.min(65, (source.y - bounds.top - bounds.height / 2) * .14)) : 28;
         windowAnimation.current = element.animate(windowOpenFrames(x, y), { duration: 680, easing: 'linear' });
       }
-      if (active === 'Projects') search.current?.focus();
     } else element?.close();
     const previousOverflow = document.body.style.overflow;
     if (active || locked) document.body.style.overflow = 'hidden';
@@ -716,7 +713,7 @@ export default function PortfolioDesktop() {
   useEffect(() => { appContent.current?.scrollTo({ top: 0 }); }, [active, selected]);
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key === 'k') { event.preventDefault(); launchOrigin.current = null; setLocked(false); setSelected(null); setQuery(''); setMenu(false); setActive('Projects'); search.current?.focus(); }
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') { event.preventDefault(); launchOrigin.current = null; setLocked(false); setSelected(null); setMenu(false); setActive('Projects'); }
 
     };
     window.addEventListener('keydown', handleKey);
@@ -732,7 +729,7 @@ export default function PortfolioDesktop() {
     pointerLauncher.current = null;
     const bounds = trigger?.getBoundingClientRect();
     launchOrigin.current = bounds?.width && bounds.height && trigger ? { x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2, width: bounds.width, height: bounds.height, element: trigger } : null;
-    setActive(app); setMenu(false); setSelected(null); setQuery('');
+    setActive(app); setMenu(false); setSelected(null);
   }, []);
   const openSkills = useCallback((focus: 'web' | 'ai') => open('Skills', focus), [open]);
   function ask(text: string) {
@@ -864,7 +861,7 @@ export default function PortfolioDesktop() {
     <footer ref={dock} className={styles.dockArea} data-motion={dockMotion ? 'on' : 'off'}><div className={styles.dockShortcuts}><button onClick={() => open('About')} data-active={active === 'About' ? 'true' : 'false'}><UserRound size={15} /> About</button><button onClick={() => open('Projects')} data-active={active === 'Projects' ? 'true' : 'false'}><Folder size={15} /> Projects</button><button onClick={() => open('Skills')} data-active={active === 'Skills' ? 'true' : 'false'}><Code2 size={15} /> Skills</button></div><nav className={styles.dock} aria-label="App dock"><a href={SOCIALS.github.href} target="_blank" rel="noreferrer" className={`${styles.appIcon} ${styles.github}`} aria-label="GitHub"><img src="/dock/github.jpg" alt="" width={512} height={512} draggable={false} /><span>GitHub</span></a><a href={SOCIALS.linkedin.href} target="_blank" rel="noreferrer" className={`${styles.appIcon} ${styles.linkedin}`} aria-label="LinkedIn"><img src="/dock/linkedin.jpg" alt="" width={512} height={512} draggable={false} /><span>LinkedIn</span></a><i className={styles.dockDivider} /><button className={`${styles.appIcon} ${styles.homeIcon}`} onClick={() => { setActive(null); setLocked(false); }} aria-label="Home"><img src="/dock/home.jpg" alt="" width={512} height={512} draggable={false} /><span>Home</span><i className={styles.activeDot} data-open={!active && !locked ? 'true' : 'false'} /></button><button className={`${styles.appIcon} ${styles.folderIcon}`} onClick={() => open('Projects')} aria-label="Open Projects"><img src="/dock/files.jpg" alt="" width={512} height={512} draggable={false} /><span>Projects</span><i className={styles.activeDot} data-open={active === 'Projects' ? 'true' : 'false'} /></button><button className={`${styles.appIcon} ${styles.resumeIcon}`} onClick={() => open('Résumé')} aria-label="Open Résumé"><img src="/dock/pages.jpg" alt="" width={512} height={512} draggable={false} /><span>Résumé</span><i className={styles.activeDot} data-open={active === 'Résumé' ? 'true' : 'false'} /></button><button className={`${styles.appIcon} ${styles.contactIcon}`} onClick={() => open('Contact')} aria-label="Open Contact"><img src="/dock/mail.jpg" alt="" width={512} height={512} draggable={false} /><span>Contact</span><i className={styles.activeDot} data-open={active === 'Contact' ? 'true' : 'false'} /></button><i className={styles.dockDivider} /><button className={`${styles.appIcon} ${styles.appearanceIcon}`} onClick={() => open('Appearance')} aria-label="Change wallpaper"><img src="/dock/photos.jpg" alt="" width={512} height={512} draggable={false} /><span>Appearance</span><i className={styles.activeDot} data-open={active === 'Appearance' ? 'true' : 'false'} /></button></nav><div className={styles.dockShortcuts}><button onClick={() => open('Experience')} data-active={active === 'Experience' ? 'true' : 'false'}><BriefcaseBusiness size={15} /> Experience</button><button onClick={() => open('Résumé')} data-active={active === 'Résumé' ? 'true' : 'false'}><FileText size={15} /> Résumé</button><button onClick={() => open('Contact')} data-active={active === 'Contact' ? 'true' : 'false'}><MessageCircle size={15} /> Let’s talk</button></div></footer>
 
     <dialog ref={dialog} onCancel={event => { event.preventDefault(); closeWindow(); }} onClose={() => setActive(null)} onClick={e => { if (e.target === e.currentTarget) closeWindow(); }} data-window-motion={dockMotion ? 'on' : 'off'} className={`${styles.dialog} ${aboutStyles.sheet} ${maximized ? mac.maximized : ''}`} aria-labelledby="app-title"><div className={styles.dialogInner}><header className={mac.modalBar}><div className={mac.modalTraffic}><button onClick={closeWindow} aria-label="Close window"><X size={9} /></button><button onClick={closeWindow} aria-label="Minimize window"><span>−</span></button><button onClick={() => setMaximized(value => !value)} aria-label={maximized ? 'Restore window size' : 'Expand window'}><Maximize2 size={8} /></button></div><h2 className={mac.modalTitle} id="app-title">{active}</h2><button className={mac.floatingClose} onClick={closeWindow} aria-label="Return to desktop" title="Close and return to desktop"><X size={15} /></button></header><div ref={appContent} className={`${styles.appContent} ${active === 'About' ? aboutStyles.content : ''}`}>
-      {active === 'Projects' && <ProjectsGallery query={query} onQueryChange={setQuery} selected={selected} onSelect={setSelected} searchRef={search} />}
+      {active === 'Projects' && <ProjectsGallery selected={selected} onSelect={setSelected} />}
       {active === 'About' && <AboutProfile />}
       {active === 'Experience' && <><div className={styles.appHeading}><span className={styles.eyebrow}>WORK EXPERIENCE</span><h3>My work<br /><em>experience.</em></h3><p>Roles in healthcare, client development, recruitment software, and GIS.</p></div><div className={styles.timeline}>{workExperience.map((item, index) => <article key={item.id}><span className={styles.timelineNumber}>0{index + 1}</span><div><span className={styles.eyebrow}>{item.dateRange} · {item.location}</span><h4>{item.company}</h4>{item.roles.map(role => <div key={role.title}><h5>{role.title}</h5><ul>{role.highlights.map(line => <li key={line}>{line}</li>)}</ul></div>)}<div className={styles.tags}>{item.stack?.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div></>}
       {active === 'Skills' && <><div className={styles.appHeading}><span className={styles.eyebrow}>TECHNICAL SKILLS</span><h3>Languages, tools,<br /><em>and frameworks.</em></h3><p>The technologies I use for web development, machine learning, and data analysis.</p></div><div className={styles.skillFilters} role="group" aria-label="Filter technologies">{([{ value: 'all', label: 'All technologies' }, { value: 'web', label: 'Web & backend' }, { value: 'ai', label: 'AI & data' }] as const).map(filter => <button key={filter.value} aria-pressed={skillFocus === filter.value} onClick={() => setSkillFocus(filter.value)}>{filter.label}</button>)}</div><div className={styles.skillGrid}>{[{ focus: 'web', title: 'Languages & backend', icon: <Terminal />, values: programmingSkills }, { focus: 'web', title: 'Full-stack & infrastructure', icon: <Layers3 />, values: fullStackSkills }, { focus: 'ai', title: 'AI & machine learning', icon: <Cpu />, values: aiSkills }, { focus: 'ai', title: 'Data & geospatial', icon: <Code2 />, values: designDataSkills }].filter(group => skillFocus === 'all' || group.focus === skillFocus).map((group, index) => <section key={group.title}><div className={styles.skillHeader}>{group.icon}<span>0{index + 1}</span></div><h4>{group.title}</h4><div className={styles.skillLogos}>{group.values.filter(value => skillLogos[value]).map(value => <span className={styles.skillLogo} key={value} role="img" aria-label={value} data-label={value} tabIndex={0}><img src={`/tech/${skillLogos[value]}`} alt="" width={36} height={36} loading="lazy" draggable={false} /></span>)}</div></section>)}</div></>}
