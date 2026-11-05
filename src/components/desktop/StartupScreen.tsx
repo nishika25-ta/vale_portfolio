@@ -34,7 +34,7 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     const wallpaper = new Image();
-    wallpaper.src = '/bg.jpg';
+    wallpaper.src = '/bg.webp';
 
     const startTime = performance.now();
     let frameId = 0;

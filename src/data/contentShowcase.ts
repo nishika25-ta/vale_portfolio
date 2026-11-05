@@ -6,6 +6,15 @@ import type { ShowcaseItem } from '../types/portfolio';
  */
 const FOLDER_MANIFEST = [
   {
+    folder: 'One_in_All',
+    title: 'One-in-All',
+    category: 'Developer Tools · AI',
+    featured: true,
+    desc: 'A Windows desktop app that runs Claude Code, Codex and Hermes side by side, each in its own pane with its own chat, folder, model picker and built-in PowerShell terminal. Supports image prompts, permission modes and automatic fallback to models your account can use. It drives the official CLIs with your own accounts instead of proxying their APIs.',
+    tags: ['Electron', 'Node.js', 'xterm.js', 'WebSockets'],
+    files: ['one_in_all_main.webp', 'one_in_all_models.webp'],
+  },
+  {
     folder: 'XAI',
     cover: 'xai-interface.webp',
     title: 'XAI-PE Analyzer',
@@ -62,7 +71,7 @@ const FOLDER_MANIFEST = [
     featured: false,
     desc: 'Converts images and media to WebP, WebM, JPG, PNG, and other formats in batches using Python and FFmpeg.',
     tags: ['Web', 'Utility', 'FFmpeg', 'Python'],
-    files: ['icons/file_converter.webp', 'fileconverter.png'],
+    files: ['icons/file_converter.webp', 'fileconverter.webp'],
   },
 ] as const;
 
