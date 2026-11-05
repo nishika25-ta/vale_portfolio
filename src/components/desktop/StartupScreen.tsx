@@ -33,6 +33,11 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
   }, []);
 
   useEffect(() => {
+    // Returning visitors skip the boot animation; storage can throw in private mode, so default to showing it.
+    try {
+      if (localStorage.getItem('vale-booted')) { onComplete(); return; }
+    } catch { /* show the intro */ }
+
     const wallpaper = new Image();
     wallpaper.src = '/bg.webp';
 
@@ -60,6 +65,7 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     if (!leaving) return;
+    try { localStorage.setItem('vale-booted', '1'); } catch { /* next visit shows the intro again */ }
     const timer = setTimeout(onComplete, 380);
     return () => clearTimeout(timer);
   }, [leaving, onComplete]);

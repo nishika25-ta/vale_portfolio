@@ -18,8 +18,8 @@ export type ShowcaseItem = {
   /** Carousel screens (excludes `icons/…` entries; those are thumb-only). */
   images: string[];
   thumb: string;
-  /** Editorial presentation mockup; original screenshots remain in images. */
-  cover?: string;
+  /** External links shown on the project detail (code, download, demo). */
+  links?: { label: string; href: string }[];
   featured?: boolean;
   /** Optional demo clip from `public/videos/` */
   videoUrl?: string;

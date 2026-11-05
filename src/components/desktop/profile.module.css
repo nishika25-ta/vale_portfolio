@@ -16,13 +16,13 @@
 .surname{color:#246ce5}.cursor{display:inline-block;vertical-align:-.08em;width:2px;height:.72em;margin-left:.1em;border-radius:1px;background:currentColor;animation:caret 1.05s steps(1,end) infinite}
 .card .description{max-width:280px;font-size:13px;line-height:1.45;color:var(--quiet);margin:8px 0 0;text-wrap:pretty}
 .stack{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:8px 0 0}
-.stack li{display:flex;align-items:center;gap:5px;padding:4px 7px;border:1px solid var(--line);border-radius:5px;background:#ffffff80;color:var(--quiet);font:11px var(--font-jetbrains-mono),monospace;line-height:1.2}
+.stack li{display:flex;align-items:center;gap:5px;padding:4px 7px;border:1px solid var(--line);border-radius:5px;background:#ffffff80;color:var(--quiet);font:12.5px var(--font-jetbrains-mono),monospace;line-height:1.2}
 .stack img{width:12px;height:12px;object-fit:contain}
 .actions{display:flex;align-items:center;gap:14px;margin-top:8px}
 .card .explore{display:flex;align-items:center;justify-content:center;gap:12px;min-height:36px;padding:8px 14px;border-radius:8px;color:#fff;background:#246ce5;font-size:12px;font-weight:500;white-space:nowrap;box-shadow:0 1px 2px #00000012;transition:background .2s}
 .card .explore:hover{background:#185bc7}
-.prompt{font:11px var(--font-jetbrains-mono),monospace;opacity:.7;transition:transform .2s}
-.projectCommand{display:none;font:10px var(--font-jetbrains-mono),monospace}
+.prompt{font:12.5px var(--font-jetbrains-mono),monospace;opacity:.7;transition:transform .2s}
+.projectCommand{display:none;font:12px var(--font-jetbrains-mono),monospace}
 @media(hover:hover){.explore:hover .projectLabel{display:none}.explore:hover .projectCommand{display:inline}.explore:hover .prompt{transform:translateX(2px)}}
 .explore:focus-visible .projectLabel{display:none}.explore:focus-visible .projectCommand{display:inline}
 .card .about{display:flex;align-items:center;gap:8px;min-height:36px;padding:0;color:var(--ink);font-size:12px;white-space:nowrap}
@@ -34,7 +34,7 @@
 .portraitPhoto img{position:absolute;bottom:0;left:50%;z-index:1;transform:translateX(-50%);width:114%;max-width:none;height:auto;max-height:100%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 5px 9px #162d5020);transition:transform .6s cubic-bezier(.16,1,.3,1)}
 .portrait:hover .portraitPhoto{box-shadow:0 16px 30px #28487920}
 .portrait:hover img{transform:translateX(-50%) translateY(-2px) scale(1.02)}
-.portrait figcaption{position:absolute;z-index:3;left:50%;bottom:10px;display:flex;align-items:center;justify-content:center;gap:4px;margin:0;padding:3px 8px;border:1px solid #ffffff40;border-radius:7px;background:#14161cd6;color:#f4f5f7;font-size:11px;line-height:1.3;white-space:nowrap;transform:translateX(-50%);pointer-events:none}
+.portrait figcaption{position:absolute;z-index:3;left:50%;bottom:10px;display:flex;align-items:center;justify-content:center;gap:4px;margin:0;padding:3px 8px;border:1px solid #ffffff40;border-radius:7px;background:#14161cd6;color:#f4f5f7;font-size:12.5px;line-height:1.3;white-space:nowrap;transform:translateX(-50%);pointer-events:none}
 .work{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex-shrink:0;padding:10px 0 14px}
 .card .work>button{display:flex;align-items:center;gap:10px;text-align:left;padding:9px 11px;color:var(--ink);min-width:0;border:1px solid var(--line);border-radius:11px;background:#ffffffa6;box-shadow:0 1px 2px #16203304;transition:background .2s,border-color .2s,box-shadow .2s}
 .workLogo{position:relative;display:grid;place-items:center;flex-shrink:0;width:32px;height:32px;overflow:hidden;border:1px solid #1720330a;border-radius:8px;background:#fff}
@@ -43,7 +43,7 @@
 .hospitalLogo img{position:absolute;top:0;left:50%;width:195%;height:auto;max-width:none;max-height:none;object-fit:fill;transform:translateX(-50.7%)}
 .workText{min-width:0;flex:1}
 .work strong{display:block;font-size:13px;font-weight:600;line-height:1.3;white-space:nowrap}
-.work small{display:block;margin-top:2px;overflow:hidden;font-size:11px;line-height:1.3;color:var(--quiet);text-overflow:ellipsis;white-space:nowrap}
+.work small{display:block;margin-top:2px;overflow:hidden;font-size:12.5px;line-height:1.3;color:var(--quiet);text-overflow:ellipsis;white-space:nowrap}
 .work>button>svg{flex-shrink:0;color:var(--quiet);transition:color .2s,transform .2s}
 .card .work>button:hover,.card .work>button:focus-visible{background:#f0f5fe;border-color:#a6bfee;box-shadow:0 3px 8px #246ce50a}
 .work>button:hover>svg,.work>button:focus-visible>svg{color:#246ce5;transform:translate(2px,-2px)}

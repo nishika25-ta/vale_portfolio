@@ -13,16 +13,20 @@ const FOLDER_MANIFEST = [
     desc: 'A Windows desktop app that runs Claude Code, Codex and Hermes side by side, each in its own pane with its own chat, folder, model picker and built-in PowerShell terminal. Supports image prompts, permission modes and automatic fallback to models your account can use. It drives the official CLIs with your own accounts instead of proxying their APIs.',
     tags: ['Electron', 'Node.js', 'xterm.js', 'WebSockets'],
     files: ['one_in_all_main.webp', 'one_in_all_models.webp'],
+    links: [
+      { label: 'Download for Windows', href: 'https://github.com/nishika25-ta/all_in_one/releases/latest' },
+      { label: 'Source code', href: 'https://github.com/nishika25-ta/all_in_one' },
+    ],
   },
   {
     folder: 'XAI',
-    cover: 'xai-interface.webp',
     title: 'XAI-PE Analyzer',
     category: 'Security · ML',
     featured: true,
     desc: 'Analyzes Windows PE files for malware using 412 security features and shows which features influenced each prediction with SHAP. Supports single-file analysis, batch scanning, and a GPU-ready pipeline compatible with EMBER datasets of up to 1.1 million samples.',
     tags: ['Python', 'XGBoost', 'LightGBM', 'SHAP', 'Flask'],
     files: ['icons/xai.webp', 'XAI.webp'],
+    links: [{ label: 'Source code', href: 'https://github.com/nishika25-ta/XAI' }],
   },
   {
     folder: 'Palm_Detection',
@@ -35,17 +39,16 @@ const FOLDER_MANIFEST = [
   },
   {
     folder: 'DarkLace',
-    cover: 'darklace-interface.webp',
     title: 'Darklace AI Assistant',
     category: 'Applied AI',
     featured: true,
     desc: 'A desktop meeting assistant with voice input and language-model responses streamed over WebSockets. Its always-on-top window keeps responses visible during meetings.',
     tags: ['Python', 'React', 'Electron', 'WebSockets'],
-    files: ['DARKLACE_logo.webp', 'Darklace.webp'],
+    files: ['Darklace.webp', 'DARKLACE_logo.webp'],
+    links: [{ label: 'Source code', href: 'https://github.com/nishika25-ta/Darklace-AI' }],
   },
   {
     folder: 'Super_Dim',
-    cover: 'super-dim-interface.webp',
     title: 'Super Dim Mobile Application',
     category: 'Mobile',
     featured: true,
@@ -55,7 +58,6 @@ const FOLDER_MANIFEST = [
   },
   {
     folder: 'UNIMAS_AR',
-    cover: 'unimas-ar-interface.webp',
     title: 'UNIMAS AR',
     category: 'AR · Mobile',
     featured: false,
@@ -65,7 +67,6 @@ const FOLDER_MANIFEST = [
   },
   {
     folder: 'file_converter',
-    cover: 'file-converter-interface.webp',
     title: 'File Converter',
     category: 'Utility',
     featured: false,
@@ -104,7 +105,7 @@ export function buildShowcaseFromContents(): ShowcaseItem[] {
       tags: [...entry.tags],
       images,
       thumb,
-      cover: 'cover' in entry ? `/images/project-covers/${entry.cover}` : undefined,
+      links: 'links' in entry ? [...entry.links] : undefined,
       featured: entry.featured,
     };
   });
