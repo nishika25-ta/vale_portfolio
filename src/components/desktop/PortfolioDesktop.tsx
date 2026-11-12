@@ -1,10 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { flushSync } from 'react-dom';
-import { ArrowDownToLine, ArrowRight, ArrowUpRight, AudioLines, BriefcaseBusiness, Check, ChevronRight, Code2, Cpu, FileText, Folder, Github, Layers3, Linkedin, MapPin, Maximize2, Menu, MessageCircle, RotateCcw, Settings2, Sparkles, Terminal, UserRound, X } from 'lucide-react';
-import { RESUME_HREF, SITE_LOCATION, SOCIALS } from '@/data/profile';
-import { showcaseData } from '@/data/showcaseData';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowDownToLine, ArrowRight, ArrowUpRight, AudioLines, BriefcaseBusiness, Check, Code2, Cpu, FileText, Folder, Github, Layers3, Linkedin, MapPin, Maximize2, Menu, MessageCircle, Settings2, Sparkles, Terminal, UserRound, X } from 'lucide-react';
+import { RESUME_HREF, SOCIALS } from '@/data/profile';
+import { certificates, type Certificate } from '@/data/certificates';
 import { workExperience } from '@/data/workExperience';
 import { aiSkills, designDataSkills, fullStackSkills, programmingSkills, skillLogos } from '@/data/skills';
 import { AboutProfile } from './AboutProfile';
@@ -19,14 +21,6 @@ import { StatusControls } from './StatusControls';
 import { StartupScreen } from './StartupScreen';
 
 type App = 'About' | 'Projects' | 'Skills' | 'Experience' | 'Résumé' | 'Contact' | 'Appearance';
-type Message = { role: 'guide' | 'user'; text: string; action?: { label: string; app: App } };
-const suggestionCards: { title: string; subtitle: string; prompt: string; tone: 'blue' | 'purple' | 'emerald' | 'amber'; icon: ReactNode }[] = [
-  { title: 'What do you build?', subtitle: 'Full-stack, backend & AI', prompt: 'What do you build?', tone: 'blue', icon: <Code2 size={14} /> },
-  { title: 'Show me your projects', subtitle: 'Featured systems & apps', prompt: 'Show me your projects', tone: 'purple', icon: <Folder size={14} /> },
-  { title: 'Your experience?', subtitle: 'Hospital Miri & Scribear', prompt: 'Your experience?', tone: 'emerald', icon: <BriefcaseBusiness size={14} /> },
-  { title: 'How can we connect?', subtitle: 'LinkedIn & GitHub links', prompt: 'How can we connect?', tone: 'amber', icon: <MessageCircle size={14} /> },
-];
-const initialMessage: Message = { role: 'guide', text: 'Ask about my projects, skills, or work experience.' };
 const wallpapers = ['Golden hour', 'After hours', 'Northern lights'] as const;
 
 function windowOpenFrames(x: number, y: number): Keyframe[] {
@@ -42,17 +36,6 @@ function windowOpenFrames(x: number, y: number): Keyframe[] {
   });
 }
 
-function answer(question: string): { text: string; action?: { label: string; app: App } } {
-  const text = question.toLowerCase();
-  if (/contact|connect|hire|email|reach/.test(text)) return { text: 'You can message Valentine on LinkedIn or view his repositories on GitHub. Open Contact for both links.', action: { label: 'Open Contact', app: 'Contact' } };
-  if (/project|work sample|built|portfolio/.test(text)) return { text: `Valentine’s projects include ${showcaseData.slice(0, 4).map(p => p.title).join(', ')}. Open Projects for descriptions, images, and the tools used.`, action: { label: 'Explore Projects', app: 'Projects' } };
-  if (/experience|hospital|career|job/.test(text)) return { text: 'Valentine builds digital systems at Hospital Miri and co-founded Scribear, where he builds applications for clients. Previously, he built AI-assisted recruitment tools at Zenara Jaya and worked on computer vision and GIS at Sarawak Oil Palms. Open Experience for his roles and responsibilities.', action: { label: 'View Experience', app: 'Experience' } };
-  if (/education|degree|study|university|certificate/.test(text)) return { text: 'Valentine holds a B.Sc. in Cognitive Science with a Computer Science minor from UNIMAS (2025), and CompTIA Security+ (2026). Open About for his education and certificates.', action: { label: 'Open About', app: 'About' } };
-  if (/stack|skill|build|tech|language|python|react|ai/.test(text)) return { text: 'Valentine works across full-stack engineering, backend systems, and applied AI. He uses TypeScript, Next.js, React, Python, FastAPI, and PostgreSQL, with Docker and Kubernetes for deployment. He also builds computer-vision and explainable-ML systems. Open Skills for the full list.', action: { label: 'Browse Skills', app: 'Skills' } };
-  if (/where|location|live|based/.test(text)) return { text: `Valentine is based in ${SITE_LOCATION}.`, action: { label: 'About Valentine', app: 'About' } };
-  if (/resume|résumé|cv/.test(text)) return { text: 'You can view and download Valentine’s latest résumé from the document icon in the dock.', action: { label: 'Open Résumé', app: 'Résumé' } };
-  return { text: 'I can answer questions about Valentine’s projects, skills, experience, education, and contact links using the information on this site. Try asking about one of those topics.' };
-}
 
 const NAME_FIRST = 'Valentine';
 const NAME_LAST = 'Agam';
@@ -113,13 +96,16 @@ export default function PortfolioDesktop() {
   const [locked, setLocked] = useState(true);
 
   const [selected, setSelected] = useState<string | null>(null);
-  const [messages, setMessages] = useState<Message[]>([initialMessage]);
-  const [input, setInput] = useState('');
+  const [openCertificate, setOpenCertificate] = useState<Certificate | null>(null);
+  const [certificateIndex, setCertificateIndex] = useState(0);
+  const [certificateDirection, setCertificateDirection] = useState(1);
+  const reducedMotion = useReducedMotion();
+  const currentCertificate = certificates[certificateIndex];
+  const changeCertificate = (step: number) => { setCertificateDirection(step > 0 ? 1 : -1); setCertificateIndex(index => (index + step + certificates.length) % certificates.length); };
   const [dockMotion, setDockMotion] = useState(true);
   const finishStartup = useCallback(() => setLocked(false), []);
   const dialog = useRef<HTMLDialogElement>(null);
   const appContent = useRef<HTMLDivElement>(null);
-  const chat = useRef<HTMLDivElement>(null);
   const dock = useRef<HTMLElement>(null);
   const windowAnimation = useRef<Animation | null>(null);
   const launchOrigin = useRef<{ x: number; y: number; width: number; height: number; element: HTMLElement } | null>(null);
@@ -709,8 +695,13 @@ export default function PortfolioDesktop() {
     if (active || locked) document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = previousOverflow; windowAnimation.current?.cancel(); };
   }, [active, locked, dockMotion]);
-  useEffect(() => { chat.current?.scrollTo({ top: chat.current.scrollHeight, behavior: 'smooth' }); }, [messages]);
   useEffect(() => { appContent.current?.scrollTo({ top: 0 }); }, [active, selected]);
+  useEffect(() => {
+    if (!openCertificate) return;
+    const close = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpenCertificate(null); };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, [openCertificate]);
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key === 'k') { event.preventDefault(); launchOrigin.current = null; setLocked(false); setSelected(null); setMenu(false); setActive('Projects'); }
@@ -732,13 +723,6 @@ export default function PortfolioDesktop() {
     setActive(app); setMenu(false); setSelected(null);
   }, []);
   const openSkills = useCallback((focus: 'web' | 'ai') => open('Skills', focus), [open]);
-  function ask(text: string) {
-    if (!text.trim()) return;
-    const reply = answer(text);
-    setMessages(current => [...current, { role: 'user', text: text.trim() }, { role: 'guide', text: reply.text, action: reply.action }]);
-    setInput('');
-  }
-  function submit(event: FormEvent) { event.preventDefault(); ask(input); }
   function chooseWallpaper(index: number) { setWallpaper(index); try { localStorage.setItem('vale-wallpaper', String(index)); } catch { /* Keep the session preference when storage is unavailable. */ } }
   function toggleTheme() {
     const next = !darkMode;
@@ -799,55 +783,22 @@ export default function PortfolioDesktop() {
           </section>
         </div>
         <div className={mac.column}>
-          <section className={[mac.window, mac.assistant].join(' ')} aria-label="Portfolio guide">
-            <WorkspaceTitle title="Portfolio Assistant" icon={<MessageCircle />} action={<button className={mac.chromeAction} title="Reset conversation" aria-label="Reset conversation" onClick={() => setMessages([initialMessage])}><RotateCcw size={13} /></button>} />
-            <div className={mac.assistantBody}>
-              <div className={mac.chat} ref={chat} role="log" aria-live="polite" aria-label="Portfolio conversation">
-                {messages.length === 1 && (
-                  <div className={mac.welcome}>
-                    <h2>About this portfolio</h2>
-                    <p>Choose a topic or type a question below.</p>
-                  </div>
-                )}
-                {messages.map((message, index) => (
-                  <div key={index} className={message.role === 'user' ? mac.userMessage : mac.guideMessage}>
-                    {message.role === 'guide' && (
-                      <span className={mac.messageLabel}>
-                        Valentine’s guide
-                        {index === 0 && <span className={mac.guideStatus}>Ready</span>}
-                      </span>
-                    )}
-                    <p>{message.text}</p>
-                    {message.action && (
-                      <button type="button" className={mac.messageAction} onClick={() => open(message.action!.app)}>
-                        {message.action.label} <ArrowUpRight size={12} />
-                      </button>
-                    )}
-                  </div>
-                ))}
-                {messages.length === 1 && (
-                  <div className={mac.suggestions}>
-                    {suggestionCards.map(item => (
-                      <button onClick={() => ask(item.prompt)} key={item.prompt} className={mac.suggestionCard} data-tone={item.tone}>
-                        <span className={mac.suggestionIcon} aria-hidden="true">{item.icon}</span>
-                        <span className={mac.suggestionText}>
-                          <strong>{item.title}</strong>
-                          <small>{item.subtitle}</small>
-                        </span>
-                        <ChevronRight size={13} className={mac.suggestionChevron} />
-                      </button>
-                    ))}
-                  </div>
-                )}
+          <section className={[mac.window, mac.assistant].join(' ')} aria-label="Certificate gallery">
+            <WorkspaceTitle title="Certificate Gallery" icon={<FileText />} detail={`${certificates.length} credentials`} />
+            <div className={mac.certificateGallery}>
+              <div className={mac.certificateCarousel} role="region" aria-roledescription="carousel" aria-label="Certificates" onKeyDown={event => { if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') { event.preventDefault(); changeCertificate(event.key === 'ArrowLeft' ? -1 : 1); } }}>
+                <button type="button" className={mac.certificateArrow} onClick={() => changeCertificate(-1)} aria-label="Previous certificate"><ChevronLeft size={20} aria-hidden="true" /></button>
+                <button type="button" className={mac.certificateSlide} onClick={() => setOpenCertificate(currentCertificate)} aria-label={`View ${currentCertificate.title} full size`}>
+                  <AnimatePresence initial={false} custom={certificateDirection}>
+                    <motion.img key={currentCertificate.id} src={currentCertificate.imageSrc} alt={currentCertificate.imageAlt} custom={certificateDirection}
+                      variants={{ enter: (direction: number) => ({ x: `${direction * 100}%`, opacity: 0, scale: 0.96 }), center: { x: 0, opacity: 1, scale: 1 }, exit: (direction: number) => ({ x: `${direction * -100}%`, opacity: 0, scale: 0.96 }) }}
+                      initial="enter" animate="center" exit="exit" transition={reducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 180, damping: 22, mass: 1 }} />
+                  </AnimatePresence>
+                </button>
+                <button type="button" className={mac.certificateArrow} onClick={() => changeCertificate(1)} aria-label="Next certificate"><ChevronRight size={20} aria-hidden="true" /></button>
               </div>
-              <form className={mac.chatForm} onSubmit={submit}>
-                <div className={mac.chatComposer}>
-                  <input value={input} onChange={e => setInput(e.target.value)} placeholder="Ask about Valentine…" aria-label="Ask about Valentine" maxLength={500} />
-                  <button type="submit" disabled={!input.trim()} aria-label="Send question">
-                    <ArrowRight size={14} />
-                  </button>
-                </div>
-              </form>
+              <div className={mac.certificateCaption} aria-live="polite"><strong>{currentCertificate.title}</strong><span>{currentCertificate.issuer}</span></div>
+              <div className={mac.certificateDots} role="group" aria-label="Choose certificate">{certificates.map((cert, index) => <button type="button" key={cert.id} aria-label={`Show ${cert.title}`} aria-pressed={index === certificateIndex} onClick={() => changeCertificate(index - certificateIndex)}><span /></button>)}</div>
             </div>
           </section>
           <section className={[mac.window, mac.music].join(' ')} aria-label="Music player">
@@ -871,6 +822,14 @@ export default function PortfolioDesktop() {
     </div></div></dialog>
 
     </div>
+    {openCertificate && <div className={mac.certificateOverlay} role="dialog" aria-modal="true" aria-label={openCertificate.title}>
+      <button className={mac.certificateBackdrop} onClick={() => setOpenCertificate(null)} aria-label="Close certificate" />
+      <div className={mac.certificatePreview}>
+        <div><span><small>{openCertificate.issuer}</small><strong>{openCertificate.title}</strong></span><button onClick={() => setOpenCertificate(null)} aria-label="Close certificate"><X size={18} /></button></div>
+        <img src={openCertificate.imageSrc} alt={openCertificate.imageAlt} />
+        <p>{openCertificate.subtitle}</p>
+      </div>
+    </div>}
     {locked && <StartupScreen onComplete={finishStartup} />}
   </div>;
 }
