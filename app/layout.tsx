@@ -91,11 +91,8 @@ export const metadata: Metadata = {
     'Miri',
   ],
   icons: {
-    icon: [
-      { url: '/favicon.svg?v=2', type: 'image/svg+xml' },
-      { url: '/favicon.ico?v=2', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
-    ],
-    apple: { url: '/apple-touch-icon.png?v=2', sizes: '180x180', type: 'image/png' },
+    icon: { url: '/vale-cat.png', sizes: '180x180', type: 'image/png' },
+    apple: { url: '/vale-cat.png', sizes: '180x180', type: 'image/png' },
   },
   openGraph: {
     title: SITE_TITLE,
@@ -128,6 +125,7 @@ export const viewport: Viewport = {
   colorScheme: 'dark',
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,0 +1,225 @@
+/* Hallmark v2.0.0 | theme: ValeOS Liquid Glass (by request) | genre: atmospheric | shape: OS Desktop Bento | signature: Interactive Liquid-Glass OS Workspace & Spotlight */
+/* critique: Preserve authentic macOS/iOS OS desktop identity, unify all tokens for crisp light/dark parity, fix mobile ergonomics, showcase all 7 credentials. */
+
+:root {
+  --os-font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+  --os-font-display: var(--font-outfit), var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --os-font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Radii */
+  --os-radius-window: 19px;
+  --os-radius-sheet: 22px;
+  --os-radius-card: 14px;
+  --os-radius-control: 10px;
+  --os-radius-pill: 9999px;
+
+  /* Motion */
+  --os-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --os-ease-snappy: cubic-bezier(0.22, 1, 0.36, 1);
+  --os-ease-exit: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Accent & semantic signals */
+  --os-accent: #0071e3;
+  --os-accent-hover: #005bb5;
+  --os-accent-soft: rgba(0, 113, 227, 0.12);
+  --os-accent-border: rgba(0, 113, 227, 0.26);
+  --os-accent-ink: #f7f9fc;
+  --os-accent-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
+  --os-teal: #0d9488;
+  --os-teal-soft: rgba(13, 148, 136, 0.12);
+  --os-emerald: #16a34a;
+  --os-emerald-soft: rgba(22, 163, 74, 0.13);
+  --os-amber: #d97706;
+  --os-amber-soft: rgba(217, 119, 6, 0.13);
+  --os-red: #ff5f57;
+  --os-yellow: #febc2e;
+  --os-green: #28c840;
+
+  /* Shared neutral & inverse tones */
+  --os-paper-tile: #f8f9fc;
+  --os-ink-inverse: #f4f6fb;
+  --os-ink-inverse-dark: #10131b;
+  --os-ink-caption-accent: #9dc6ff;
+  --os-stage-dark: #0c0f17;
+  --os-traffic-ink: rgba(0, 0, 0, 0.65);
+  --os-traffic-ring: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
+
+  /* Shared shadows & overlays */
+  --os-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --os-shadow-md: 0 12px 26px rgba(0, 0, 0, 0.14);
+  --os-shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.18);
+  --os-shadow-icon: 0 6px 14px rgba(0, 0, 0, 0.22);
+  --os-shadow-knob: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --os-shadow-dialog: 0 40px 120px rgba(0, 0, 0, 0.45);
+  --os-shadow-cert: 0 36px 100px rgba(0, 0, 0, 0.55);
+  --os-shadow-cert-img: 0 18px 44px rgba(0, 0, 0, 0.45);
+  --os-text-shadow-hero: 0 2px 16px rgba(0, 0, 0, 0.28);
+  --os-icon-rim: inset 0 1px 1px rgba(255, 255, 255, 0.38), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  --os-dock-sheen: rgba(255, 255, 255, 0.34);
+
+  /* Dock icon gradients & specular gloss */
+  --os-tile-cert: linear-gradient(180deg, #38bdf8 0%, #0284c7 58%, #0369a1 100%);
+  --os-tile-skills: linear-gradient(180deg, #34d399 0%, #059669 58%, #047857 100%);
+  --os-tile-exp: linear-gradient(180deg, #fbbf24 0%, #ea580c 62%, #c2410c 100%);
+  --os-tile-music: linear-gradient(180deg, #fb7185 0%, #e11d48 56%, #be123c 100%);
+  --os-icon-gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0.06) 44%, transparent 52%);
+  --os-icon-glyph-shadow: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+  --os-dock-dot: rgba(20, 23, 31, 0.85);
+  --os-dock-dot-glow: none;
+  --os-dock-music-ring: 0 0 0 1.5px rgba(251, 113, 133, 0.7), 0 6px 16px rgba(225, 29, 72, 0.36);
+
+  /* Wallpaper overlays */
+  --os-wp-wash: linear-gradient(180deg, rgba(6, 11, 25, 0.22), transparent 28%, rgba(6, 11, 25, 0.12));
+  --os-wp-vignette: radial-gradient(ellipse at center, transparent 48%, rgba(4, 8, 20, 0.16) 100%);
+  --os-cert-backdrop: rgba(5, 8, 16, 0.8);
+
+  /* Startup screen tokens */
+  --os-boot-glow-a: rgba(59, 158, 255, 0.14);
+  --os-boot-glow-b: rgba(45, 212, 191, 0.08);
+  --os-boot-vignette: rgba(5, 7, 12, 0.96);
+  --os-boot-void: #05070c;
+  --os-boot-mark-border: rgba(244, 246, 251, 0.12);
+  --os-boot-mark-bg: rgba(244, 246, 251, 0.04);
+  --os-boot-mark-ink: rgba(244, 246, 251, 0.72);
+  --os-boot-keyword: #60b2ff;
+  --os-boot-punct: rgba(244, 246, 251, 0.48);
+  --os-boot-encrypted: rgba(244, 246, 251, 0.34);
+  --os-boot-string: #4ade80;
+  --os-boot-progress-bg: rgba(244, 246, 251, 0.12);
+  --os-boot-progress-fill: linear-gradient(90deg, #3b9eff, #4ade80);
+  --os-boot-hint: rgba(244, 246, 251, 0.46);
+
+  /* Portrait & stage overlays */
+  --os-portrait-top: #cfe1fb;
+  --os-portrait-bottom: #789fd6;
+  --os-portrait-ring: rgba(255, 255, 255, 0.34);
+  --os-portrait-halo: rgba(255, 255, 255, 0.08);
+  --os-portrait-pill-bg: rgba(12, 16, 24, 0.72);
+  --os-portrait-pill-border: rgba(255, 255, 255, 0.22);
+  --os-portrait-scrim: linear-gradient(180deg, transparent 58%, rgba(10, 14, 24, 0.62) 100%);
+  --os-profile-glow: radial-gradient(ellipse 75% 75% at 84% 26%, rgba(0, 113, 227, 0.11), transparent 68%);
+  --os-btn-specular: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  --os-stage-bg: #0f131c;
+  --os-stage-scrim: linear-gradient(180deg, rgba(8, 11, 20, 0.02) 25%, rgba(8, 11, 20, 0.88) 100%);
+  --os-stage-tag-bg: rgba(255, 255, 255, 0.14);
+  --os-stage-tag-border: rgba(255, 255, 255, 0.22);
+
+  /* Capability card surfaces */
+  --os-cap-web-bg: linear-gradient(160deg, #f8fbff 0%, #ebf2ff 100%);
+  --os-cap-web-border: rgba(0, 113, 227, 0.22);
+  --os-cap-ai-bg: linear-gradient(160deg, #171c28 0%, #0f1420 100%);
+  --os-cap-ai-border: rgba(56, 189, 248, 0.24);
+  --os-cap-ai-ink: #f1f5f9;
+  --os-cap-ai-muted: #9aa7bd;
+  --os-cap-ai-accent: #38bdf8;
+  --os-cap-ai-soft: rgba(56, 189, 248, 0.14);
+  --os-cap-ai-ring: rgba(56, 189, 248, 0.28);
+  --os-cap-divider: rgba(148, 163, 184, 0.16);
+  --os-cap-logo-border: rgba(15, 23, 42, 0.08);
+
+  /* Light Mode Glass & Surfaces */
+  --os-desktop-bg: #202b3d;
+  --os-ink: #14171f;
+  --os-ink-secondary: #4e5566;
+  --os-ink-muted: #6c7385;
+  --os-ink-on-wallpaper: #f5f7fb;
+  --os-ink-on-wallpaper-muted: rgba(245, 247, 251, 0.78);
+
+  --os-menubar-bg: rgba(248, 249, 252, 0.78);
+  --os-menubar-border: rgba(255, 255, 255, 0.65);
+  --os-menubar-ink: #1d212b;
+  --os-menubar-hover: rgba(20, 23, 31, 0.07);
+
+  --os-window-bg: rgba(249, 251, 254, 0.92);
+  --os-window-chrome: rgba(247, 249, 253, 0.74);
+  --os-window-border: rgba(255, 255, 255, 0.78);
+  --os-window-hairline: rgba(20, 23, 31, 0.08);
+  --os-window-shadow: 0 20px 44px -24px rgba(10, 14, 28, 0.45);
+
+  --os-sheet-bg: rgba(245, 247, 251, 0.96);
+  --os-surface: #fbfcfe;
+  --os-surface-subtle: #f1f3f8;
+  --os-surface-hover: #e9edf5;
+  --os-border: rgba(20, 23, 31, 0.09);
+  --os-border-strong: rgba(20, 23, 31, 0.16);
+  --os-specular: rgba(255, 255, 255, 0.85);
+
+  --os-dock-bg: rgba(246, 247, 252, 0.48);
+  --os-dock-border: rgba(255, 255, 255, 0.55);
+  --os-dock-shadow: 0 16px 38px rgba(10, 14, 28, 0.2), 0 0 0 0.5px rgba(0, 0, 0, 0.14), inset 0 0.5px 0 rgba(255, 255, 255, 0.88);
+  --os-dock-divider: rgba(20, 23, 31, 0.22);
+  --os-tooltip-bg: rgba(245, 246, 250, 0.92);
+  --os-tooltip-border: rgba(20, 23, 31, 0.14);
+  --os-tooltip-ink: #14171f;
+
+  --os-popover-bg: rgba(248, 249, 253, 0.94);
+  --os-popover-border: rgba(255, 255, 255, 0.8);
+  --os-popover-shadow: 0 24px 60px -12px rgba(8, 12, 24, 0.3), 0 0 0 1px rgba(20, 23, 31, 0.07);
+  --os-backdrop: rgba(8, 12, 22, 0.52);
+}
+
+[data-theme='dark'] {
+  --os-accent: #3b9eff;
+  --os-accent-hover: #60b2ff;
+  --os-accent-soft: rgba(59, 158, 255, 0.15);
+  --os-accent-border: rgba(59, 158, 255, 0.34);
+  --os-accent-ink: #071322;
+  --os-teal: #2dd4bf;
+  --os-teal-soft: rgba(45, 212, 191, 0.14);
+  --os-emerald: #4ade80;
+  --os-emerald-soft: rgba(74, 222, 128, 0.14);
+  --os-amber: #fbbf24;
+  --os-amber-soft: rgba(251, 191, 36, 0.14);
+
+  --os-wp-vignette: radial-gradient(ellipse at center, transparent 42%, rgba(4, 8, 20, 0.24) 100%);
+
+  --os-desktop-bg: #0b0e15;
+  --os-ink: #f4f6fb;
+  --os-ink-secondary: #b5bccd;
+  --os-ink-muted: #8a92a6;
+
+  --os-menubar-bg: rgba(18, 21, 29, 0.76);
+  --os-menubar-border: rgba(255, 255, 255, 0.1);
+  --os-menubar-ink: #f4f6fb;
+  --os-menubar-hover: rgba(255, 255, 255, 0.11);
+
+  --os-window-bg: rgba(23, 27, 38, 0.94);
+  --os-window-chrome: rgba(35, 40, 54, 0.7);
+  --os-window-border: rgba(255, 255, 255, 0.13);
+  --os-window-hairline: rgba(255, 255, 255, 0.08);
+  --os-window-shadow: 0 22px 48px -24px rgba(0, 0, 0, 0.65);
+
+  --os-sheet-bg: rgba(20, 23, 31, 0.96);
+  --os-surface: #1b202c;
+  --os-surface-subtle: rgba(42, 47, 62, 0.72);
+  --os-surface-hover: rgba(54, 60, 78, 0.85);
+  --os-border: rgba(255, 255, 255, 0.09);
+  --os-border-strong: rgba(255, 255, 255, 0.17);
+  --os-specular: rgba(255, 255, 255, 0.14);
+
+  --os-dock-bg: rgba(28, 28, 34, 0.46);
+  --os-dock-border: rgba(255, 255, 255, 0.18);
+  --os-dock-shadow: 0 18px 44px rgba(0, 0, 0, 0.54), 0 0 0 0.5px rgba(0, 0, 0, 0.45), inset 0 0.5px 0 rgba(255, 255, 255, 0.28);
+  --os-dock-divider: rgba(255, 255, 255, 0.24);
+  --os-dock-dot: rgba(244, 246, 251, 0.92);
+  --os-dock-dot-glow: 0 0 4px rgba(255, 255, 255, 0.4);
+  --os-tooltip-bg: rgba(34, 34, 40, 0.9);
+  --os-tooltip-border: rgba(255, 255, 255, 0.18);
+  --os-tooltip-ink: #f4f6fb;
+
+  --os-popover-bg: rgba(24, 27, 37, 0.94);
+  --os-popover-border: rgba(255, 255, 255, 0.14);
+  --os-popover-shadow: 0 28px 68px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --os-backdrop: rgba(4, 6, 12, 0.68);
+
+  --os-portrait-top: #3a567e;
+  --os-portrait-bottom: #19263a;
+  --os-profile-glow: radial-gradient(ellipse 72% 78% at 84% 28%, rgba(59, 158, 255, 0.16), transparent 68%);
+  --os-cap-web-bg: linear-gradient(160deg, rgba(27, 38, 58, 0.94) 0%, rgba(18, 25, 39, 0.96) 100%);
+  --os-cap-web-border: rgba(59, 158, 255, 0.26);
+  --os-cap-ai-bg: linear-gradient(160deg, rgba(19, 32, 42, 0.96) 0%, rgba(13, 21, 29, 0.98) 100%);
+  --os-cap-ai-border: rgba(45, 212, 191, 0.26);
+  --os-cap-ai-accent: #2dd4bf;
+  --os-cap-ai-soft: rgba(45, 212, 191, 0.14);
+  --os-cap-ai-ring: rgba(45, 212, 191, 0.28);
+}

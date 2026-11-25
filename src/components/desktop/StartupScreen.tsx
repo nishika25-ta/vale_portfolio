@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './startup.module.css';
 
-const BOOT_MS = 2000;
-const HOLD_MS = 700;
+const BOOT_MS = 1800;
+const HOLD_MS = 550;
 const CODE = [
   ['import', 'keyword'],
   [' { ', 'punct'],
@@ -15,7 +15,8 @@ const CODE = [
   ["'./future'", 'string'],
   [';', 'punct'],
 ] as const;
-const GLYPHS = CODE.flatMap(([text, kind]) => [...text].map(char => ({ char, kind })));
+
+const GLYPHS = CODE.flatMap(([text, kind]) => [...text].map((char) => ({ char, kind })));
 const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz./{}_';
 
 function scrambled(index: number, frame: number) {
@@ -33,10 +34,20 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
   }, []);
 
   useEffect(() => {
-    // Returning visitors skip the boot animation; storage can throw in private mode, so default to showing it.
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      onComplete();
+      return;
+    }
+
     try {
-      if (localStorage.getItem('vale-booted')) { onComplete(); return; }
-    } catch { /* show the intro */ }
+      if (localStorage.getItem('vale-booted')) {
+        onComplete();
+        return;
+      }
+    } catch {
+      /* Show boot animation if storage is blocked. */
+    }
 
     const wallpaper = new Image();
     wallpaper.src = '/bg.webp';
@@ -44,6 +55,7 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
     const startTime = performance.now();
     let frameId = 0;
     let holdTimer = 0;
+
     const animate = (now: number) => {
       if (stop.current) return;
       const t = Math.min(1, (now - startTime) / BOOT_MS);
@@ -56,18 +68,23 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
         if (!stop.current) setLeaving(true);
       }, HOLD_MS);
     };
+
     frameId = requestAnimationFrame(animate);
     return () => {
       cancelAnimationFrame(frameId);
       window.clearTimeout(holdTimer);
     };
-  }, []);
+  }, [onComplete]);
 
   useEffect(() => {
     if (!leaving) return;
-    try { localStorage.setItem('vale-booted', '1'); } catch { /* next visit shows the intro again */ }
-    const timer = setTimeout(onComplete, 380);
-    return () => clearTimeout(timer);
+    try {
+      localStorage.setItem('vale-booted', '1');
+    } catch {
+      /* Ignore storage failure. */
+    }
+    const timer = window.setTimeout(onComplete, 420);
+    return () => window.clearTimeout(timer);
   }, [leaving, onComplete]);
 
   useEffect(() => {
@@ -93,16 +110,17 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
 
   return (
     <section
-      className={`${styles.startup} ${leaving ? styles.leaving : ''}`}
+      className={styles.startup}
+      data-leaving={leaving ? 'true' : undefined}
       style={{ ['--boot' as string]: String(elapsed) }}
       role="dialog"
       aria-modal="true"
-      aria-label="macOS boot startup"
+      aria-label="ValeOS startup"
       onClick={finish}
     >
       <div className={styles.ambientGlow} aria-hidden="true" />
-
       <div className={styles.centerStage}>
+        <span className={styles.bootMark}>ValeOS 2.0</span>
         <h1 className={styles.codeTitle} aria-label="import { Valentine } from './future';">
           {revealed === 0 ? <span className={styles.caret} style={{ opacity: caretOn ? 1 : 0 }} /> : null}
           {GLYPHS.map((glyph, index) => {
@@ -120,6 +138,10 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
             );
           })}
         </h1>
+        <div className={styles.progressTrack} aria-hidden="true">
+          <span className={styles.progressFill} />
+        </div>
+        <p className={styles.skipHint}>Click or press any key to enter workspace</p>
       </div>
     </section>
   );

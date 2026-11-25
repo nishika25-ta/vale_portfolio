@@ -1,248 +1,445 @@
+.controls,
+.spotlightBtn {
+  border: 1px solid var(--os-menubar-border);
+  border-radius: var(--os-radius-pill);
+  background: var(--os-menubar-bg);
+  color: var(--os-menubar-ink);
+  backdrop-filter: blur(20px) saturate(1.3);
+  box-shadow: var(--os-shadow-sm);
+}
+
 .controls {
-  position: relative;
-  isolation: isolate;
-  margin-left: auto;
+  justify-self: end;
   display: flex;
   align-items: center;
-  gap: 3px;
-  font-size: 12.5px;
-}
-
-.hoverPill {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 26px;
-  width: var(--menu-pill-w, 28px);
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.068);
-  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.55);
-  transform: translate3d(var(--menu-pill-x, 0px), -50%, 0) scale(0.94);
-  opacity: 0;
-  pointer-events: none;
-  z-index: -1;
-  transition: opacity 0.16s ease, transform 0.16s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.controls[data-glide="true"] .hoverPill {
-  transition:
-    opacity 0.16s ease,
-    width 0.26s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.controls[data-hover="true"] .hoverPill {
-  opacity: 1;
-  transform: translate3d(var(--menu-pill-x, 0px), -50%, 0) scale(1);
-}
-
-:global([data-theme=dark]) .hoverPill {
-  background: rgba(255, 255, 255, 0.13);
-  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
+  padding: 3px;
 }
 
 .controls > button {
-  position: relative;
-  display: flex;
+  cursor: pointer;
+  transition: background-color 0.16s ease, color 0.16s ease;
+}
+
+.controls > button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 26px;
-  gap: 8px;
+  min-width: 34px;
+  min-height: 32px;
   padding: 0 8px;
-  color: inherit;
+  border-radius: var(--os-radius-pill);
+}
+
+.controls > button:hover {
+  background: var(--os-menubar-hover);
+}
+
+.spotlightBtn {
+  position: relative;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 38px;
+  padding: 0 8px 0 12px;
+  text-align: left;
+  transition:
+    width 400ms var(--spotlight-width-ease, var(--os-ease-spring)),
+    transform 360ms var(--os-ease-spring),
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.spotlightBtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    ellipse 82px 28px at var(--spotlight-x, 50%) 0%,
+    color-mix(in srgb, var(--os-accent) 26%, transparent),
+    transparent
+  );
+  transition: opacity 220ms ease;
+}
+
+.spotlightBtn:focus-visible {
+  border-color: var(--os-accent-border);
+  background: var(--os-popover-bg);
+}
+
+.spotlightBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(112deg, transparent 42%, var(--os-specular) 50%, transparent 58%);
+  background-size: 240% 100%;
+}
+
+.spotlightBtn > svg {
+  flex-shrink: 0;
+  color: var(--os-accent);
+}
+
+.searchLabel {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.kbdHint {
+  margin-inline-start: auto;
+  padding: 3px 6px;
   border-radius: 6px;
-  transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), color 0.18s ease, background-color 0.18s ease;
-}
-
-.controls > button:active {
-  transform: scale(0.94);
-  background: rgba(0, 0, 0, 0.05);
-}
-
-:global([data-theme=dark]) .controls > button:active {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.clock {
+  background: var(--os-menubar-hover);
+  color: var(--os-ink-secondary);
+  font-family: var(--os-font-mono);
+  font-size: 10px;
+  line-height: 1.15;
   white-space: nowrap;
-  font-size: 12.5px !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .spotlightBtn > :is(svg, .searchLabel, .kbdHint) {
+    transition: transform 400ms var(--os-ease-spring);
+  }
+
+  :global([data-motion='on']) .spotlightBtn:hover {
+    transform: translateY(-2px) scale(1.045);
+    border-color: var(--os-accent-border);
+    background: var(--os-popover-bg);
+    box-shadow: inset 0 1px 0 var(--os-specular), var(--os-shadow-md);
+  }
+
+  :global([data-motion='on']) .spotlightBtn:hover::before {
+    opacity: 1;
+  }
+
+  :global([data-motion='on']) .spotlightBtn:hover > svg {
+    transform: translateX(2px) rotate(-12deg) scale(1.2);
+  }
+
+  :global([data-motion='on']) .spotlightBtn:hover > .searchLabel {
+    transform: translateX(2px);
+  }
+
+  :global([data-motion='on']) .spotlightBtn:hover > .kbdHint {
+    transform: translateY(-1px) scale(1.06);
+  }
+
+  :global([data-motion='on']) .spotlightBtn:active {
+    transform: scale(0.975);
+    transition-duration: 120ms;
+  }
+}
+
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :global([data-motion='on']) .spotlightBtn:hover {
+    --spotlight-width-ease: cubic-bezier(0.2, 0.9, 0.28, 1.22);
+    width: calc(100% + 32px);
+  }
+
+  :global([data-motion='on']) .spotlightBtn:hover::after {
+    animation: spotlightSweep 630ms ease-out;
+  }
+}
+
+@keyframes spotlightSweep {
+  0% { background-position: 100% 0; opacity: 0; }
+  25% { opacity: 0.52; }
+  72% { opacity: 0.3; }
+  100% { background-position: 0 0; opacity: 0; }
+}
+
+.miniEq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+  color: var(--os-accent);
+}
+
+.miniEq i {
+  display: block;
+  width: 2px;
+  height: 100%;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: bottom;
+  transform: scaleY(0.55);
+  animation: eqPulse 0.75s ease-in-out infinite alternate;
+}
+
+.miniEq i:nth-child(2) {
+  animation-delay: -0.35s;
+}
+
+.miniEq i:nth-child(3) {
+  animation-delay: -0.18s;
+}
+
+@keyframes eqPulse {
+  from { transform: scaleY(0.25); }
+  to { transform: scaleY(1); }
+}
+
+.controls > .clock {
+  position: relative;
+  gap: 7px;
+  margin-inline-start: 2px;
+  padding-inline: 10px;
+  white-space: nowrap;
+  font-size: 12px;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.1px;
-  padding: 0 9px !important;
+}
+
+.clock::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -1px;
+  height: 14px;
+  width: 1px;
+  background: var(--os-border-strong);
+}
+
+.clock span {
+  color: var(--os-ink-secondary);
 }
 
 .clock b {
-  font-weight: 550;
+  font-weight: 650;
 }
 
-.controls > button.themeToggle {
-  position: relative;
-  display: flex;
-  width: 28px;
-  min-width: 28px;
-  padding: 0;
+/* Popover panels (Control Center & Calendar) */
+.panel {
+  position: fixed;
+  inset: 56px max(16px, calc((100% - 1260px) / 2)) auto auto;
+  margin: 0;
+  width: 320px;
+  max-width: calc(100% - 24px);
+  padding: 18px;
+  border: 1px solid var(--os-popover-border);
+  border-radius: 18px;
+  background: var(--os-popover-bg);
+  color: var(--os-ink);
+  box-shadow: var(--os-popover-shadow);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  font-family: var(--os-font-sans);
+  z-index: 40;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  transition: opacity 180ms ease, transform 260ms var(--os-ease-spring), display 180ms allow-discrete, overlay 180ms allow-discrete;
 }
 
-.themeToggle:active {
-  transform: scale(0.88);
+.panel:popover-open {
+  opacity: 1;
+  transform: none;
 }
 
-.themeToggle svg {
-  position: absolute;
-  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s;
+.panel:not(:popover-open) {
   pointer-events: none;
 }
 
-.themeToggle .moon {
-  opacity: 1;
-  transform: rotate(0) scale(1);
+@starting-style {
+  .panel:popover-open {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
 }
 
-.themeToggle .sun {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.4);
-}
-
-.themeToggle[aria-pressed=true] .moon {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.4);
-}
-
-.themeToggle[aria-pressed=true] .sun {
-  opacity: 1;
-  transform: rotate(0) scale(1);
-}
-
-.panel {
-  position: fixed;
-  inset: 46px 20px auto auto;
-  margin: 0;
-  width: 285px;
-  max-width: calc(100vw - 24px);
-  padding: 21px;
-  border: 1px solid #ffffff90;
-  border-radius: 15px;
-  background: #f5f6fcf5;
-  color: #252528;
-  box-shadow: 0 18px 50px #0000002e, inset 0 1px 0 #ffffffb3;
-  backdrop-filter: blur(30px) saturate(1.6);
-  -webkit-backdrop-filter: blur(30px) saturate(1.6);
-  font: 12px var(--font-inter), sans-serif;
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
 }
 
 .panel h2 {
-  font-size: 16px;
-  font-weight: 500;
-  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--os-ink);
+  margin: 0;
 }
 
-.panel strong {
-  display: flex;
+.panelSub {
+  font-size: 12px;
+  color: var(--os-ink-muted);
+  margin: 4px 0 0;
+}
+
+.ccGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+  margin-bottom: 12px;
+}
+
+.ccTile {
+  display: flex;
   align-items: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: #252528;
-  line-height: 1.7;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 13px;
+  background: var(--os-surface);
+  border: 1px solid var(--os-border);
+  color: var(--os-ink);
+  text-align: left;
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.16s var(--os-ease-snappy);
 }
 
-.panel p {
+.ccTile:hover {
+  background: var(--os-surface-hover);
+}
+
+.ccTile:active {
+  transform: scale(0.97);
+}
+
+.ccTile[aria-pressed='true'] {
+  background: var(--os-accent-soft);
+  border-color: var(--os-accent-border);
+}
+
+.ccIcon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--os-surface-subtle);
+  color: var(--os-ink-secondary);
+  flex-shrink: 0;
+}
+
+.ccTile[aria-pressed='true'] .ccIcon {
+  background: var(--os-accent);
+  color: var(--os-accent-ink);
+}
+
+.ccTile strong {
+  display: block;
   font-size: 12.5px;
-  line-height: 1.8;
-  color: #636366;
-  margin: 12px 0;
+  font-weight: 600;
+  color: var(--os-ink);
+  line-height: 1.25;
 }
 
-.panel small {
+.ccTile small {
+  display: block;
+  font-size: 11px;
+  color: var(--os-ink-muted);
+  margin-top: 2px;
+}
+
+.ccStatusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--os-surface);
+  border: 1px solid var(--os-border);
+  margin-bottom: 12px;
   font-size: 12px;
-  color: #767680;
-  line-height: 1.6;
+  color: var(--os-ink-secondary);
 }
 
-.panel meter {
-  width: 100%;
-  margin-top: 18px;
-  accent-color: #007aff;
+.ccStatusItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ccMusicSlot {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--os-border);
 }
 
 .calendar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  margin-top: 17px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 14px;
   text-align: center;
 }
 
 .calendar span {
-  padding: 8px 0;
+  padding: 7px 0;
   font-size: 12.5px;
   border-radius: 8px;
+  color: var(--os-ink);
 }
 
 .calendar .weekday {
   font-size: 11px;
-  color: #767680;
+  font-weight: 600;
+  color: var(--os-ink-muted);
 }
 
-.calendar [aria-current=date] {
-  background: #007aff;
-  color: #fff;
+.calendar [aria-current='date'] {
+  background: var(--os-accent);
+  color: var(--os-accent-ink);
   font-weight: 600;
 }
 
-:global([data-theme=dark]) .panel {
-  background: #26272df5;
-  color: var(--theme-text);
-  border-color: var(--theme-border);
-  box-shadow: 0 18px 50px #0007, inset 0 1px 0 #ffffff14;
-}
-
-:global([data-theme=dark]) .panel strong {
-  color: var(--theme-text);
-}
-
-:global([data-theme=dark]) .panel p {
-  color: var(--theme-secondary);
-}
-
-:global([data-theme=dark]) .panel small,
-:global([data-theme=dark]) .calendar .weekday {
-  color: var(--theme-muted);
-}
-
-@media (max-width: 700px) {
+@media (max-width: 899px) {
   .controls {
-    gap: 0;
+    padding: 2px;
   }
-  .controls > button {
+
+  .controls > button,
+  .spotlightBtn {
     min-width: 44px;
     min-height: 44px;
+  }
+
+  .spotlightBtn {
+    width: 44px;
+    justify-content: center;
     padding: 0;
   }
-  .controls > button[aria-label="Connection status"],
-  .controls > button[aria-label="Battery status"],
-  .controls > button.clock {
+
+  .searchLabel,
+  .kbdHint,
+  .clock span {
     display: none;
   }
-  .controls > button.themeToggle {
-    display: flex;
-    width: 44px;
-    min-width: 44px;
-  }
-  .hoverPill {
-    display: none;
-  }
+
   .panel {
-    right: 12px;
+    inset: calc(58px + env(safe-area-inset-top)) max(12px, env(safe-area-inset-right), calc((100% - 580px) / 2)) auto auto;
+    width: min(340px, calc(100% - 24px));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hoverPill,
-  .controls[data-glide="true"] .hoverPill,
   .controls > button,
-  .themeToggle,
-  .themeToggle svg {
-    transition: none !important;
+  .spotlightBtn,
+  .spotlightBtn::before,
+  .spotlightBtn > :is(svg, .searchLabel, .kbdHint),
+  .ccTile {
+    transition: none;
+  }
+
+  .spotlightBtn:is(:hover, :active),
+  .spotlightBtn:hover > :is(svg, .searchLabel, .kbdHint) {
+    transform: none;
+  }
+
+  .spotlightBtn:hover::before {
+    opacity: 0;
+  }
+
+  .miniEq i {
+    animation: none;
   }
 }
