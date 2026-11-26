@@ -23,9 +23,9 @@ const FOLDER_MANIFEST = [
     title: 'XAI-PE Analyzer',
     category: 'Security · ML',
     featured: true,
-    desc: 'Analyzes Windows PE files for malware using 412 security features and shows which features influenced each prediction with SHAP. Supports single-file analysis, batch scanning, and a GPU-ready pipeline compatible with EMBER datasets of up to 1.1 million samples.',
+    desc: 'Analyzes Windows PE files for malware using 412 security features and shows which features influenced each prediction with SHAP. The web app queues batch scans of uploads or local paths and draws each feature’s pull toward benign or malware, alongside section entropy, flagged imports, hashes and a JSON export. The training pipeline is GPU-ready and works with EMBER datasets of up to 1.1 million samples.',
     tags: ['Python', 'XGBoost', 'LightGBM', 'SHAP', 'Flask'],
-    files: ['icons/xai.webp', 'XAI.webp'],
+    files: ['icons/xai_logo.webp', 'xai_report.webp', 'xai_welcome.webp'],
     links: [{ label: 'Source code', href: 'https://github.com/nishika25-ta/XAI' }],
   },
   {
