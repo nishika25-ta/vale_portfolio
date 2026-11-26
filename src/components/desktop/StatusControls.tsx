@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type PointerEvent } from 'react';
 import {
   BatteryFull,
   Moon,
@@ -11,11 +11,13 @@ import {
   Wallpaper,
   Wifi,
 } from 'lucide-react';
+import { motion, useSpring } from 'motion/react';
 import { musicTracks } from '@/data/music';
 import { MusicPlayer, type MusicController } from './MusicPlayer';
 import styles from './status.module.css';
 
 type Battery = EventTarget & { level: number; charging: boolean };
+const DOCK_SPRING = { stiffness: 361, damping: 24 };
 
 export function StatusControls({
   clock,
@@ -23,6 +25,7 @@ export function StatusControls({
   darkMode,
   onToggleTheme,
   dockMotion,
+  motionEnabled,
   onToggleMotion,
   wallpaperName,
   onCycleWallpaper,
@@ -33,6 +36,7 @@ export function StatusControls({
   darkMode: boolean;
   onToggleTheme: () => void;
   dockMotion: boolean;
+  motionEnabled: boolean;
   onToggleMotion: () => void;
   wallpaperName: string;
   onCycleWallpaper: () => void;
@@ -40,6 +44,14 @@ export function StatusControls({
 }) {
   const [online, setOnline] = useState(true);
   const [battery, setBattery] = useState<{ level: number; charging: boolean } | null>(null);
+  const spotlightAmount = useSpring(0, DOCK_SPRING);
+  const spotlightPointer = useSpring(0, DOCK_SPRING);
+
+  useEffect(() => {
+    if (motionEnabled) return;
+    spotlightAmount.jump(0);
+    spotlightPointer.jump(0);
+  }, [motionEnabled, spotlightAmount, spotlightPointer]);
 
   useEffect(() => {
     const update = () => setOnline(navigator.onLine);
@@ -74,6 +86,19 @@ export function StatusControls({
     };
   }, []);
 
+  function moveSpotlight(event: PointerEvent<HTMLButtonElement>) {
+    if (!motionEnabled || event.pointerType !== 'mouse' || window.innerWidth < 900) return;
+    const { left, width } = event.currentTarget.getBoundingClientRect();
+    const offset = (event.clientX - left) / width * 2 - 1;
+    spotlightPointer.set(Math.max(-1, Math.min(1, offset)));
+    if (event.type !== 'pointermove') spotlightAmount.set(event.buttons === 1 ? 0.65 : 1);
+  }
+
+  function resetSpotlight() {
+    spotlightAmount.set(0);
+    spotlightPointer.set(0);
+  }
+
   const local = clock ? new Date(clock.toLocaleString('en-US', { timeZone: 'Asia/Kuala_Lumpur' })) : null;
   const day = local?.getDate();
   const days = local ? new Date(local.getFullYear(), local.getMonth() + 1, 0).getDate() : 0;
@@ -84,19 +109,27 @@ export function StatusControls({
         type="button"
         className={styles.spotlightBtn}
         onClick={onSearch}
-        onPointerMove={(event) => {
-          if (event.pointerType !== 'mouse') return;
-          const button = event.currentTarget;
-          const { left, width } = button.getBoundingClientRect();
-          button.style.setProperty('--spotlight-x', `${(event.clientX - left) / width * 100}%`);
-        }}
+        onPointerEnter={moveSpotlight}
+        onPointerMove={moveSpotlight}
+        onPointerDown={moveSpotlight}
+        onPointerUp={moveSpotlight}
+        onPointerLeave={resetSpotlight}
+        onPointerCancel={resetSpotlight}
         aria-label="Open Spotlight search"
         aria-haspopup="dialog"
         title="Spotlight Search (Ctrl/⌘ K)"
       >
-        <Search size={15} aria-hidden="true" />
-        <span className={styles.searchLabel}>Search ValeOS</span>
-        <kbd className={styles.kbdHint}>Ctrl / ⌘ K</kbd>
+        <motion.span
+          className={styles.spotlightSurface}
+          style={{
+            ['--spotlight-amount' as string]: spotlightAmount,
+            ['--spotlight-pointer' as string]: spotlightPointer,
+          }}
+        >
+          <Search size={15} aria-hidden="true" />
+          <span className={styles.searchLabel}>Search ValeOS</span>
+          <kbd className={styles.kbdHint}>Ctrl / ⌘ K</kbd>
+        </motion.span>
       </button>
 
       <div className={styles.controls}>

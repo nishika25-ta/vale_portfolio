@@ -1,4 +1,5 @@
 .desktop {
+  --os-boot-handoff: 440ms;
   height: 100svh;
   height: 100dvh;
   max-height: 100dvh;
@@ -19,6 +20,39 @@
   flex: 1;
   min-height: 0;
   overflow: hidden;
+}
+
+.osLayer > [data-startup-layer] {
+  --os-layer-fade: opacity 410ms ease-out var(--os-reveal-delay, 0ms);
+  transition:
+    var(--os-layer-fade),
+    translate var(--os-reveal-duration, 640ms) var(--os-reveal-ease, var(--os-ease-spring)) var(--os-reveal-delay, 0ms);
+}
+
+.osLayer > [data-startup-layer='header'] {
+  --os-reveal-offset: -8px;
+  --os-reveal-duration: 580ms;
+}
+
+.osLayer > [data-startup-layer='workspace'] {
+  --os-reveal-delay: 64ms;
+  --os-reveal-offset: 15px;
+}
+
+.osLayer > [data-startup-layer='dock'] {
+  --os-reveal-delay: 128ms;
+  --os-reveal-offset: 20px;
+  --os-reveal-duration: 640ms;
+  --os-reveal-ease: cubic-bezier(0.23, 0.86, 0.35, 1.035);
+}
+
+.desktop[data-booting] > .osLayer,
+.desktop[data-booting] > .osLayer > [data-startup-layer] {
+  opacity: 0;
+}
+
+.desktop[data-booting][data-motion='on'] > .osLayer > [data-startup-layer] {
+  translate: 0 var(--os-reveal-offset);
 }
 
 .desktop[data-theme='light'] {
@@ -70,7 +104,7 @@
   inset: 0;
   z-index: -2;
   background: var(--os-wp-wash), url('/bg.webp') center / cover no-repeat;
-  transition: filter 0.7s var(--os-ease-snappy);
+  transition: filter 0.7s var(--os-ease-snappy), transform 900ms var(--os-ease-spring);
 }
 
 .wallpaper::after {
@@ -79,6 +113,10 @@
   inset: 0;
   background: var(--os-wp-vignette);
   pointer-events: none;
+}
+
+.desktop[data-booting][data-motion='on'] > .wallpaper {
+  transform: scale(1.045);
 }
 
 .wallpaper0 .wallpaper,
@@ -368,7 +406,7 @@
   background: var(--os-tile-cert);
 }
 
-.desktop .skillsIconTile {
+.desktop :is(.skillsIconTile, .aboutIconTile) {
   background: var(--os-tile-skills);
 }
 
@@ -384,7 +422,7 @@
   box-shadow: var(--os-dock-music-ring);
 }
 
-/* Mobile Floating iOS Dock */
+/* Mobile Liquid Glass Dock */
 .mobileDock {
   display: none;
 }
@@ -930,10 +968,12 @@
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
   padding: 16px 18px;
   border-radius: var(--os-radius-card);
   background: var(--os-surface);
   border: 1px solid var(--os-border);
+  text-align: start;
   transition: transform 0.2s var(--os-ease-spring), border-color 0.2s ease, background-color 0.2s ease;
 }
 
@@ -962,11 +1002,16 @@
   color: var(--os-ink);
 }
 
-.contactLinks span {
+.contactLinks > :is(a, button) > div {
+  min-width: 0;
+}
+
+.contactLinks > :is(a, button) > div > span {
   display: block;
   font-size: 12.5px;
   color: var(--os-ink-muted);
   margin-top: 2px;
+  overflow-wrap: anywhere;
 }
 
 .contactArrow {
@@ -1438,6 +1483,15 @@
 
 /* Mobile & Tablet Responsive Overrides */
 @media (max-width: 899px) {
+  .desktop {
+    --os-mobile-body-size: 0.9375rem;
+    --os-mobile-label-size: 0.875rem;
+    --os-mobile-caption-size: 0.75rem;
+    --os-mobile-heading-size: clamp(1.5rem, 6vw, 1.75rem);
+    --os-mobile-sheet-gutter: 1rem;
+    font-size: var(--os-mobile-body-size);
+  }
+
   .menubar {
     grid-template-columns: minmax(0, 1fr) auto auto;
     width: calc(100% - max(14px, env(safe-area-inset-left)) - max(14px, env(safe-area-inset-right)));
@@ -1456,62 +1510,31 @@
     display: none;
   }
 
-  /* Native iOS Floating Dock */
+  /* Center the shared tray within the mobile safe area. */
   .mobileDock {
     position: fixed;
-    left: max(14px, env(safe-area-inset-left));
-    right: max(14px, env(safe-area-inset-right));
+    left: max(8px, env(safe-area-inset-left));
+    right: max(8px, env(safe-area-inset-right));
     bottom: max(10px, calc(env(safe-area-inset-bottom) + 4px));
-    max-width: 420px;
+    width: max-content;
     margin-inline: auto;
     z-index: 30;
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 3px;
-    padding: 5px;
-    border-radius: 24px;
-    background: var(--os-menubar-bg);
-    border: 1px solid var(--os-dock-border);
-    box-shadow: var(--os-dock-shadow);
-    backdrop-filter: blur(24px) saturate(1.4);
-  }
-
-  .mobileDockBtn {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    min-height: 58px;
-    border-radius: 18px;
-    color: var(--os-ink-secondary);
-    font-size: 10.5px;
-    font-weight: 600;
-    transition: background-color 0.16s ease, color 0.16s ease, transform 0.14s var(--os-ease-snappy);
+    gap: clamp(4px, 1.5vw, 8px);
   }
 
-  .mobileDockBtn > svg {
-    width: 30px;
-    height: 30px;
-    padding: 6px;
-    border: 1px solid var(--os-window-hairline);
-    border-radius: 10px;
-    background: var(--os-surface-subtle);
-    color: var(--os-menubar-ink);
+  .mobileDock .appIcon {
+    flex: none;
+    width: clamp(44px, 15vw, 48px);
+    height: clamp(44px, 15vw, 48px);
   }
 
-  .mobileDockBtn:active {
-    transform: scale(0.93);
+  .mobileDock .appIcon > span {
+    font-size: var(--os-mobile-label-size);
   }
 
-  .mobileDockBtn[data-active='true'] {
-    background: var(--os-accent-soft);
-    color: var(--os-accent);
-  }
-
-  .mobileDockBtn[data-active='true'] > svg {
-    background: var(--os-accent);
-    color: var(--os-accent-ink);
+  .desktop[data-motion='on'] .mobileDock .appIcon:active {
+    transform: scale(0.94);
   }
 
   /* iOS Full-Height Sheet Dialog */
@@ -1543,7 +1566,23 @@
   }
 
   .appContent {
-    padding: 20px max(16px, env(safe-area-inset-right)) calc(32px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    padding-block: 20px calc(32px + env(safe-area-inset-bottom));
+    padding-inline: max(var(--os-mobile-sheet-gutter), env(safe-area-inset-left)) max(var(--os-mobile-sheet-gutter), env(safe-area-inset-right));
+  }
+
+  .appHeading h3,
+  .contactPage h3,
+  .resumeHeader h3 {
+    font-size: var(--os-mobile-heading-size);
+    line-height: 1.2;
+  }
+
+  .appHeading p,
+  .resumeHeader p,
+  .timeline li,
+  .certAppBody p,
+  .certPreviewDetails p {
+    font-size: var(--os-mobile-body-size);
   }
 
   .skillGrid,
@@ -1583,9 +1622,57 @@
   }
 
   .mobileResumeCard p {
-    font-size: 13.5px;
+    font-size: var(--os-mobile-body-size);
     line-height: 1.6;
     color: var(--os-ink-secondary);
+  }
+
+  .contactPage {
+    margin-block: 0 8px;
+    text-align: start;
+  }
+
+  .contactBadge {
+    width: 42px;
+    height: 42px;
+    margin: 0 0 12px;
+    border-radius: 12px;
+  }
+
+  .contactBadge > svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contactPage > p {
+    margin: 0 0 18px;
+    font-size: var(--os-mobile-body-size);
+    line-height: 1.55;
+  }
+
+  .contactLinks > :is(a, button) {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .contactLinkIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contactLinks strong {
+    font-size: var(--os-mobile-label-size);
+    line-height: 1.35;
+  }
+
+  .contactLinks > :is(a, button) > div > span,
+  .locationLine {
+    font-size: var(--os-mobile-caption-size);
+    line-height: 1.45;
+  }
+
+  .locationLine {
+    margin-top: 16px;
   }
 
   .spotlightOverlay {
@@ -1594,6 +1681,46 @@
 
   .spotlightPanel {
     max-height: min(76svh, calc(100dvh - 32px));
+  }
+
+  .spotlightInputRow {
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  .spotlightInputRow input {
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  .spotlightEsc {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: var(--os-mobile-caption-size);
+  }
+
+  .spotlightItemText strong {
+    font-size: var(--os-mobile-label-size);
+    line-height: 1.3;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .spotlightItemText small {
+    display: -webkit-box;
+    font-size: var(--os-mobile-caption-size);
+    line-height: 1.4;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .spotlightItemKind {
+    font-size: var(--os-mobile-caption-size);
+  }
+
+  .spotlightEmpty {
+    font-size: var(--os-mobile-body-size);
   }
 
   .certOverlay {
@@ -1610,6 +1737,10 @@
   scroll-behavior: auto !important;
 }
 
+.desktop[data-motion='off'] > .osLayer > [data-startup-layer] {
+  transition: var(--os-layer-fade) !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .desktop *,
   .desktop *::before,
@@ -1618,5 +1749,9 @@
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+
+  .desktop > .osLayer > [data-startup-layer] {
+    transition: var(--os-layer-fade) !important;
   }
 }

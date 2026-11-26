@@ -321,7 +321,8 @@
   .card h1 {
     grid-area: name;
     align-self: end;
-    font-size: clamp(33px, 10.7cqi, 57px);
+    font-size: clamp(1.875rem, 9.5cqi, 2.625rem);
+    line-height: 1.04;
   }
 
   .role {
@@ -329,13 +330,13 @@
     align-self: end;
     margin: 0;
     color: var(--os-accent);
-    font-size: 10px;
+    font-size: var(--os-mobile-caption-size);
   }
 
   .description {
     grid-area: description;
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: var(--os-mobile-body-size);
+    line-height: 1.55;
     margin: 0;
   }
 
@@ -351,7 +352,7 @@
   .about {
     min-height: 44px;
     padding: 5px 9px;
-    font-size: 13px;
+    font-size: var(--os-mobile-label-size);
   }
 
   .resumeLink {
@@ -391,11 +392,12 @@
   }
 
   .work strong {
-    font-size: 12px;
+    font-size: var(--os-mobile-label-size);
+    white-space: normal;
   }
 
   .work small {
-    font-size: 10.5px;
+    font-size: var(--os-mobile-caption-size);
     white-space: normal;
   }
 }

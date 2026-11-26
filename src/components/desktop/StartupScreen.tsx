@@ -1,90 +1,112 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import styles from './startup.module.css';
 
-const BOOT_MS = 1800;
-const HOLD_MS = 550;
-const CODE = [
-  ['import', 'keyword'],
-  [' { ', 'punct'],
-  ['Valentine', 'nameText'],
-  [' } ', 'punct'],
-  ['from', 'keyword'],
-  [' ', 'punct'],
-  ["'./future'", 'string'],
-  [';', 'punct'],
-] as const;
-
-const GLYPHS = CODE.flatMap(([text, kind]) => [...text].map((char) => ({ char, kind })));
-const POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz./{}_';
-
-function scrambled(index: number, frame: number) {
-  return POOL[(index * 13 + frame) % POOL.length];
-}
+const TYPE_STEP_MS = 34;
+const TRACE_STEP_MS = 18;
+const HOLD_MS = 680;
+const SHELL_TOKEN = /(^#!.*$|"[^"]*"|'[^']*'|\b(?:set|readonly|export|umask|trap|exec|cd|printf|exit|sha256sum|log|fail)\b|--[\w-]+)/;
+const BOOT_LINES = [
+  '#!/usr/bin/env bash',
+  'set -Eeuo pipefail',
+  'readonly root="${VALE_HOME:-/opt/valeos}" run="/run/valeos"',
+  'readonly manifest="$root/etc/boot.sha256" config="$root/etc/workspace.conf"',
+  'readonly tty="${VALE_TTY:-tty1}" boot_id="${VALE_BOOT_ID:-0x7F3A}"',
+  'export TERM="${TERM:-xterm-256color}" LC_ALL=C',
+  'umask 027',
+  "log() { printf '[%s] %-8s %s\\n' \"$boot_id\" \"$1\" \"$2\" >&2; }",
+  "fail() { log 'ERROR' \"$1\"; exit 1; }",
+  "trap 'log ERR \"boot stopped at line $LINENO\"' ERR",
+  "[[ -d \"$root\" && -d \"$run\" ]] || fail 'runtime directories unavailable'",
+  "[[ -r \"$manifest\" && -r \"$config\" ]] || fail 'boot configuration unreadable'",
+  'cd -- "$root"',
+  "log 'VERIFY' \"checking ${manifest##*/}\"",
+  "sha256sum --check --status -- \"$manifest\" || fail 'manifest check failed'",
+  'readonly workspace="$root/bin/workspace"',
+  "[[ -x \"$workspace\" ]] || fail 'workspace executable unavailable'",
+  'args=(--config "$config" --tty "$tty" --boot-id "$boot_id")',
+  "log 'READY' \"handoff to $tty via $workspace\"",
+  'exec "$workspace" "${args[@]}"',
+].map((source) => {
+  let offset = 0;
+  const parts = source.split(SHELL_TOKEN).map((text, index) => {
+    const start = offset;
+    offset += text.length;
+    const className = !text || index % 2 === 0 ? undefined
+      : text.startsWith('#!') ? styles.comment
+      : /^['"]/.test(text) ? styles.string
+      : styles.keyword;
+    return { text, start, className };
+  }).filter((part) => part.text);
+  return { source, parts };
+});
+const LAST_LINE = BOOT_LINES.length - 1;
 
 export function StartupScreen({ onComplete }: { onComplete: () => void }) {
-  const [elapsed, setElapsed] = useState(0);
+  const [{ line, characters }, setPosition] = useState({ line: 0, characters: 0 });
   const [leaving, setLeaving] = useState(false);
-  const stop = useRef(false);
+  const overlayRef = useRef<HTMLElement>(null);
+  const screenRef = useRef<HTMLDivElement>(null);
 
-  const finish = useCallback(() => {
-    stop.current = true;
-    setLeaving(true);
-  }, []);
+  const finish = useCallback(() => setLeaving(true), []);
 
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      onComplete();
-      return;
-    }
-
-    try {
-      if (localStorage.getItem('vale-booted')) {
-        onComplete();
-        return;
-      }
-    } catch {
-      /* Show boot animation if storage is blocked. */
-    }
+    if (leaving) return;
 
     const wallpaper = new Image();
     wallpaper.src = '/bg.webp';
 
-    const startTime = performance.now();
-    let frameId = 0;
-    let holdTimer = 0;
+    let nextLine = 0;
+    let visible = 0;
 
-    const animate = (now: number) => {
-      if (stop.current) return;
-      const t = Math.min(1, (now - startTime) / BOOT_MS);
-      setElapsed(t);
-      if (t < 1) {
-        frameId = requestAnimationFrame(animate);
+    function typeNext() {
+      const { source } = BOOT_LINES[nextLine];
+      const slow = nextLine === 0 || nextLine === LAST_LINE;
+      visible = Math.min(source.length, visible + (slow ? 1 : 6));
+      setPosition({ line: nextLine, characters: visible });
+
+      if (visible < source.length) {
+        timer = window.setTimeout(typeNext, slow ? TYPE_STEP_MS : TRACE_STEP_MS);
         return;
       }
-      holdTimer = window.setTimeout(() => {
-        if (!stop.current) setLeaving(true);
-      }, HOLD_MS);
-    };
 
-    frameId = requestAnimationFrame(animate);
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.clearTimeout(holdTimer);
-    };
-  }, [onComplete]);
+      if (nextLine === LAST_LINE) {
+        timer = window.setTimeout(finish, HOLD_MS);
+        return;
+      }
+
+      nextLine += 1;
+      visible = 0;
+      const delay = nextLine === 1 || nextLine === LAST_LINE ? 320 : TRACE_STEP_MS;
+      timer = window.setTimeout(typeNext, delay);
+    }
+
+    let timer = window.setTimeout(typeNext, TYPE_STEP_MS);
+    return () => window.clearTimeout(timer);
+  }, [finish, leaving]);
+
+  useLayoutEffect(() => {
+    const screen = screenRef.current;
+    const terminal = screen?.firstElementChild;
+    if (!screen || !terminal) return;
+
+    const observer = new ResizeObserver(() => {
+      screen.scrollTop = screen.scrollHeight;
+    });
+    observer.observe(terminal);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!leaving) return;
-    try {
-      localStorage.setItem('vale-booted', '1');
-    } catch {
-      /* Ignore storage failure. */
-    }
-    const timer = window.setTimeout(onComplete, 420);
-    return () => window.clearTimeout(timer);
+
+    const animations = overlayRef.current?.getAnimations?.() ?? [];
+    let mounted = true;
+    void Promise.allSettled(animations.map((animation) => animation.finished)).then(() => {
+      if (mounted) onComplete();
+    });
+    return () => { mounted = false; };
   }, [leaving, onComplete]);
 
   useEffect(() => {
@@ -98,50 +120,33 @@ export function StartupScreen({ onComplete }: { onComplete: () => void }) {
     return () => window.removeEventListener('keydown', handleKey);
   }, [finish]);
 
-  const revealed = Math.min(GLYPHS.length, Math.floor(elapsed * GLYPHS.length));
-  const scrambleFrame = Math.floor(elapsed * 48);
-  const caretOn = Math.floor(elapsed * 4) % 2 === 0;
-  const tone = {
-    keyword: styles.keyword,
-    punct: styles.punct,
-    nameText: styles.nameText,
-    string: styles.string,
-  } as const;
+  const paused = (line === 0 || line === LAST_LINE) && characters === BOOT_LINES[line].source.length;
 
   return (
     <section
+      ref={overlayRef}
       className={styles.startup}
-      data-leaving={leaving ? 'true' : undefined}
-      style={{ ['--boot' as string]: String(elapsed) }}
+      data-startup={leaving ? 'leaving' : 'typing'}
       role="dialog"
       aria-modal="true"
       aria-label="ValeOS startup"
       onClick={finish}
     >
-      <div className={styles.ambientGlow} aria-hidden="true" />
-      <div className={styles.centerStage}>
-        <span className={styles.bootMark}>ValeOS 2.0</span>
-        <h1 className={styles.codeTitle} aria-label="import { Valentine } from './future';">
-          {revealed === 0 ? <span className={styles.caret} style={{ opacity: caretOn ? 1 : 0 }} /> : null}
-          {GLYPHS.map((glyph, index) => {
-            const shown = index < revealed;
-            const atCaret = index === revealed - 1 && revealed < GLYPHS.length;
+      <div className={styles.screen} ref={screenRef} aria-hidden="true">
+        <pre className={styles.terminal} data-paused={paused ? '' : undefined}>
+          {BOOT_LINES.slice(0, line + 1).map(({ source, parts }, index) => {
+            const current = index === line;
+            const visible = current ? characters : source.length;
+
             return (
-              <span
-                key={index}
-                className={shown || glyph.char === ' ' ? tone[glyph.kind] : styles.nameEncrypted}
-                data-caret={atCaret ? 'true' : undefined}
-                style={atCaret ? { ['--caret' as string]: caretOn ? '1' : '0' } : undefined}
-              >
-                {shown || glyph.char === ' ' ? glyph.char : scrambled(index, scrambleFrame)}
-              </span>
+              <code key={source} className={styles.line} data-current={current ? '' : undefined}>
+                {parts.map(({ text, start, className }) => (
+                  <span key={start} className={className}>{text.slice(0, Math.max(0, visible - start))}</span>
+                ))}
+              </code>
             );
           })}
-        </h1>
-        <div className={styles.progressTrack} aria-hidden="true">
-          <span className={styles.progressFill} />
-        </div>
-        <p className={styles.skipHint}>Click or press any key to enter workspace</p>
+        </pre>
       </div>
     </section>
   );

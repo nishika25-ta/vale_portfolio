@@ -1,5 +1,5 @@
 .controls,
-.spotlightBtn {
+.spotlightSurface {
   border: 1px solid var(--os-menubar-border);
   border-radius: var(--os-radius-pill);
   background: var(--os-menubar-bg);
@@ -35,55 +35,50 @@
 }
 
 .spotlightBtn {
-  position: relative;
   justify-self: center;
+  display: block;
+  width: 100%;
+  min-height: 38px;
+  border-radius: var(--os-radius-pill);
+  text-align: left;
+}
+
+.spotlightSurface {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   gap: 9px;
-  width: 100%;
-  min-height: 38px;
+  min-height: inherit;
   padding: 0 8px 0 12px;
-  text-align: left;
+  pointer-events: none;
   transition:
-    width 400ms var(--spotlight-width-ease, var(--os-ease-spring)),
-    transform 360ms var(--os-ease-spring),
     background-color 220ms ease,
     border-color 220ms ease,
     box-shadow 220ms ease;
 }
 
-.spotlightBtn::before {
+.spotlightSurface::before {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: -1;
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
   background: radial-gradient(
-    ellipse 82px 28px at var(--spotlight-x, 50%) 0%,
-    color-mix(in srgb, var(--os-accent) 26%, transparent),
-    transparent
+    ellipse 96px 48px at calc(50% + var(--spotlight-pointer, 0) * 50%) 22%,
+    var(--os-dock-sheen),
+    transparent 76%
   );
-  transition: opacity 220ms ease;
 }
 
-.spotlightBtn:focus-visible {
+.spotlightBtn:focus-visible .spotlightSurface {
   border-color: var(--os-accent-border);
   background: var(--os-popover-bg);
 }
 
-.spotlightBtn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(112deg, transparent 42%, var(--os-specular) 50%, transparent 58%);
-  background-size: 240% 100%;
-}
-
-.spotlightBtn > svg {
+.spotlightSurface > svg {
   flex-shrink: 0;
   color: var(--os-accent);
 }
@@ -106,55 +101,26 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .spotlightBtn > :is(svg, .searchLabel, .kbdHint) {
-    transition: transform 400ms var(--os-ease-spring);
-  }
-
-  :global([data-motion='on']) .spotlightBtn:hover {
-    transform: translateY(-2px) scale(1.045);
+  .spotlightBtn:hover .spotlightSurface {
     border-color: var(--os-accent-border);
     background: var(--os-popover-bg);
     box-shadow: inset 0 1px 0 var(--os-specular), var(--os-shadow-md);
   }
 
-  :global([data-motion='on']) .spotlightBtn:hover::before {
-    opacity: 1;
-  }
-
-  :global([data-motion='on']) .spotlightBtn:hover > svg {
-    transform: translateX(2px) rotate(-12deg) scale(1.2);
-  }
-
-  :global([data-motion='on']) .spotlightBtn:hover > .searchLabel {
-    transform: translateX(2px);
-  }
-
-  :global([data-motion='on']) .spotlightBtn:hover > .kbdHint {
-    transform: translateY(-1px) scale(1.06);
-  }
-
-  :global([data-motion='on']) .spotlightBtn:active {
-    transform: scale(0.975);
-    transition-duration: 120ms;
-  }
 }
 
 @media (min-width: 900px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  :global([data-motion='on']) .spotlightBtn:hover {
-    --spotlight-width-ease: cubic-bezier(0.2, 0.9, 0.28, 1.22);
-    width: calc(100% + 32px);
+  :global([data-motion='on']) .spotlightSurface {
+    transform: translate3d(
+      calc(var(--spotlight-pointer, 0) * 6px),
+      calc(var(--spotlight-amount, 0) * -4px),
+      0
+    ) scale(calc(1 + var(--spotlight-amount, 0) * 0.12));
   }
 
-  :global([data-motion='on']) .spotlightBtn:hover::after {
-    animation: spotlightSweep 630ms ease-out;
+  :global([data-motion='on']) .spotlightSurface::before {
+    opacity: clamp(0, calc(var(--spotlight-amount, 0) * 0.55), 0.55);
   }
-}
-
-@keyframes spotlightSweep {
-  0% { background-position: 100% 0; opacity: 0; }
-  25% { opacity: 0.52; }
-  72% { opacity: 0.3; }
-  100% { background-position: 0 0; opacity: 0; }
 }
 
 .miniEq {
@@ -405,6 +371,9 @@
 
   .spotlightBtn {
     width: 44px;
+  }
+
+  .spotlightSurface {
     justify-content: center;
     padding: 0;
   }
@@ -423,20 +392,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .controls > button,
-  .spotlightBtn,
-  .spotlightBtn::before,
-  .spotlightBtn > :is(svg, .searchLabel, .kbdHint),
+  .spotlightSurface,
   .ccTile {
     transition: none;
-  }
-
-  .spotlightBtn:is(:hover, :active),
-  .spotlightBtn:hover > :is(svg, .searchLabel, .kbdHint) {
-    transform: none;
-  }
-
-  .spotlightBtn:hover::before {
-    opacity: 0;
   }
 
   .miniEq i {

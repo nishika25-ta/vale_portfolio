@@ -175,7 +175,7 @@ export function SpotlightModal({
             type="search"
             value={query}
             onChange={(event) => updateQuery(event.target.value)}
-            placeholder="Search apps, projects, and more"
+            placeholder="Search ValeOS"
             aria-label="Search ValeOS"
             role="combobox"
             aria-autocomplete="list"

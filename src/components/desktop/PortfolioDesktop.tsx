@@ -16,12 +16,10 @@ import {
   FileText,
   Folder,
   Github,
-  Home,
   Layers3,
   Linkedin,
   MapPin,
   Maximize2,
-  MessageCircle,
   ShieldCheck,
   Sparkles,
   Terminal,
@@ -827,7 +825,17 @@ export default function PortfolioDesktop() {
   const scrollCertShelf = (direction: -1 | 1) => {
     const shelf = certShelfRef.current;
     if (!shelf) return;
-    shelf.scrollBy({ left: direction * 260, behavior: motionEnabled ? 'smooth' : 'instant' });
+
+    const cards = shelf.querySelectorAll<HTMLLIElement>(':scope > li');
+    const first = cards[0];
+    if (!first) return;
+
+    const stops = Array.from(cards, (card) => card.offsetLeft - first.offsetLeft);
+    const current = shelf.scrollLeft;
+    const left = direction === 1
+      ? stops.find((stop) => stop > current + 1) ?? shelf.scrollWidth - shelf.clientWidth
+      : stops.reverse().find((stop) => stop < current - 1) ?? 0;
+    shelf.scrollTo({ left, behavior: motionEnabled ? 'smooth' : 'instant' });
   };
 
   const handleCopyPortfolioUrl = async () => {
@@ -850,6 +858,7 @@ export default function PortfolioDesktop() {
       className={`${styles.desktop} ${styles[`wallpaper${wallpaper}`]}`}
       data-theme={darkMode ? 'dark' : 'light'}
       data-motion={motionEnabled ? 'on' : 'off'}
+      data-booting={locked ? '' : undefined}
       onPointerDownCapture={(event) => {
         if (event.target instanceof Element) {
           const trigger = event.target.closest<HTMLElement>('button, a');
@@ -884,7 +893,7 @@ export default function PortfolioDesktop() {
           Skip to workspace
         </a>
 
-        <header className={styles.menubar}>
+        <header className={styles.menubar} data-startup-layer="header">
           <button
             type="button"
             className={styles.desktopBrand}
@@ -902,6 +911,7 @@ export default function PortfolioDesktop() {
             darkMode={darkMode}
             onToggleTheme={toggleTheme}
             dockMotion={dockMotion}
+            motionEnabled={motionEnabled}
             onToggleMotion={toggleDockMotion}
             wallpaperName={WALLPAPERS[wallpaper]}
             onCycleWallpaper={cycleWallpaper}
@@ -914,6 +924,7 @@ export default function PortfolioDesktop() {
           id="workspace"
           ref={workspace}
           className={mac.workspace}
+          data-startup-layer="workspace"
           tabIndex={-1}
           onTouchStart={(event) => {
             const point = event.touches[0];
@@ -1019,7 +1030,7 @@ export default function PortfolioDesktop() {
                       </span>
                       <span className={profile.workText}>
                         <strong>Scribear</strong>
-                        <small>Co-founder &amp; developer</small>
+                        <small>Full Stack Dev</small>
                       </span>
                     </button>
                   </div>
@@ -1073,7 +1084,7 @@ export default function PortfolioDesktop() {
               >
                 <div className={mac.certVaultBody}>
                   <div className={mac.certShelfWrap}>
-                    <ul ref={certShelfRef} className={mac.certificateStrip} aria-label="Verified certificates">
+                    <ul ref={certShelfRef} className={mac.certificateStrip} aria-label="Verified certificates" tabIndex={0}>
                       {certificates.map((cert) => (
                         <li key={cert.id}>
                           <button
@@ -1139,7 +1150,12 @@ export default function PortfolioDesktop() {
         </main>
 
         {/* Desktop Liquid Glass Dock */}
-        <footer ref={dock} className={styles.dockArea} data-motion={dockMotion ? 'on' : 'off'}>
+        <footer
+          ref={dock}
+          className={styles.dockArea}
+          data-motion={dockMotion ? 'on' : 'off'}
+          data-startup-layer="dock"
+        >
           <nav className={styles.dock} aria-label="App dock">
             <button
               type="button"
@@ -1270,55 +1286,60 @@ export default function PortfolioDesktop() {
           </nav>
         </footer>
 
-        {/* Mobile iOS Floating Glass Dock */}
-        <nav className={styles.mobileDock} aria-label="Mobile navigation">
+        {/* Mobile Liquid Glass Dock */}
+        <nav className={`${styles.dock} ${styles.mobileDock}`} aria-label="Mobile navigation" data-startup-layer="dock">
           <button
             type="button"
-            className={styles.mobileDockBtn}
-            data-active={!active ? 'true' : 'false'}
+            className={styles.appIcon}
+            aria-label="Home"
             onClick={() => {
               setMobilePage(0);
               workspace.current?.scrollTo({ top: 0 });
             }}
           >
-            <Home size={20} />
+            <img src="/dock/home.jpg" alt="" width={512} height={512} draggable={false} />
             <span>Home</span>
+            <i className={styles.activeDot} data-open={!active && !locked ? 'true' : 'false'} aria-hidden="true" />
           </button>
           <button
             type="button"
-            className={styles.mobileDockBtn}
-            data-active={active === 'Projects' ? 'true' : 'false'}
+            className={styles.appIcon}
+            aria-label="Projects"
             onClick={() => openApp('Projects')}
           >
-            <Folder size={20} />
+            <img src="/dock/files.jpg" alt="" width={512} height={512} draggable={false} />
             <span>Work</span>
+            <i className={styles.activeDot} data-open={active === 'Projects' ? 'true' : 'false'} aria-hidden="true" />
           </button>
           <button
             type="button"
-            className={styles.mobileDockBtn}
-            data-active={active === 'Certificates' ? 'true' : 'false'}
+            className={`${styles.appIcon} ${styles.certIconTile}`}
+            aria-label="Certificates"
             onClick={() => openApp('Certificates')}
           >
-            <Award size={20} />
+            <Award size={23} strokeWidth={2.2} aria-hidden="true" />
             <span>Certs</span>
+            <i className={styles.activeDot} data-open={active === 'Certificates' ? 'true' : 'false'} aria-hidden="true" />
           </button>
           <button
             type="button"
-            className={styles.mobileDockBtn}
-            data-active={active === 'About' || active === 'Experience' ? 'true' : 'false'}
+            className={`${styles.appIcon} ${styles.aboutIconTile}`}
+            aria-label="About"
             onClick={() => openApp('About')}
           >
-            <UserRound size={20} />
+            <UserRound size={23} strokeWidth={2.2} aria-hidden="true" />
             <span>About</span>
+            <i className={styles.activeDot} data-open={active === 'About' || active === 'Experience' ? 'true' : 'false'} aria-hidden="true" />
           </button>
           <button
             type="button"
-            className={styles.mobileDockBtn}
-            data-active={active === 'Contact' || active === 'Résumé' ? 'true' : 'false'}
+            className={styles.appIcon}
+            aria-label="Contact"
             onClick={() => openApp('Contact')}
           >
-            <MessageCircle size={20} />
+            <img src="/dock/mail.jpg" alt="" width={512} height={512} draggable={false} />
             <span>Contact</span>
+            <i className={styles.activeDot} data-open={active === 'Contact' || active === 'Résumé' ? 'true' : 'false'} aria-hidden="true" />
           </button>
         </nav>
 

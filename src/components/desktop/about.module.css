@@ -283,6 +283,13 @@
   color: var(--os-ink-muted);
 }
 
+@media (max-width: 899px) {
+  .story p,
+  .education p {
+    font-size: var(--os-mobile-body-size);
+  }
+}
+
 @media (max-width: 760px) {
   .profile {
     grid-template-columns: 1fr;
