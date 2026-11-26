@@ -42,9 +42,9 @@ const FOLDER_MANIFEST = [
     title: 'Darklace AI Assistant',
     category: 'Applied AI',
     featured: true,
-    desc: 'A desktop meeting assistant with voice input and language-model responses streamed over WebSockets. Its always-on-top window keeps responses visible during meetings.',
-    tags: ['Python', 'React', 'Electron', 'WebSockets'],
-    files: ['Darklace.webp', 'DARKLACE_logo.webp'],
+    desc: 'A desktop meeting assistant that hears the question and answers in two sentences. A chat interface in an always-on-top window streams replies over WebSockets with markdown and code blocks, keeps conversation history on the device, and shows each heard question in live mode. It runs on Llama 3.3 through Groq.',
+    tags: ['Python', 'Electron', 'WebSockets', 'Groq'],
+    files: ['icons/darklace_logo.webp', 'darklace_chat.webp', 'darklace_overlay.webp', 'darklace_welcome.webp'],
     links: [{ label: 'Source code', href: 'https://github.com/nishika25-ta/Darklace-AI' }],
   },
   {

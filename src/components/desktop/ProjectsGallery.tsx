@@ -11,7 +11,7 @@ const summaries: Record<string, string> = {
   One_in_All: 'Claude Code, Codex, and Hermes side by side in one desktop window.',
   XAI: 'Explainable malware detection with 412 PE-file features, SHAP explanations, and EMBER support up to 1.1M samples.',
   Palm_Detection: 'Oil-palm anomaly detection from aerial imagery at 92% accuracy.',
-  DarkLace: 'Always-on-top desktop meeting assistant with voice input and streamed responses.',
+  DarkLace: 'Chat-style meeting assistant in an always-on-top window, with live voice input and streamed answers.',
   Super_Dim: 'Flutter utility that lowers screen brightness with an accessible dark overlay.',
   UNIMAS_AR: 'Mobile AR campus navigation with spatial overlays for UNIMAS.',
   file_converter: 'Batch image and media conversion powered by Python and FFmpeg.',
